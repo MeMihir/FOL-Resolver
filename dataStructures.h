@@ -23,8 +23,8 @@ struct FOL
     Predicate predicate;
 };
 
-// vector<Predicate> Clause; // Clause
-// vector<vector<Predicate>> KB; // Knowledge Base (vector of clauses) 
+extern vector<Predicate> Clause; // Clause
+extern vector<vector<Predicate>> KB; // Knowledge Base (vector of clauses) 
 
 FOL *stringToFOL(string s);
 void printFOL(FOL *fol);

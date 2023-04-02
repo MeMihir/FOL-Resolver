@@ -5,7 +5,6 @@
 using namespace std;
 #include "dataStructures.h"
 
-
 // convert string to FOL
 FOL *stringToFOL(string s)
 {
@@ -61,13 +60,23 @@ FOL *stringToFOL(string s)
     pos = s.find("(");
     if (pos != string::npos)
     {
-        p.name = s.substr(0, pos);
+        string name = s.substr(0, pos);
+        if (name[0] == '~')
+        {
+            p.sign = false;
+            p.name = name.substr(1, name.length() - 1);
+        }
+        else
+        {
+            p.name = name;
+        }
         string args = s.substr(pos + 1, s.length() - pos - 2);
         // find all , in args
         // if found, split args into multiple strings
         while (args.find(",") != string::npos)
         {
             pos = args.find(",");
+            string pred = args.substr(0, pos);
             p.arguments.push_back(args.substr(0, pos));
             args = args.substr(pos + 1, args.length() - pos - 1);
         }
@@ -82,6 +91,11 @@ void printFOL(FOL *fol)
 {
     if (fol->left == nullptr && fol->right == nullptr)
     {
+
+        if (fol->predicate.sign == false)
+        {
+            cout << "NOT ";
+        }
         cout << fol->predicate.name << "(";
         for (int i = 0; i < fol->predicate.arity; i++)
         {
@@ -91,29 +105,35 @@ void printFOL(FOL *fol)
                 cout << ",";
             }
         }
-        cout << ")" << " ";
+        cout << ")"
+             << " ";
         return;
     }
     if (fol->left != nullptr)
     {
-        cout<<"(";
+        if(fol->sign == false)
+            cout << "NOT ";
+        cout << "(";
         printFOL(fol->left);
     }
     if (fol->operatorType == AND)
     {
-        cout << "AND" << " ";
+        cout << "AND"
+             << " ";
     }
     else if (fol->operatorType == OR)
     {
-        cout << "OR" << " ";
+        cout << "OR"
+             << " ";
     }
     else if (fol->operatorType == IMPLY)
     {
-        cout << "IMPLY" << " ";
+        cout << "IMPLY"
+             << " ";
     }
     if (fol->right != nullptr)
     {
         printFOL(fol->right);
-        cout<<")";
+        cout << ")";
     }
 }
