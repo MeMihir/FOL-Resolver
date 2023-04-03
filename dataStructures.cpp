@@ -111,7 +111,7 @@ void printFOL(FOL *fol)
     }
     if (fol->left != nullptr)
     {
-        if(fol->sign == false)
+        if (fol->sign == false)
             cout << "NOT ";
         cout << "(";
         printFOL(fol->left);
@@ -136,4 +136,134 @@ void printFOL(FOL *fol)
         printFOL(fol->right);
         cout << ")";
     }
+}
+
+// FOL to CNF
+void FOLtoCNF(FOL *fol)
+{
+
+    cout << "Orignal\t: ";
+    printFOL(fol);
+    cout << endl; // debug
+
+    // if fol is a predicate
+    if (fol->left == nullptr && fol->right == nullptr)
+    {
+        // add fol to KB
+        Clause.push_back(fol->predicate);
+        KB.push_back(Clause);
+        Clause.clear();
+        return;
+    }
+
+    // if fol is a IMPLICATION remove it
+    if (fol->operatorType == IMPLY)
+    {
+        // add fol to KB
+        fol->left->sign = false;
+        fol->operatorType = OR;
+        FOLtoCNF(fol);
+    }
+
+    cout << "No =>\t: ";
+    printFOL(fol);
+    cout << endl; // debug
+
+    // De Morgan's Law
+    fol = deMorgan(fol);
+    cout << "deMorgan\t: ";
+    printFOL(fol);
+    cout << endl; // debug
+
+    // Distributive Law
+    fol = distributeCNF(fol);
+    cout << "distribute\t: ";
+    printFOL(fol);
+    cout << endl; // debug
+}
+
+// De Morgan's Law
+FOL *deMorgan(FOL *fol)
+{
+    if (fol->left == nullptr && fol->right == nullptr)
+    {
+        if (fol->sign == false)
+        {
+            fol->sign = true;
+            fol->predicate.sign = !fol->predicate.sign;
+        }
+        return fol;
+    }
+    if (fol->sign == false)
+    {
+        if (fol->operatorType == AND)
+        {
+            fol->sign = true;
+            fol->operatorType = OR;
+            fol->left->sign = !fol->left->sign;
+            fol->right->sign = !fol->right->sign;
+            fol->left = deMorgan(fol->left);
+            fol->right = deMorgan(fol->right);
+            return fol;
+        }
+        if (fol->operatorType == OR)
+        {
+            fol->sign = true;
+            fol->operatorType = AND;
+            fol->left->sign = !fol->left->sign;
+            fol->right->sign = !fol->right->sign;
+            fol->left = deMorgan(fol->left);
+            fol->right = deMorgan(fol->right);
+            return fol;
+        }
+    }
+    fol->left = deMorgan(fol->left);
+    fol->right = deMorgan(fol->right);
+    return fol;
+}
+
+// Distributive Law
+FOL *distributeCNF(FOL *fol)
+{
+    if (fol->operatorType == AND)
+    {
+        fol->left = distributeCNF(fol->left);
+        fol->right = distributeCNF(fol->right);
+    }
+    else if (fol->operatorType == OR)
+    {
+        if (fol->left->operatorType == AND) {
+            FOL* a = fol->left->left;
+            FOL* b = fol->left->right;
+            FOL* c = fol->right;
+
+            FOL* left = new FOL();
+            left->operatorType = AND;
+            left->right = distributeCNF(new FOL(distributeCNF(b), distributeCNF(c),  OR));
+            left->left = distributeCNF(new FOL(distributeCNF(a), distributeCNF(c),  OR));
+
+            return distributeCNF(left);
+        }
+        else if (fol->right->operatorType == AND)
+        {
+            FOL* a = fol->left;
+            FOL* b = fol->right->left;
+            FOL* c = fol->right->right;
+
+            FOL* left = new FOL();
+            left->operatorType = AND;
+            left->left = distributeCNF(new FOL(distributeCNF(a), distributeCNF(b), OR));
+            left->right = distributeCNF(new FOL(distributeCNF(a), distributeCNF(c), OR));
+
+            return distributeCNF(left);
+        }
+        else
+        {
+            fol->left = distributeCNF(fol->left);
+            fol->right = distributeCNF(fol->right);
+        }
+
+        return fol;
+    }
+    return fol;
 }

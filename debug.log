@@ -1,0 +1,5 @@
+((A(x) AND B(x) )OR (C(x) OR D(x) ))
+Orignal	: ((A(x) AND B(x) )OR (C(x) OR D(x) ))
+No =>	: ((A(x) AND B(x) )OR (C(x) OR D(x) ))
+deMorgan	: ((A(x) AND B(x) )OR (C(x) OR D(x) ))
+distribute	: ((A(x) OR (C(x) OR D(x) ))AND (B(x) OR (C(x) OR D(x) )))

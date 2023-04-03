@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 
+#define NONE 0
 #define AND 1
 #define OR 2
 #define IMPLY 3
@@ -19,8 +20,25 @@ struct FOL
     bool sign = true; // true = positive, false = negative
     FOL *left = nullptr;
     FOL *right = nullptr;
-    int operatorType = AND;
+    int operatorType = 0;
     Predicate predicate;
+
+    FOL()
+    {
+        left = nullptr;
+        right = nullptr;
+        operatorType = NONE;
+    }
+    FOL(FOL *l, FOL *r, int op)
+    {
+        left = l;
+        right = r;
+        operatorType = op;
+    }
+    FOL(Predicate p)
+    {
+        predicate = p;
+    }
 };
 
 extern vector<Predicate> Clause; // Clause
@@ -28,3 +46,6 @@ extern vector<vector<Predicate>> KB; // Knowledge Base (vector of clauses)
 
 FOL *stringToFOL(string s);
 void printFOL(FOL *fol);
+void FOLtoCNF(FOL *fol);
+FOL *deMorgan(FOL *fol);
+FOL *distributeCNF(FOL *fol);
