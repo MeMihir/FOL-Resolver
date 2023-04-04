@@ -41,11 +41,12 @@ struct FOL
     }
 };
 
-extern vector<Predicate> Clause; // Clause
 extern vector<vector<Predicate>> KB; // Knowledge Base (vector of clauses) 
 
 FOL *stringToFOL(string s);
 void printFOL(FOL *fol);
-void FOLtoCNF(FOL *fol);
+FOL *FOLtoCNF(FOL *fol);
 FOL *deMorgan(FOL *fol);
 FOL *distributeCNF(FOL *fol);
+void buildKB(FOL *fol);
+void printKB();

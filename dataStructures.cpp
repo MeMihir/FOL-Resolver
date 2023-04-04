@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stack>
 
 using namespace std;
 #include "dataStructures.h"
 
+// =================================================================================================
 // convert string to FOL
 FOL *stringToFOL(string s)
 {
@@ -138,8 +140,10 @@ void printFOL(FOL *fol)
     }
 }
 
+// =================================================================================================
 // FOL to CNF
-void FOLtoCNF(FOL *fol)
+
+FOL *FOLtoCNF(FOL *fol)
 {
 
     cout << "Orignal\t: ";
@@ -150,10 +154,11 @@ void FOLtoCNF(FOL *fol)
     if (fol->left == nullptr && fol->right == nullptr)
     {
         // add fol to KB
+        vector<Predicate> Clause;
         Clause.push_back(fol->predicate);
         KB.push_back(Clause);
         Clause.clear();
-        return;
+        return new FOL();
     }
 
     // if fol is a IMPLICATION remove it
@@ -162,24 +167,19 @@ void FOLtoCNF(FOL *fol)
         // add fol to KB
         fol->left->sign = false;
         fol->operatorType = OR;
-        FOLtoCNF(fol);
     }
 
-    cout << "No =>\t: ";
-    printFOL(fol);
-    cout << endl; // debug
+    cout << "No =>\t: "; printFOL(fol); cout << endl; // debug
 
     // De Morgan's Law
     fol = deMorgan(fol);
-    cout << "deMorgan\t: ";
-    printFOL(fol);
-    cout << endl; // debug
+    cout << "deMorgan\t: "; printFOL(fol); cout << endl; // debug
 
     // Distributive Law
     fol = distributeCNF(fol);
-    cout << "distribute\t: ";
-    printFOL(fol);
-    cout << endl; // debug
+    cout << "distribute\t: "; printFOL(fol); cout << endl; // debug
+    
+    return fol;
 }
 
 // De Morgan's Law
@@ -266,4 +266,63 @@ FOL *distributeCNF(FOL *fol)
         return fol;
     }
     return fol;
+}
+
+// =================================================================================================
+// Build KB
+void buildKB(FOL *fol)
+{
+    // KB
+    vector<Predicate> Clause;
+    stack <FOL*> inorder;
+
+    // inorder traversal of FOL
+    FOL *curr = fol;
+    while( curr != nullptr || !inorder.empty())
+    {   
+        while(curr != nullptr)
+        {
+            inorder.push(curr);
+            curr = curr->left;
+        }
+
+        curr = inorder.top();
+        inorder.pop();
+
+        if (curr->operatorType == AND)
+        {
+            KB.push_back(Clause);
+            Clause.clear();
+        }
+        else
+        {
+            if(curr->predicate.arity != 0)
+                Clause.push_back(curr->predicate);
+        }
+
+        curr = curr->right;
+    }
+    KB.push_back(Clause);
+}
+
+void printKB() {
+    // print KB
+    for (int i = 0; i < KB.size(); i++)
+    {
+        for (int j = 0; j < KB[i].size(); j++)
+        {
+            cout << KB[i][j].name << "(";
+            for (int k = 0; k < KB[i][j].arguments.size(); k++)
+            {
+                cout << KB[i][j].arguments[k];
+                if (k < KB[i][j].arguments.size() - 1)
+                    cout << ",";
+            }
+            cout << ")";
+            if (j < KB[i].size() - 1)
+                cout << " | ";
+        }
+        cout << endl;
+    }
+
 }
