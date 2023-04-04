@@ -16,6 +16,37 @@ struct Predicate
     int arity = 0;
     vector<string> arguments;
 
+    Predicate()
+    {
+        name = "";
+        arity = 0;
+    }
+
+    Predicate(string s)
+    {
+        int pos = s.find("(");
+        if (s[0] == '~')
+        {
+            sign = false;
+            name = s.substr(1, pos - 1);
+        }
+        else
+        {
+            name = s.substr(0, pos);
+        }
+        string args = s.substr(pos + 1, s.length() - pos - 2);
+        // find all , in args
+        // if found, split args into multiple strings
+        while (args.find(",") != string::npos)
+        {
+            pos = args.find(",");
+            arguments.push_back(args.substr(0, pos));
+            args = args.substr(pos + 1, args.length() - pos - 1);
+        }
+        arguments.push_back(args);
+        arity = arguments.size();
+    }
+
     bool operator==(const Predicate& p) const {
         return (sign == p.sign && name == p.name && arity == p.arity);
     }
@@ -61,6 +92,7 @@ extern vector<unordered_set<Predicate, PredicateHash>> KB; // Knowledge Base (ve
 extern unordered_map<Predicate, vector<int>, PredicateHash> KBMap; // Knowledge Base Table (map of predicate to clause number)
 
 FOL *stringToFOL(string s);
+void printPredicate(Predicate p);
 void printFOL(FOL *fol);
 FOL *FOLtoCNF(FOL *fol);
 FOL *deMorgan(FOL *fol);

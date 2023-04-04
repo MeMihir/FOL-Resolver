@@ -57,59 +57,35 @@ FOL *stringToFOL(string s)
     }
 
     // PREDICATE
-    Predicate p;
-    // find ( in s
-    // if found, split s into two strings
-    pos = s.find("(");
-    if (pos != string::npos)
-    {
-        string name = s.substr(0, pos);
-        if (name[0] == '~')
-        {
-            p.sign = false;
-            p.name = name.substr(1, name.length() - 1);
-        }
-        else
-        {
-            p.name = name;
-        }
-        string args = s.substr(pos + 1, s.length() - pos - 2);
-        // find all , in args
-        // if found, split args into multiple strings
-        while (args.find(",") != string::npos)
-        {
-            pos = args.find(",");
-            string pred = args.substr(0, pos);
-            p.arguments.push_back(args.substr(0, pos));
-            args = args.substr(pos + 1, args.length() - pos - 1);
-        }
-        p.arguments.push_back(args);
-        p.arity = p.arguments.size();
-        fol->predicate = p;
-    }
+    Predicate p(s);
+    fol->predicate = p;
+
     return fol;
+}
+
+void printPredicate(Predicate p)
+{
+    if (p.sign == false)
+    {
+        cout << "NOT ";
+    }
+    cout << p.name << "(";
+    for (int i = 0; i < p.arity; i++)
+    {
+        cout << p.arguments[i];
+        if (i != p.arity - 1)
+        {
+            cout << ",";
+        }
+    }
+    cout << ") ";
 }
 
 void printFOL(FOL *fol)
 {
     if (fol->left == nullptr && fol->right == nullptr)
     {
-
-        if (fol->predicate.sign == false)
-        {
-            cout << "NOT ";
-        }
-        cout << fol->predicate.name << "(";
-        for (int i = 0; i < fol->predicate.arity; i++)
-        {
-            cout << fol->predicate.arguments[i];
-            if (i != fol->predicate.arity - 1)
-            {
-                cout << ",";
-            }
-        }
-        cout << ")"
-             << " ";
+        printPredicate(fol->predicate);
         return;
     }
     if (fol->left != nullptr)
@@ -170,15 +146,15 @@ FOL *FOLtoCNF(FOL *fol)
         fol->operatorType = OR;
     }
 
-    cout << "No =>\t: "; printFOL(fol); cout << endl; // debug
+    // cout << "No =>\t: "; printFOL(fol); cout << endl; // debug
 
     // De Morgan's Law
     fol = deMorgan(fol);
-    cout << "deMorgan\t: "; printFOL(fol); cout << endl; // debug
+    // cout << "deMorgan\t: "; printFOL(fol); cout << endl; // debug
 
     // Distributive Law
     fol = distributeCNF(fol);
-    cout << "distribute\t: "; printFOL(fol); cout << endl; // debug
+    // cout << "distribute\t: "; printFOL(fol); cout << endl; // debug
 
     return fol;
 }
@@ -284,6 +260,8 @@ unordered_set<Predicate, PredicateHash> insertPredicate(Predicate predicate, uno
 }
 
 void insertClause(unordered_set<Predicate, PredicateHash> Clause) {
+    if(Clause.size() == 0)
+        return;
     KB.push_back(Clause);
     for(Predicate predicate : Clause) {
         KBMap[predicate].push_back(KB.size()-1);
