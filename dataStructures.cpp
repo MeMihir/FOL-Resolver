@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <stack>
+#include <unordered_set>
 
 using namespace std;
 #include "dataStructures.h"
@@ -154,8 +155,8 @@ FOL *FOLtoCNF(FOL *fol)
     if (fol->left == nullptr && fol->right == nullptr)
     {
         // add fol to KB
-        vector<Predicate> Clause;
-        Clause.push_back(fol->predicate);
+        unordered_set<Predicate, PredicateHash> Clause;
+        Clause.insert(fol->predicate);
         KB.push_back(Clause);
         Clause.clear();
         return new FOL();
@@ -178,7 +179,7 @@ FOL *FOLtoCNF(FOL *fol)
     // Distributive Law
     fol = distributeCNF(fol);
     cout << "distribute\t: "; printFOL(fol); cout << endl; // debug
-    
+
     return fol;
 }
 
@@ -269,11 +270,24 @@ FOL *distributeCNF(FOL *fol)
 }
 
 // =================================================================================================
-// Build KB
+// insert predicate in clause
+unordered_set<Predicate, PredicateHash> insertPredicate(Predicate predicate, unordered_set<Predicate, PredicateHash> Clause) {
+    predicate.sign = !predicate.sign;
+    auto it = Clause.find(predicate);
+    if (it != Clause.end())
+        Clause.erase(it);
+    else {
+        predicate.sign = !predicate.sign;
+        Clause.insert(predicate);
+    }
+    return Clause;
+}
+
+// build KB
 void buildKB(FOL *fol)
 {
     // KB
-    vector<Predicate> Clause;
+    unordered_set<Predicate, PredicateHash> Clause;
     stack <FOL*> inorder;
 
     // inorder traversal of FOL
@@ -296,8 +310,9 @@ void buildKB(FOL *fol)
         }
         else
         {
-            if(curr->predicate.arity != 0)
-                Clause.push_back(curr->predicate);
+            if(curr->predicate.arity != 0) {
+                Clause = insertPredicate(curr->predicate, Clause);
+            }
         }
 
         curr = curr->right;
@@ -309,18 +324,17 @@ void printKB() {
     // print KB
     for (int i = 0; i < KB.size(); i++)
     {
-        for (int j = 0; j < KB[i].size(); j++)
+        cout << "Clause " << i << " : ";
+        for (auto it = KB[i].begin(); it != KB[i].end(); it++)
         {
-            cout << KB[i][j].name << "(";
-            for (int k = 0; k < KB[i][j].arguments.size(); k++)
+            cout << it->name << "(";
+            for (int j = 0; j < it->arity; j++)
             {
-                cout << KB[i][j].arguments[k];
-                if (k < KB[i][j].arguments.size() - 1)
+                cout << it->arguments[j];
+                if (j != it->arity - 1)
                     cout << ",";
             }
-            cout << ")";
-            if (j < KB[i].size() - 1)
-                cout << " | ";
+            cout << ") | ";
         }
         cout << endl;
     }

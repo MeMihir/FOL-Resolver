@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_set>
 #include <string>
 
 #define NONE 0
@@ -13,6 +14,20 @@ struct Predicate
     string name;
     int arity = 0;
     vector<string> arguments;
+
+    bool operator==(const Predicate& p) const {
+        return (sign == p.sign && name == p.name && arity == p.arity);
+    }
+};
+
+struct PredicateHash {
+    size_t operator()(const Predicate& p) const {
+        size_t hashVal = 0;
+        hashVal ^= hash<bool>{}(p.sign);
+        hashVal ^= hash<string>{}(p.name);
+        hashVal ^= hash<int>{}(p.arity);
+        return hashVal;
+    }
 };
 
 struct FOL
@@ -41,12 +56,13 @@ struct FOL
     }
 };
 
-extern vector<vector<Predicate>> KB; // Knowledge Base (vector of clauses) 
+extern vector<unordered_set<Predicate, PredicateHash>> KB; // Knowledge Base (vector of clauses) 
 
 FOL *stringToFOL(string s);
 void printFOL(FOL *fol);
 FOL *FOLtoCNF(FOL *fol);
 FOL *deMorgan(FOL *fol);
 FOL *distributeCNF(FOL *fol);
+unordered_set<Predicate, PredicateHash> insertPredicate(Predicate p, unordered_set<Predicate, PredicateHash> Clause);
 void buildKB(FOL *fol);
 void printKB();
