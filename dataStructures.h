@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
 #include <string>
 
 #define NONE 0
@@ -57,6 +58,7 @@ struct FOL
 };
 
 extern vector<unordered_set<Predicate, PredicateHash>> KB; // Knowledge Base (vector of clauses) 
+extern unordered_map<Predicate, vector<int>, PredicateHash> KBMap; // Knowledge Base Table (map of predicate to clause number)
 
 FOL *stringToFOL(string s);
 void printFOL(FOL *fol);
@@ -64,5 +66,6 @@ FOL *FOLtoCNF(FOL *fol);
 FOL *deMorgan(FOL *fol);
 FOL *distributeCNF(FOL *fol);
 unordered_set<Predicate, PredicateHash> insertPredicate(Predicate p, unordered_set<Predicate, PredicateHash> Clause);
+void insertClause(unordered_set<Predicate, PredicateHash> Clause);
 void buildKB(FOL *fol);
 void printKB();

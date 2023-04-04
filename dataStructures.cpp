@@ -283,6 +283,13 @@ unordered_set<Predicate, PredicateHash> insertPredicate(Predicate predicate, uno
     return Clause;
 }
 
+void insertClause(unordered_set<Predicate, PredicateHash> Clause) {
+    KB.push_back(Clause);
+    for(Predicate predicate : Clause) {
+        KBMap[predicate].push_back(KB.size()-1);
+    }
+}
+
 // build KB
 void buildKB(FOL *fol)
 {
@@ -305,7 +312,7 @@ void buildKB(FOL *fol)
 
         if (curr->operatorType == AND)
         {
-            KB.push_back(Clause);
+            insertClause(Clause);
             Clause.clear();
         }
         else
@@ -317,16 +324,19 @@ void buildKB(FOL *fol)
 
         curr = curr->right;
     }
-    KB.push_back(Clause);
+    insertClause(Clause);
 }
 
 void printKB() {
     // print KB
+    cout << "KB" << endl;
     for (int i = 0; i < KB.size(); i++)
     {
         cout << "Clause " << i << " : ";
         for (auto it = KB[i].begin(); it != KB[i].end(); it++)
         {
+            if (it->sign == false)
+                cout << "~";
             cout << it->name << "(";
             for (int j = 0; j < it->arity; j++)
             {
@@ -339,4 +349,24 @@ void printKB() {
         cout << endl;
     }
 
+    // print KBMap
+    cout << "KBMap" << endl;
+    for (auto it = KBMap.begin(); it != KBMap.end(); it++)
+    {
+        if (it->first.sign == false)
+            cout << "~";
+        cout << it->first.name << "(";
+        for (int j = 0; j < it->first.arity; j++)
+        {
+            cout << it->first.arguments[j];
+            if (j != it->first.arity - 1)
+                cout << ",";
+        }
+        cout << ") : ";
+        for (int i = 0; i < it->second.size(); i++)
+        {
+            cout << it->second[i] << " ";
+        }
+        cout << endl;
+    }
 }
