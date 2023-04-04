@@ -133,7 +133,7 @@ FOL *FOLtoCNF(FOL *fol)
         // add fol to KB
         unordered_set<Predicate, PredicateHash> Clause;
         Clause.insert(fol->predicate);
-        KB.push_back(Clause);
+        insertClause(Clause);
         Clause.clear();
         return new FOL();
     }
@@ -157,6 +157,13 @@ FOL *FOLtoCNF(FOL *fol)
     // cout << "distribute\t: "; printFOL(fol); cout << endl; // debug
 
     return fol;
+}
+
+bool isVariable(string s)
+{
+    if (s[0] >= 'a' && s[0] <= 'z')
+        return true;
+    return false;
 }
 
 // De Morgan's Law

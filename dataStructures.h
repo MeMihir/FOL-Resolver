@@ -52,12 +52,21 @@ struct Predicate
     }
 };
 
+bool isVariable(string s);
+
 struct PredicateHash {
     size_t operator()(const Predicate& p) const {
         size_t hashVal = 0;
         hashVal ^= hash<bool>{}(p.sign);
         hashVal ^= hash<string>{}(p.name);
         hashVal ^= hash<int>{}(p.arity);
+        for (int i = 0; i < p.arity; i++)
+        {
+            if(isVariable(p.arguments[i]))
+                hashVal ^= hash<string>{}("v");
+            else
+                hashVal ^= hash<string>{}(p.arguments[i]);
+        }
         return hashVal;
     }
 };

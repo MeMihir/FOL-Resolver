@@ -17,7 +17,7 @@ vector<string>input;
 string readInput()
 {
     string s, target;
-    freopen("inputs/input4.txt", "r", stdin);
+    freopen("inputs/input1.txt", "r", stdin);
     cin>>target;
 
     int n;
