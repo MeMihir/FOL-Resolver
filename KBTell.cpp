@@ -131,10 +131,10 @@ FOL *FOLtoCNF(FOL *fol)
     if (fol->left == nullptr && fol->right == nullptr)
     {
         // add fol to KB
-        unordered_set<Predicate, PredicateHash> Clause;
-        Clause.insert(fol->predicate);
-        insertClause(Clause);
-        Clause.clear();
+        Clause clause;
+        clause.insert(fol->predicate);
+        insertClause(clause);
+        clause.clear();
         return new FOL();
     }
 
@@ -254,23 +254,23 @@ FOL *distributeCNF(FOL *fol)
 
 // =================================================================================================
 // insert predicate in clause
-unordered_set<Predicate, PredicateHash> insertPredicate(Predicate predicate, unordered_set<Predicate, PredicateHash> Clause) {
+Clause insertPredicate(Predicate predicate, Clause clause) {
     predicate.sign = !predicate.sign;
-    auto it = Clause.find(predicate);
-    if (it != Clause.end())
-        Clause.erase(it);
+    auto it = clause.find(predicate);
+    if (it != clause.end())
+        clause.erase(it);
     else {
         predicate.sign = !predicate.sign;
-        Clause.insert(predicate);
+        clause.insert(predicate);
     }
-    return Clause;
+    return clause;
 }
 
-void insertClause(unordered_set<Predicate, PredicateHash> Clause) {
-    if(Clause.size() == 0)
+void insertClause(Clause clause) {
+    if(clause.size() == 0)
         return;
-    KB.push_back(Clause);
-    for(Predicate predicate : Clause) {
+    KB.push_back(clause);
+    for(Predicate predicate : clause) {
         KBMap[predicate].push_back(KB.size()-1);
     }
 }
@@ -279,7 +279,7 @@ void insertClause(unordered_set<Predicate, PredicateHash> Clause) {
 void buildKB(FOL *fol)
 {
     // KB
-    unordered_set<Predicate, PredicateHash> Clause;
+    Clause clause;
     stack <FOL*> inorder;
 
     // inorder traversal of FOL
@@ -297,19 +297,19 @@ void buildKB(FOL *fol)
 
         if (curr->operatorType == AND)
         {
-            insertClause(Clause);
-            Clause.clear();
+            insertClause(clause);
+            clause.clear();
         }
         else
         {
             if(curr->predicate.arity != 0) {
-                Clause = insertPredicate(curr->predicate, Clause);
+                clause = insertPredicate(curr->predicate, clause);
             }
         }
 
         curr = curr->right;
     }
-    insertClause(Clause);
+    insertClause(clause);
 }
 
 void printKB() {
@@ -317,7 +317,7 @@ void printKB() {
     cout << "KB" << endl;
     for (int i = 0; i < KB.size(); i++)
     {
-        cout << "Clause " << i << " : ";
+        cout << "clause " << i << " : ";
         for (auto it = KB[i].begin(); it != KB[i].end(); it++)
         {   
             if(it != KB[i].begin())
