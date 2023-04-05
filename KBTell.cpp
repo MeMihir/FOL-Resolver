@@ -5,7 +5,7 @@
 #include <unordered_set>
 
 using namespace std;
-#include "dataStructures.h"
+#include "KBTell.h"
 
 // =================================================================================================
 // convert string to FOL
@@ -319,7 +319,9 @@ void printKB() {
     {
         cout << "Clause " << i << " : ";
         for (auto it = KB[i].begin(); it != KB[i].end(); it++)
-        {
+        {   
+            if(it != KB[i].begin())
+                cout << " | ";
             if (it->sign == false)
                 cout << "~";
             cout << it->name << "(";
@@ -329,7 +331,7 @@ void printKB() {
                 if (j != it->arity - 1)
                     cout << ",";
             }
-            cout << ") | ";
+            cout << ") ";
         }
         cout << endl;
     }
