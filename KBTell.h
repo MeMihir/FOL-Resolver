@@ -62,13 +62,13 @@ struct PredicateHash {
         hashVal ^= hash<bool>{}(p.sign);
         hashVal ^= hash<string>{}(p.name);
         hashVal ^= hash<int>{}(p.arity);
-        for (int i = 0; i < p.arity; i++)
-        {
-            if(isVariable(p.arguments[i]))
-                hashVal ^= hash<string>{}("v");
-            else
-                hashVal ^= hash<string>{}(p.arguments[i]);
-        }
+        // for (int i = 0; i < p.arity; i++)
+        // {
+        //     if(isVariable(p.arguments[i]))
+        //         hashVal ^= hash<string>{}("v");
+        //     else
+        //         hashVal ^= hash<string>{}(p.arguments[i]);
+        // }
         return hashVal;
     }
 };

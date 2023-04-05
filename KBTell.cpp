@@ -271,6 +271,8 @@ void insertClause(Clause clause) {
         return;
     KB.push_back(clause);
     for(Predicate predicate : clause) {
+        for(int i=0; i<predicate.arity; i++)
+            predicate.arguments[i] = "v";
         KBMap[predicate].push_back(KB.size()-1);
     }
 }
