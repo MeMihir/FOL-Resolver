@@ -7,6 +7,7 @@
 
 using namespace std;
 #include "KBTell.h"
+#include "KBAsk.h"
 
 vector <unordered_set<Predicate, PredicateHash>> KB; // Knowledge Base (vector of clauses)
 unordered_map <Predicate, vector<int>, PredicateHash> KBMap; // Knowledge Base (map of clauses)
@@ -16,7 +17,7 @@ vector<string>input;
 string readInput()
 {
     string s, target;
-    freopen("inputs/input1.txt", "r", stdin);
+    freopen("inputs/input.txt", "r", stdin);
     cin>>target;
 
     int n;
@@ -49,6 +50,8 @@ int main()
     }
 
     cout<<endl; printKB(); cout<<endl; // debug
+
+    queryKB(query);
 
     return 0;
 }
