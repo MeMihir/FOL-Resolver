@@ -51,7 +51,8 @@ int main()
 
     cout<<endl; printKB(); cout<<endl; // debug
 
-    queryKB(query);
+    bool ans = queryKB(query);
+    cout<<"FINAL ANSWER \t: "<<ans<<endl; 
 
     return 0;
 }
