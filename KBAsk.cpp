@@ -166,7 +166,8 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
                     queryPredicate.arguments[i] = substitution[queryPredicate.arguments[i]];
                 }
             }
-            insertPredicate(queryPredicate, result);
+            // !CHANGE RESULT.INSET TO RESULT.INSERT
+            result.insert(queryPredicate);
         }
     }
 
@@ -182,7 +183,7 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
                     clausePredicate.arguments[i] = substitution[clausePredicate.arguments[i]];
                 }
             }
-            insertPredicate(clausePredicate, result);
+            result.insert(clausePredicate);
         }
     }
 
