@@ -25,6 +25,9 @@ bool queryKB(Predicate target)
     {
         query = resolver.top();
         resolver.pop();
+        if(isClauseVisited(query))
+            continue;
+        addClauseToVisited(query);
         cout<<"\n\nQuery\t: "; printClause(query); cout<<endl; // debug
 
         if (query.empty()) return true;
@@ -38,11 +41,13 @@ bool queryKB(Predicate target)
             {
                 Clause unified = unifyClauses(query, clauses[i], p);
                 cout<<"Clause\t: "; printClause(clauses[i]); // debug
-                cout<<"Unified\t: "; printClause(unified); cout<<endl; // debug
-                if(unified.size() != 0)
+                cout<<"Unified\t: "; printClause(unified); // debug
+                if(unified.size() != 0) {
                     resolver.push(unified);
+                }
                 else 
                     return true;
+                cout<<"Visited\t: "<< visited.size() <<endl<<endl; // debug
             }
             // printClauses(clauses); // debug
 
@@ -188,4 +193,40 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
     }
 
     return result;
+}
+
+void addClauseToVisited(Clause clause)
+{
+    visited.push_back(clause);
+    for(auto it = clause.begin(); it != clause.end(); it++)
+    {
+        Predicate p = *it;
+        visitedMap[p].push_back(visited.size()-1);
+    }
+}
+
+bool isClauseVisited(Clause clause)
+{
+    Predicate p = *clause.begin();
+
+    vector <int> clauseIndices = visitedMap[p];
+    for(int i=0; i<clauseIndices.size(); i++)
+    {
+        if(clauseCompare(clause, visited[clauseIndices[i]]))
+            return true;
+    }
+    return false;
+}
+
+bool clauseCompare(Clause a, Clause b)
+{
+    if(a.size() != b.size())
+        return false;
+    for(auto it = a.begin(); it != a.end(); it++)
+    {
+        Predicate p = *it;
+        if(find(b.begin(), b.end(), p) == b.end())
+            return false;
+    }
+    return true;
 }
