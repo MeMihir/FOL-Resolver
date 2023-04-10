@@ -55,6 +55,7 @@ int main()
 
     bool ans = queryKB(query);
     cout<<"FINAL ANSWER \t: "<<ans<<endl<<endl<<endl; 
+    cout<<"=============================================================\n";
 
     return 0;
 }

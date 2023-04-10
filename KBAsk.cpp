@@ -69,6 +69,24 @@ vector <Clause> getKBClauses(Predicate target)
     vector <int> clauseIndices = KBMap[target];
     cout<<"Clauses\t: "; // debug
     for(int i=0; i<clauseIndices.size(); i++) {
+        Clause::iterator it = KB[clauseIndices[i]].find(target);
+        Predicate p = *it;
+        bool flag = true;
+        for(int j=0; j<p.arity; j++)
+        {
+            if(
+                !isVariable(p.arguments[j]) && 
+                !isVariable(target.arguments[j]) && 
+                (p.arguments[j] != target.arguments[j])
+            ) {
+                cout<<"CU ";
+                flag = false;
+                break;
+            }
+        }
+
+        if(!flag) continue;
+            
         clauses.push_back(KB[clauseIndices[i]]);
         cout<<clauseIndices[i]<<" "; // debug
     }
@@ -131,9 +149,9 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
     for(auto it = query.begin(); it != query.end(); it++)
     {
         Predicate queryPredicate = *it;
-        for(auto it = clause.begin(); it != clause.end(); it++)
+        for(auto it2 = clause.begin(); it2 != clause.end(); it2++)
         {
-            Predicate clausePredicate = *it;
+            Predicate clausePredicate = *it2;
             if(queryPredicate.name == clausePredicate.name && queryPredicate.arity == clausePredicate.arity)
             {
                 for(int i=0; i<queryPredicate.arity; i++)
@@ -147,6 +165,7 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
                             else
                                 substitution[clausePredicate.arguments[i]] = queryPredicate.arguments[i];
                         }
+                        // !CHECK THIS
                         // else
                         // {
                         //     substitution[clausePredicate.arguments[i]] = substitution[queryPredicate.arguments[i]];
@@ -172,7 +191,8 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
                 }
             }
             // !CHANGE RESULT.INSET TO RESULT.INSERT
-            result.insert(queryPredicate);
+            // result.insert(queryPredicate);
+            result = insertPredicate(queryPredicate, result);
         }
     }
 
@@ -188,7 +208,8 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
                     clausePredicate.arguments[i] = substitution[clausePredicate.arguments[i]];
                 }
             }
-            result.insert(clausePredicate);
+            result = insertPredicate(clausePredicate, result);
+            // result.insert(clausePredicate);
         }
     }
 
@@ -224,9 +245,16 @@ bool clauseCompare(Clause a, Clause b)
         return false;
     for(auto it = a.begin(); it != a.end(); it++)
     {
-        Predicate p = *it;
-        if(find(b.begin(), b.end(), p) == b.end())
+        Predicate p1 = *it;
+        Clause::iterator it2 = b.find(p1);
+        if(it2 == b.end())
             return false;
+        Predicate p2 = *it2;
+        for(int i=0; i<p1.arity; i++)
+        {
+            if(!isVariable(p1.arguments[i]) && !isVariable(p2.arguments[i]) && p1.arguments[i] != p2.arguments[i])
+                return false;
+        }
     }
     return true;
 }

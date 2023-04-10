@@ -2,3 +2,4 @@ ref
 .vscode/
 inputs/
 outputs/
+.DS_Store
