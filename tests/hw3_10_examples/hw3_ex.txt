@@ -1,0 +1,3308 @@
+NOT Order(Jenny,Pizza) 
+
+Orignal	: (Order(x,y) IMPLY Seated(x) )
+Orignal	: (Order(x,y) IMPLY Stocked(y) )
+Orignal	: (Ate(x) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(x) )IMPLY Leave(x) )
+Orignal	: (Seated(x) IMPLY Open(Restaurant) )
+Orignal	: (Seated(x) IMPLY Open(Kitchen) )
+Orignal	: Stocked(Hamburger) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+
+KB
+clause 0 : Seated(x)  | ~Order(x,y) 
+clause 1 : Stocked(y)  | ~Order(x,y) 
+clause 2 : GetCheck(x)  | ~Ate(x) 
+clause 3 : ~GetCheck(x)  | Leave(x)  | ~Paid(x) 
+clause 4 : Open(Restaurant)  | ~Seated(x) 
+clause 5 : Open(Kitchen)  | ~Seated(x) 
+clause 6 : Stocked(Hamburger) 
+clause 7 : Open(Restaurant) 
+clause 8 : Open(Kitchen) 
+KBMap
+~Seated(v) : 4 5 
+~GetCheck(v) : 3 
+Leave(v) : 3 
+GetCheck(v) : 2 
+~Order(v,v) : 0 1 
+Stocked(v) : 1 6 
+~Paid(v) : 3 
+~Ate(v) : 2 
+Open(v) : 4 5 7 8 
+Seated(v) : 0 
+
+
+
+Query	: ~Order(Jenny,Pizza) 
+
+Pred	: NOT Order(Jenny,Pizza) 
+Clauses	: 
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+=============================================================
+NOT Leave(Helena) 
+
+Orignal	: ((Seated(x) AND Stocked(y) )IMPLY Order(x,y) )
+Orignal	: (Order(x,y) IMPLY Ate(x) )
+Orignal	: ((GetCheck(x) AND HaveMoney(x) )IMPLY Paid(x) )
+Orignal	: (Ate(x) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(x) )IMPLY Leave(x) )
+Orignal	: ((Open(Restaurant) AND Open(Kitchen) )IMPLY Seated(x) )
+Orignal	: ((Stocked(Portabello) OR Stocked(Tofu) )IMPLY Stocked(VeganHamburger) )
+Orignal	: Stocked(Portabello) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+Orignal	: HaveMoney(Helena) 
+
+KB
+clause 0 : Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+clause 1 : Ate(x)  | ~Order(x,y) 
+clause 2 : Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+clause 3 : GetCheck(x)  | ~Ate(x) 
+clause 4 : ~GetCheck(x)  | Leave(x)  | ~Paid(x) 
+clause 5 : Seated(x)  | ~Open(Restaurant) 
+clause 6 : Stocked(Portabello) 
+clause 7 : Open(Restaurant) 
+clause 8 : Open(Kitchen) 
+clause 9 : HaveMoney(Helena) 
+KBMap
+HaveMoney(v) : 9 
+Open(v) : 7 8 
+Stocked(v) : 6 
+Seated(v) : 5 
+Leave(v) : 4 
+~Paid(v) : 4 
+~Open(v) : 5 
+~Ate(v) : 3 
+Paid(v) : 2 
+~GetCheck(v) : 2 4 
+~Stocked(v) : 0 
+Order(v,v) : 0 
+~HaveMoney(v) : 2 
+~Order(v,v) : 1 
+Ate(v) : 1 
+~Seated(v) : 0 
+GetCheck(v) : 3 
+
+
+
+Query	: ~Leave(Helena) 
+
+Pred	: NOT Leave(Helena) 
+Clauses	: 4 
+Clause	: ~GetCheck(x)  | Leave(x)  | ~Paid(x) 
+Unified	: ~GetCheck(Helena)  | ~Paid(Helena) 
+Visited	: 1
+
+
+
+Query	: ~Paid(Helena)  | ~GetCheck(Helena) 
+
+Pred	: NOT GetCheck(Helena) 
+Clauses	: 3 
+Clause	: GetCheck(x)  | ~Ate(x) 
+Unified	: ~Paid(Helena)  | ~Ate(Helena) 
+Visited	: 2
+
+Pred	: NOT Paid(Helena) 
+Clauses	: 2 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(Helena)  | ~HaveMoney(Helena) 
+Visited	: 2
+
+
+
+Query	: ~Paid(Helena)  | ~Ate(Helena) 
+
+Pred	: NOT Ate(Helena) 
+Clauses	: 1 
+Clause	: Ate(x)  | ~Order(x,y) 
+Unified	: ~Paid(Helena)  | ~Order(Helena,y) 
+Visited	: 3
+
+Pred	: NOT Paid(Helena) 
+Clauses	: 2 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(Helena)  | ~Ate(Helena)  | ~HaveMoney(Helena) 
+Visited	: 3
+
+
+
+Query	: ~GetCheck(Helena)  | ~HaveMoney(Helena) 
+
+Pred	: NOT HaveMoney(Helena) 
+Clauses	: 9 
+Clause	: HaveMoney(Helena) 
+Unified	: ~GetCheck(Helena) 
+Visited	: 4
+
+Pred	: NOT GetCheck(Helena) 
+Clauses	: 3 
+Clause	: GetCheck(x)  | ~Ate(x) 
+Unified	: ~HaveMoney(Helena)  | ~Ate(Helena) 
+Visited	: 4
+
+
+
+Query	: ~GetCheck(Helena) 
+
+Pred	: NOT GetCheck(Helena) 
+Clauses	: 3 
+Clause	: GetCheck(x)  | ~Ate(x) 
+Unified	: ~Ate(Helena) 
+Visited	: 5
+
+
+
+Query	: ~Ate(Helena) 
+
+Pred	: NOT Ate(Helena) 
+Clauses	: 1 
+Clause	: Ate(x)  | ~Order(x,y) 
+Unified	: ~Order(Helena,y) 
+Visited	: 6
+
+
+
+Query	: ~Order(Helena,y) 
+
+Pred	: NOT Order(Helena,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Helena)  | ~Stocked(y) 
+Visited	: 7
+
+
+
+Query	: ~Ate(Helena)  | ~HaveMoney(Helena) 
+
+Pred	: NOT HaveMoney(Helena) 
+Clauses	: 9 
+Clause	: HaveMoney(Helena) 
+Unified	: ~Ate(Helena) 
+Visited	: 8
+
+Pred	: NOT Ate(Helena) 
+Clauses	: 1 
+Clause	: Ate(x)  | ~Order(x,y) 
+Unified	: ~HaveMoney(Helena)  | ~Order(Helena,y) 
+Visited	: 8
+
+
+
+Query	: ~Stocked(y)  | ~Seated(Helena) 
+
+Pred	: NOT Seated(Helena) 
+Clauses	: 5 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Stocked(y)  | ~Open(Restaurant) 
+Visited	: 9
+
+Pred	: NOT Stocked(y) 
+Clauses	: 6 
+Clause	: Stocked(Portabello) 
+Unified	: ~Seated(Helena) 
+Visited	: 9
+
+
+
+Query	: ~Seated(Helena) 
+
+Pred	: NOT Seated(Helena) 
+Clauses	: 5 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Open(Restaurant) 
+Visited	: 10
+
+
+
+Query	: ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 7 CU 
+Clause	: Open(Restaurant) 
+Unified	: 
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 2 milliseconds
+=============================================================
+NOT Order(Tim,Italian) 
+
+Orignal	: ((Seated(x) AND Stocked(y) )IMPLY Order(x,y) )
+Orignal	: (Order(x,y) IMPLY Ate(x) )
+Orignal	: ((GetCheck(x) AND HaveMoney(x) )IMPLY Paid(x) )
+Orignal	: (Ate(x) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(x) )IMPLY Leave(x) )
+Orignal	: ((Open(Restaurant) AND Open(Kitchen) )IMPLY Seated(x) )
+Orignal	: ((Stocked(Pasta) OR Stocked(Pizza) )IMPLY Stocked(Italian) )
+Orignal	: ((Stocked(Flour) AND Stocked(Cheese) )IMPLY Stocked(Pizza) )
+Orignal	: ((Stocked(Penne) AND Stocked(Pesto) )IMPLY Stocked(Pasta) )
+Orignal	: Open(Restaurant) 
+Orignal	: HaveMoney(Tim) 
+Orignal	: HaveMoney(Lauren) 
+Orignal	: Stocked(Penne) 
+Orignal	: Stocked(Flour) 
+Orignal	: Stocked(Cheese) 
+
+KB
+clause 0 : Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+clause 1 : Ate(x)  | ~Order(x,y) 
+clause 2 : Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+clause 3 : GetCheck(x)  | ~Ate(x) 
+clause 4 : ~GetCheck(x)  | Leave(x)  | ~Paid(x) 
+clause 5 : Seated(x)  | ~Open(Restaurant) 
+clause 6 : Open(Restaurant) 
+clause 7 : HaveMoney(Tim) 
+clause 8 : HaveMoney(Lauren) 
+clause 9 : Stocked(Penne) 
+clause 10 : Stocked(Flour) 
+clause 11 : Stocked(Cheese) 
+KBMap
+HaveMoney(v) : 7 8 
+Stocked(v) : 9 10 11 
+Open(v) : 6 
+Seated(v) : 5 
+Leave(v) : 4 
+~Paid(v) : 4 
+~Open(v) : 5 
+~Ate(v) : 3 
+Paid(v) : 2 
+~GetCheck(v) : 2 4 
+~Stocked(v) : 0 
+Order(v,v) : 0 
+~HaveMoney(v) : 2 
+~Order(v,v) : 1 
+Ate(v) : 1 
+~Seated(v) : 0 
+GetCheck(v) : 3 
+
+
+
+Query	: ~Order(Tim,Italian) 
+
+Pred	: NOT Order(Tim,Italian) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Tim)  | ~Stocked(Italian) 
+Visited	: 1
+
+
+
+Query	: ~Stocked(Italian)  | ~Seated(Tim) 
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 5 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Stocked(Italian)  | ~Open(Restaurant) 
+Visited	: 2
+
+Pred	: NOT Stocked(Italian) 
+Clauses	: CU CU CU 
+
+
+Query	: ~Stocked(Italian)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 6 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(Italian) 
+Visited	: 3
+
+Pred	: NOT Stocked(Italian) 
+Clauses	: CU CU CU 
+
+
+Query	: ~Stocked(Italian) 
+
+Pred	: NOT Stocked(Italian) 
+Clauses	: CU CU CU 
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 1 milliseconds
+=============================================================
+NOT Hangout(Leia,Teddy) 
+
+Orignal	: (((Likes(x,y) AND Likes(y,x) )OR Meet(x,y,z) )IMPLY Hangout(x,y) )
+Orignal	: ((Leave(x,z) AND Leave(y,z) )IMPLY Meet(x,y,z) )
+Orignal	: ((GetCheck(x,z) AND Paid(x,z) )IMPLY Leave(x,z) )
+Orignal	: ((GetCheck(x,z) AND HaveMoney(x) )IMPLY Paid(x,z) )
+Orignal	: (Ate(x,y) IMPLY GetCheck(x,z) )
+Orignal	: ((Order(x,y) AND Good(y) )IMPLY Ate(x,y) )
+Orignal	: ((Seated(x,z) AND Stocked(y,z) )IMPLY Order(x,y) )
+Orignal	: ((OpenRestaurant(z) AND (Open(Kitchen,z) AND HasTable(z) ))IMPLY Seated(x,z) )
+Orignal	: ((TableOpen(x,z) OR TableOpen(y,z) )IMPLY HasTable(z) )
+Orignal	: ((HasIngredients(y,z) AND Open(Kitchen,z) )IMPLY Stocked(y,z) )
+Orignal	: (NOT Bad(x) IMPLY Good(x) )
+Orignal	: ((Has(Dough,z) AND Has(Cheese,z) )IMPLY HasIngredients(CheesePizza,z) )
+Orignal	: ((Has(Pasta,z) AND Has(Pesto,z) )IMPLY HasIngredients(PestoPasta,z) )
+Orignal	: ((Has(Falafel,z) AND Has(Hummus,z) )IMPLY HasIngredients(FalafelPlate,z) )
+Orignal	: ((Has(Rice,z) AND Has(Lamb,z) )IMPLY HasIngredients(LambPlate,z) )
+Orignal	: ((Has(LadyFingers,z) AND Has(Mascarpone,z) )IMPLY HasIngredients(Tiramisu,z) )
+Orignal	: ((Old(Cheese) OR Burnt(CheesePizza) )IMPLY Bad(CheesePizza) )
+Orignal	: (Moldy(Pesto) IMPLY Bad(PestoPasta) )
+Orignal	: ((Bad(Lamb) OR Soggy(Rice) )IMPLY Bad(LambPlate) )
+Orignal	: Has(Dough,Bestia) 
+Orignal	: Has(Cheese,Bestia) 
+Orignal	: Has(Cheese,Dune) 
+Orignal	: Has(Pasta,Bestia) 
+Orignal	: Has(Pesto,Bestia) 
+Orignal	: Has(Falafel,Dune) 
+Orignal	: Has(Hummus,Dune) 
+Orignal	: Has(Rice,Dune) 
+Orignal	: Has(Lamb,Dune) 
+Orignal	: Has(LadyFingers,Bestia) 
+Orignal	: Has(Mascarpone,Bestia) 
+Orignal	: Burnt(CheesePizza) 
+Orignal	: Soggy(Rice) 
+Orignal	: NOT Bad(Tiramisu) 
+Orignal	: Bad(Lamb) 
+Orignal	: OpenRestaurant(Bestia) 
+Orignal	: Open(Kitchen,Bestia) 
+Orignal	: OpenRestaurant(Dune) 
+Orignal	: Open(Kitchen,Dune) 
+Orignal	: HaveMoney(Leia) 
+Orignal	: HaveMoney(Teddy) 
+Orignal	: Likes(Leia,Teddy) 
+Orignal	: Likes(Leia,Mary) 
+Orignal	: Likes(Teddy,Harry) 
+Orignal	: Likes(Harry,Teddy) 
+Orignal	: TableOpen(Patio,Bestia) 
+
+KB
+clause 0 : Hangout(x,y)  | ~Likes(x,y) 
+clause 1 : Hangout(x,y)  | ~Meet(x,y,z) 
+clause 2 : Meet(x,y,z)  | ~Leave(x,z) 
+clause 3 : Leave(x,z)  | ~GetCheck(x,z)  | ~Paid(x,z) 
+clause 4 : Paid(x,z)  | ~GetCheck(x,z)  | ~HaveMoney(x) 
+clause 5 : GetCheck(x,z)  | ~Ate(x,y) 
+clause 6 : Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+clause 7 : Order(x,y)  | ~Seated(x,z)  | ~Stocked(y,z) 
+clause 8 : Seated(x,z)  | ~Open(Kitchen,z)  | ~HasTable(z)  | ~OpenRestaurant(z) 
+clause 9 : HasTable(z)  | ~TableOpen(x,z) 
+clause 10 : HasTable(z)  | ~TableOpen(y,z) 
+clause 11 : Stocked(y,z)  | ~HasIngredients(y,z)  | ~Open(Kitchen,z) 
+clause 12 : Good(x)  | Bad(x) 
+clause 13 : HasIngredients(CheesePizza,z)  | ~Has(Dough,z) 
+clause 14 : HasIngredients(PestoPasta,z)  | ~Has(Pasta,z) 
+clause 15 : HasIngredients(FalafelPlate,z)  | ~Has(Falafel,z) 
+clause 16 : HasIngredients(LambPlate,z)  | ~Has(Rice,z) 
+clause 17 : HasIngredients(Tiramisu,z)  | ~Has(LadyFingers,z) 
+clause 18 : Bad(CheesePizza)  | ~Old(Cheese) 
+clause 19 : Bad(CheesePizza)  | ~Burnt(CheesePizza) 
+clause 20 : Bad(PestoPasta)  | ~Moldy(Pesto) 
+clause 21 : Bad(LambPlate)  | ~Soggy(Rice) 
+clause 22 : Has(Dough,Bestia) 
+clause 23 : Has(Cheese,Bestia) 
+clause 24 : Has(Cheese,Dune) 
+clause 25 : Has(Pasta,Bestia) 
+clause 26 : Has(Pesto,Bestia) 
+clause 27 : Has(Falafel,Dune) 
+clause 28 : Has(Hummus,Dune) 
+clause 29 : Has(Rice,Dune) 
+clause 30 : Has(Lamb,Dune) 
+clause 31 : Has(LadyFingers,Bestia) 
+clause 32 : Has(Mascarpone,Bestia) 
+clause 33 : Burnt(CheesePizza) 
+clause 34 : Soggy(Rice) 
+clause 35 : ~Bad(Tiramisu) 
+clause 36 : Bad(Lamb) 
+clause 37 : OpenRestaurant(Bestia) 
+clause 38 : Open(Kitchen,Bestia) 
+clause 39 : OpenRestaurant(Dune) 
+clause 40 : Open(Kitchen,Dune) 
+clause 41 : HaveMoney(Leia) 
+clause 42 : HaveMoney(Teddy) 
+clause 43 : Likes(Leia,Teddy) 
+clause 44 : Likes(Leia,Mary) 
+clause 45 : Likes(Teddy,Harry) 
+clause 46 : Likes(Harry,Teddy) 
+clause 47 : TableOpen(Patio,Bestia) 
+KBMap
+Open(v,v) : 38 40 
+Soggy(v) : 34 
+Has(v,v) : 22 23 24 25 26 27 28 29 30 31 32 
+~Soggy(v) : 21 
+~Moldy(v) : 20 
+Burnt(v) : 33 
+~Old(v) : 18 
+HasIngredients(v,v) : 13 14 15 16 17 
+~Has(v,v) : 13 14 15 16 17 
+Good(v) : 12 
+Stocked(v,v) : 11 
+~Burnt(v) : 19 
+~HasIngredients(v,v) : 11 
+HasTable(v) : 9 10 
+~HasTable(v) : 8 
+~Open(v,v) : 8 11 
+~Stocked(v,v) : 7 
+Paid(v,v) : 4 
+Ate(v,v) : 6 
+OpenRestaurant(v) : 37 39 
+GetCheck(v,v) : 5 
+Bad(v) : 12 18 19 20 21 36 
+~Seated(v,v) : 7 
+~Likes(v,v) : 0 
+Hangout(v,v) : 0 1 
+~TableOpen(v,v) : 9 10 
+~Order(v,v) : 6 
+Leave(v,v) : 3 
+~Paid(v,v) : 3 
+~Good(v) : 6 
+Meet(v,v,v) : 2 
+Likes(v,v) : 43 44 45 46 
+~Bad(v) : 35 
+Seated(v,v) : 8 
+~Ate(v,v) : 5 
+~HaveMoney(v) : 4 
+~OpenRestaurant(v) : 8 
+~GetCheck(v,v) : 3 4 
+TableOpen(v,v) : 47 
+HaveMoney(v) : 41 42 
+Order(v,v) : 7 
+~Leave(v,v) : 2 
+~Meet(v,v,v) : 1 
+
+
+
+Query	: ~Hangout(Leia,Teddy) 
+
+Pred	: NOT Hangout(Leia,Teddy) 
+Clauses	: 0 1 
+Clause	: Hangout(x,y)  | ~Likes(x,y) 
+Unified	: ~Likes(Leia,Teddy) 
+Visited	: 1
+
+Clause	: Hangout(x,y)  | ~Meet(x,y,z) 
+Unified	: ~Meet(Leia,Teddy,z) 
+Visited	: 1
+
+
+
+Query	: ~Likes(Leia,Teddy) 
+
+Pred	: NOT Likes(Leia,Teddy) 
+Clauses	: 43 CU CU CU 
+Clause	: Likes(Leia,Teddy) 
+Unified	: 
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 2 milliseconds
+=============================================================
+NOT MiniSudoku(Ac,D) 
+
+Orignal	: (MiniSudoku(x,A) IMPLY NOT MiniSudoku(x,B) )
+Orignal	: (MiniSudoku(x,A) IMPLY NOT MiniSudoku(x,C) )
+Orignal	: (MiniSudoku(x,A) IMPLY NOT MiniSudoku(x,D) )
+Orignal	: (MiniSudoku(x,B) IMPLY NOT MiniSudoku(x,A) )
+Orignal	: (MiniSudoku(x,B) IMPLY NOT MiniSudoku(x,C) )
+Orignal	: (MiniSudoku(x,B) IMPLY NOT MiniSudoku(x,D) )
+Orignal	: (MiniSudoku(x,C) IMPLY NOT MiniSudoku(x,A) )
+Orignal	: (MiniSudoku(x,C) IMPLY NOT MiniSudoku(x,B) )
+Orignal	: (MiniSudoku(x,C) IMPLY NOT MiniSudoku(x,D) )
+Orignal	: (MiniSudoku(x,D) IMPLY NOT MiniSudoku(x,A) )
+Orignal	: (MiniSudoku(x,D) IMPLY NOT MiniSudoku(x,B) )
+Orignal	: (MiniSudoku(x,D) IMPLY NOT MiniSudoku(x,C) )
+Orignal	: (MiniSudoku(Aa,x) OR (MiniSudoku(Ab,x) OR (MiniSudoku(Ac,x) OR MiniSudoku(Ad,x) )))
+Orignal	: (MiniSudoku(Ba,x) OR (MiniSudoku(Bb,x) OR (MiniSudoku(Bc,x) OR MiniSudoku(Bd,x) )))
+Orignal	: (MiniSudoku(Ca,x) OR (MiniSudoku(Cb,x) OR (MiniSudoku(Cc,x) OR MiniSudoku(Cd,x) )))
+Orignal	: (MiniSudoku(Da,x) OR (MiniSudoku(Db,x) OR (MiniSudoku(Dc,x) OR MiniSudoku(Dd,x) )))
+Orignal	: (MiniSudoku(Aa,x) OR (MiniSudoku(Ba,x) OR (MiniSudoku(Ca,x) OR MiniSudoku(Da,x) )))
+Orignal	: (MiniSudoku(Ab,x) OR (MiniSudoku(Bb,x) OR (MiniSudoku(Cb,x) OR MiniSudoku(Db,x) )))
+Orignal	: (MiniSudoku(Ac,x) OR (MiniSudoku(Bc,x) OR (MiniSudoku(Cc,x) OR MiniSudoku(Dc,x) )))
+Orignal	: (MiniSudoku(Ad,x) OR (MiniSudoku(Bd,x) OR (MiniSudoku(Cd,x) OR MiniSudoku(Dd,x) )))
+Orignal	: (MiniSudoku(Aa,x) OR (MiniSudoku(Ab,x) OR (MiniSudoku(Ba,x) OR MiniSudoku(Bb,x) )))
+Orignal	: (MiniSudoku(Ca,x) OR (MiniSudoku(Cb,x) OR (MiniSudoku(Da,x) OR MiniSudoku(Db,x) )))
+Orignal	: (MiniSudoku(Aa,x) OR (MiniSudoku(Ab,x) OR (MiniSudoku(Ba,x) OR MiniSudoku(Bb,x) )))
+Orignal	: (MiniSudoku(Ca,x) OR (MiniSudoku(Cb,x) OR (MiniSudoku(Da,x) OR MiniSudoku(Db,x) )))
+Orignal	: (MiniSudoku(Aa,A) AND MiniSudoku(Bb,B) )
+Orignal	: (MiniSudoku(Cc,C) AND MiniSudoku(Dd,D) )
+Orignal	: (MiniSudoku(Cd,A) AND MiniSudoku(Dc,B) )
+
+KB
+clause 0 : ~MiniSudoku(x,A) 
+clause 1 : ~MiniSudoku(x,A) 
+clause 2 : ~MiniSudoku(x,A) 
+clause 3 : ~MiniSudoku(x,B) 
+clause 4 : ~MiniSudoku(x,B) 
+clause 5 : ~MiniSudoku(x,B) 
+clause 6 : ~MiniSudoku(x,C) 
+clause 7 : ~MiniSudoku(x,C) 
+clause 8 : ~MiniSudoku(x,C) 
+clause 9 : ~MiniSudoku(x,D) 
+clause 10 : ~MiniSudoku(x,D) 
+clause 11 : ~MiniSudoku(x,D) 
+clause 12 : MiniSudoku(Aa,x) 
+clause 13 : MiniSudoku(Ba,x) 
+clause 14 : MiniSudoku(Ca,x) 
+clause 15 : MiniSudoku(Da,x) 
+clause 16 : MiniSudoku(Aa,x) 
+clause 17 : MiniSudoku(Ab,x) 
+clause 18 : MiniSudoku(Ac,x) 
+clause 19 : MiniSudoku(Ad,x) 
+clause 20 : MiniSudoku(Aa,x) 
+clause 21 : MiniSudoku(Ca,x) 
+clause 22 : MiniSudoku(Aa,x) 
+clause 23 : MiniSudoku(Ca,x) 
+clause 24 : MiniSudoku(Aa,A) 
+clause 25 : MiniSudoku(Bb,B) 
+clause 26 : MiniSudoku(Cc,C) 
+clause 27 : MiniSudoku(Dd,D) 
+clause 28 : MiniSudoku(Cd,A) 
+clause 29 : MiniSudoku(Dc,B) 
+KBMap
+MiniSudoku(v,v) : 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 
+~MiniSudoku(v,v) : 0 1 2 3 4 5 6 7 8 9 10 11 
+
+
+
+Query	: ~MiniSudoku(Ac,D) 
+
+Pred	: NOT MiniSudoku(Ac,D) 
+Clauses	: CU CU CU CU CU CU 18 CU CU CU CU CU CU CU CU CU CU CU 
+Clause	: MiniSudoku(Ac,x) 
+Unified	: 
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+=============================================================
+NOT A(Daphne) 
+
+Orignal	: ((B(x) AND C(y,y,x) )IMPLY A(Daphne) )
+Orignal	: C(One,Two,Three) 
+Orignal	: B(Three) 
+
+KB
+clause 0 : A(Daphne)  | ~B(x)  | ~C(y,y,x) 
+clause 1 : C(One,Two,Three) 
+clause 2 : B(Three) 
+KBMap
+B(v) : 2 
+C(v,v,v) : 1 
+A(v) : 0 
+~B(v) : 0 
+~C(v,v,v) : 0 
+
+
+
+Query	: ~A(Daphne) 
+
+Pred	: NOT A(Daphne) 
+Clauses	: 0 
+Clause	: A(Daphne)  | ~B(x)  | ~C(y,y,x) 
+Unified	: ~B(x)  | ~C(y,y,x) 
+Visited	: 1
+
+
+
+Query	: ~B(x)  | ~C(y,y,x) 
+
+Pred	: NOT C(y,y,x) 
+Clauses	: 1 
+Clause	: C(One,Two,Three) 
+Unified	: ~B(Three) 
+Visited	: 2
+
+Pred	: NOT B(x) 
+Clauses	: 2 
+Clause	: B(Three) 
+Unified	: ~C(y,y,Three) 
+Visited	: 2
+
+
+
+Query	: ~B(Three) 
+
+Pred	: NOT B(Three) 
+Clauses	: 2 
+Clause	: B(Three) 
+Unified	: 
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+=============================================================
+NOT A(Ficus,Iris) 
+
+Orignal	: (NOT B(z,z,y) OR (NOT C(w,w,x) OR A(y,x) ))
+Orignal	: C(One,Two,Iris) 
+Orignal	: B(One,Two,Ficus) 
+
+KB
+clause 0 : A(y,x)  | ~B(z,z,y)  | ~C(w,w,x) 
+clause 1 : C(One,Two,Iris) 
+clause 2 : B(One,Two,Ficus) 
+KBMap
+A(v,v) : 0 
+C(v,v,v) : 1 
+~B(v,v,v) : 0 
+B(v,v,v) : 2 
+~C(v,v,v) : 0 
+
+
+
+Query	: ~A(Ficus,Iris) 
+
+Pred	: NOT A(Ficus,Iris) 
+Clauses	: 0 
+Clause	: A(y,x)  | ~B(z,z,y)  | ~C(w,w,x) 
+Unified	: ~B(z,z,Ficus)  | ~C(w,w,Iris) 
+Visited	: 1
+
+
+
+Query	: ~B(z,z,Ficus)  | ~C(w,w,Iris) 
+
+Pred	: NOT C(w,w,Iris) 
+Clauses	: 1 
+Clause	: C(One,Two,Iris) 
+Unified	: ~B(z,z,Ficus) 
+Visited	: 2
+
+Pred	: NOT B(z,z,Ficus) 
+Clauses	: 2 
+Clause	: B(One,Two,Ficus) 
+Unified	: ~C(w,w,Iris) 
+Visited	: 2
+
+
+
+Query	: ~B(z,z,Ficus) 
+
+Pred	: NOT B(z,z,Ficus) 
+Clauses	: 2 
+Clause	: B(One,Two,Ficus) 
+Unified	: 
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+=============================================================
+NOT A(Maackia,Lythrum,Myrica) 
+
+Orignal	: (NOT B(x,y,z) OR (NOT C(z,w,q) OR (NOT D(q,u,x) OR A(y,w,u) )))
+Orignal	: B(One,Maackia,Two) 
+Orignal	: C(Two,Lythrum,Three) 
+Orignal	: D(Three,Myrica,One) 
+
+KB
+clause 0 : ~C(z,w,q)  | ~B(x,y,z)  | A(y,w,u)  | ~D(q,u,x) 
+clause 1 : B(One,Maackia,Two) 
+clause 2 : C(Two,Lythrum,Three) 
+clause 3 : D(Three,Myrica,One) 
+KBMap
+D(v,v,v) : 3 
+C(v,v,v) : 2 
+B(v,v,v) : 1 
+~C(v,v,v) : 0 
+~B(v,v,v) : 0 
+A(v,v,v) : 0 
+~D(v,v,v) : 0 
+
+
+
+Query	: ~A(Maackia,Lythrum,Myrica) 
+
+Pred	: NOT A(Maackia,Lythrum,Myrica) 
+Clauses	: 0 
+Clause	: ~C(z,w,q)  | ~B(x,y,z)  | A(y,w,u)  | ~D(q,u,x) 
+Unified	: ~B(x,Maackia,z)  | ~C(z,Lythrum,q)  | ~D(q,Myrica,x) 
+Visited	: 1
+
+
+
+Query	: ~B(x,Maackia,z)  | ~C(z,Lythrum,q)  | ~D(q,Myrica,x) 
+
+Pred	: NOT D(q,Myrica,x) 
+Clauses	: 3 
+Clause	: D(Three,Myrica,One) 
+Unified	: ~B(One,Maackia,z)  | ~C(z,Lythrum,Three) 
+Visited	: 2
+
+Pred	: NOT C(z,Lythrum,q) 
+Clauses	: 2 
+Clause	: C(Two,Lythrum,Three) 
+Unified	: ~B(x,Maackia,Two)  | ~D(Three,Myrica,x) 
+Visited	: 2
+
+Pred	: NOT B(x,Maackia,z) 
+Clauses	: 1 
+Clause	: B(One,Maackia,Two) 
+Unified	: ~C(Two,Lythrum,q)  | ~D(q,Myrica,One) 
+Visited	: 2
+
+
+
+Query	: ~B(One,Maackia,z)  | ~C(z,Lythrum,Three) 
+
+Pred	: NOT C(z,Lythrum,Three) 
+Clauses	: 2 
+Clause	: C(Two,Lythrum,Three) 
+Unified	: ~B(One,Maackia,Two) 
+Visited	: 3
+
+Pred	: NOT B(One,Maackia,z) 
+Clauses	: 1 
+Clause	: B(One,Maackia,Two) 
+Unified	: ~C(Two,Lythrum,Three) 
+Visited	: 3
+
+
+
+Query	: ~B(One,Maackia,Two) 
+
+Pred	: NOT B(One,Maackia,Two) 
+Clauses	: 1 
+Clause	: B(One,Maackia,Two) 
+Unified	: 
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 1 milliseconds
+=============================================================
+NOT Leave(Charley) 
+
+Orignal	: ((Seated(x) AND Stocked(y) )IMPLY Order(x,y) )
+Orignal	: ((Order(x,y) AND Good(y) )IMPLY Ate(x,y) )
+Orignal	: ((Order(x,y) AND Bad(y) )IMPLY NOT Ate(x,y) )
+Orignal	: ((GetCheck(x) AND HaveMoney(x) )IMPLY Paid(x) )
+Orignal	: (Ate(x,y) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(y) )IMPLY Leave(x) )
+Orignal	: ((Open(Restaurant) AND Open(Kitchen) )IMPLY Seated(x) )
+Orignal	: ((Stocked(Soup) AND Stocked(Chicken) )IMPLY Stocked(ChickenSoup) )
+Orignal	: Stocked(Chicken) 
+Orignal	: Bad(Chicken) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+Orignal	: NOT HaveMoney(Charley) 
+Orignal	: HaveMoney(Bob) 
+
+KB
+clause 0 : Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+clause 1 : Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+clause 2 : ~Ate(x,y)  | ~Order(x,y)  | ~Bad(y) 
+clause 3 : Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+clause 4 : GetCheck(x)  | ~Ate(x,y) 
+clause 5 : ~GetCheck(x)  | Leave(x)  | ~Paid(y) 
+clause 6 : Seated(x)  | ~Open(Restaurant) 
+clause 7 : Stocked(Chicken) 
+clause 8 : Bad(Chicken) 
+clause 9 : Open(Restaurant) 
+clause 10 : Open(Kitchen) 
+clause 11 : ~HaveMoney(Charley) 
+clause 12 : HaveMoney(Bob) 
+KBMap
+HaveMoney(v) : 12 
+Bad(v) : 8 
+~Open(v) : 6 
+~Paid(v) : 5 
+GetCheck(v) : 4 
+~Good(v) : 1 
+Paid(v) : 3 
+~GetCheck(v) : 3 5 
+Seated(v) : 6 
+Leave(v) : 5 
+Ate(v,v) : 1 
+~Stocked(v) : 0 
+Order(v,v) : 0 
+~HaveMoney(v) : 3 11 
+~Ate(v,v) : 2 4 
+Open(v) : 9 10 
+Stocked(v) : 7 
+~Bad(v) : 2 
+~Order(v,v) : 1 2 
+~Seated(v) : 0 
+
+
+
+Query	: ~Leave(Charley) 
+
+Pred	: NOT Leave(Charley) 
+Clauses	: 5 
+Clause	: ~GetCheck(x)  | Leave(x)  | ~Paid(y) 
+Unified	: ~GetCheck(Charley)  | ~Paid(y) 
+Visited	: 1
+
+
+
+Query	: ~Paid(y)  | ~GetCheck(Charley) 
+
+Pred	: NOT GetCheck(Charley) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Paid(y)  | ~Ate(Charley,y) 
+Visited	: 2
+
+Pred	: NOT Paid(y) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(Charley)  | ~HaveMoney(Charley) 
+Visited	: 2
+
+
+
+Query	: ~Ate(Charley,y)  | ~Paid(y) 
+
+Pred	: NOT Paid(y) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(y)  | ~Ate(Charley,y)  | ~HaveMoney(y) 
+Visited	: 3
+
+Pred	: NOT Ate(Charley,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Charley,y)  | ~Paid(y)  | ~Good(y) 
+Visited	: 3
+
+
+
+Query	: ~GetCheck(Charley)  | ~HaveMoney(Charley) 
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT GetCheck(Charley) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(Charley)  | ~Ate(Charley,y) 
+Visited	: 4
+
+
+
+Query	: ~HaveMoney(Charley)  | ~Ate(Charley,y) 
+
+Pred	: NOT Ate(Charley,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Charley,y)  | ~HaveMoney(Charley)  | ~Good(y) 
+Visited	: 5
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+
+
+Query	: ~Paid(y)  | ~Order(Charley,y)  | ~Good(y) 
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Order(Charley,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Paid(y)  | ~Good(y)  | ~Stocked(y) 
+Visited	: 6
+
+Pred	: NOT Paid(y) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(y)  | ~Order(Charley,y)  | ~Good(y)  | ~HaveMoney(y) 
+Visited	: 6
+
+
+
+Query	: ~GetCheck(y)  | ~HaveMoney(y)  | ~Ate(Charley,y) 
+
+Pred	: NOT Ate(Charley,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Charley,y)  | ~GetCheck(y)  | ~HaveMoney(y)  | ~Good(y) 
+Visited	: 7
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~GetCheck(Bob)  | ~Ate(Charley,Bob) 
+Visited	: 7
+
+Pred	: NOT GetCheck(y) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Ate(Charley,y)  | ~HaveMoney(y) 
+Visited	: 7
+
+
+
+Query	: ~GetCheck(Bob)  | ~Ate(Charley,Bob) 
+
+Pred	: NOT Ate(Charley,Bob) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Charley,Bob)  | ~GetCheck(Bob)  | ~Good(Bob) 
+Visited	: 8
+
+Pred	: NOT GetCheck(Bob) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Ate(Charley,Bob) 
+Visited	: 8
+
+
+
+Query	: ~Ate(Charley,Bob) 
+
+Pred	: NOT Ate(Charley,Bob) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Charley,Bob)  | ~Good(Bob) 
+Visited	: 9
+
+
+
+Query	: ~Order(Charley,Bob)  | ~Good(Bob) 
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Order(Charley,Bob) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Good(Bob)  | ~Stocked(Bob) 
+Visited	: 10
+
+
+
+Query	: ~Order(Charley,y)  | ~HaveMoney(Charley)  | ~Good(y) 
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Order(Charley,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(Charley)  | ~Good(y)  | ~Stocked(y) 
+Visited	: 11
+
+
+
+Query	: ~GetCheck(Bob)  | ~Order(Charley,Bob)  | ~Good(Bob) 
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Order(Charley,Bob) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~GetCheck(Bob)  | ~Good(Bob)  | ~Stocked(Bob) 
+Visited	: 12
+
+Pred	: NOT GetCheck(Bob) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Good(Bob)  | ~Order(Charley,Bob)  | ~Ate(Bob,y) 
+Visited	: 12
+
+
+
+Query	: ~Seated(Charley)  | ~Stocked(Bob)  | ~Good(Bob) 
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+Visited	: 13
+
+
+
+Query	: ~Good(Bob)  | ~Order(Charley,Bob)  | ~Ate(Bob,y) 
+
+Pred	: NOT Ate(Bob,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Good(Bob)  | ~Order(Charley,Bob) 
+Visited	: 14
+
+Pred	: NOT Order(Charley,Bob) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Ate(Bob,Bob) 
+Visited	: 14
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+
+
+Query	: ~Stocked(Bob)  | ~Good(Bob)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob) 
+Visited	: 15
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+
+
+Query	: ~Good(Bob)  | ~Stocked(Bob) 
+
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Good(Bob) 
+Clauses	: 
+
+
+Query	: ~Seated(Charley)  | ~Paid(y)  | ~Stocked(y)  | ~Good(y) 
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Paid(Chicken)  | ~Seated(Charley)  | ~Good(Chicken) 
+Visited	: 17
+
+Pred	: NOT Paid(y) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~Stocked(y)  | ~Good(y)  | ~GetCheck(y)  | ~Seated(Charley)  | ~HaveMoney(y) 
+Visited	: 17
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Paid(y)  | ~Good(y)  | ~Stocked(y)  | ~Open(Restaurant) 
+Visited	: 17
+
+
+
+Query	: ~Paid(Chicken)  | ~Seated(Charley)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~Paid(Chicken)  | ~Open(Restaurant) 
+Visited	: 18
+
+Pred	: NOT Paid(Chicken) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(Chicken)  | ~Seated(Charley)  | ~Good(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 18
+
+
+
+Query	: ~Good(Chicken)  | ~Paid(Chicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~Paid(Chicken) 
+Visited	: 19
+
+Pred	: NOT Paid(Chicken) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant)  | ~HaveMoney(Chicken) 
+Visited	: 19
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~Good(Chicken)  | ~Paid(Chicken) 
+
+Pred	: NOT Paid(Chicken) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(Chicken)  | ~Good(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 20
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~GetCheck(Chicken)  | ~Good(Chicken)  | ~HaveMoney(Chicken) 
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT GetCheck(Chicken) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(Chicken)  | ~Ate(Chicken,y)  | ~Good(Chicken) 
+Visited	: 21
+
+
+
+Query	: ~Ate(Chicken,y)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Ate(Chicken,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+Visited	: 22
+
+
+
+Query	: ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Order(Chicken,Chicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken)  | ~Stocked(Chicken) 
+Visited	: 23
+
+
+
+Query	: ~GetCheck(Bob)  | ~Seated(Charley)  | ~Stocked(Bob)  | ~Good(Bob) 
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~GetCheck(Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+Visited	: 24
+
+Pred	: NOT GetCheck(Bob) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Seated(Charley)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Ate(Bob,y) 
+Visited	: 24
+
+
+
+Query	: ~Order(Charley,y)  | ~GetCheck(y)  | ~Good(y)  | ~HaveMoney(y) 
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~GetCheck(Bob)  | ~Order(Charley,Bob)  | ~Good(Bob) 
+Visited	: 25
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT GetCheck(y) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(y)  | ~Ate(y,y)  | ~Order(Charley,y)  | ~Good(y) 
+Visited	: 25
+
+Pred	: NOT Order(Charley,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Good(y)  | ~Stocked(y)  | ~Seated(Charley)  | ~GetCheck(y)  | ~HaveMoney(y) 
+Visited	: 25
+
+
+
+Query	: ~Seated(Charley)  | ~Stocked(Bob)  | ~Good(Bob)  | ~Ate(Bob,Bob) 
+
+Pred	: NOT Ate(Bob,Bob) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob)  | ~Order(Bob,Bob)  | ~Seated(Charley) 
+Visited	: 26
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Ate(Bob,Bob)  | ~Stocked(Bob)  | ~Good(Bob)  | ~Open(Restaurant) 
+Visited	: 26
+
+
+
+Query	: ~Seated(Chicken)  | ~HaveMoney(Chicken)  | ~Stocked(Chicken)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Stocked(Chicken) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~HaveMoney(Chicken)  | ~Seated(Chicken)  | ~Good(Chicken) 
+Visited	: 27
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Seated(Chicken) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(Chicken)  | ~Good(Chicken)  | ~Stocked(Chicken)  | ~Open(Restaurant) 
+Visited	: 27
+
+
+
+Query	: ~HaveMoney(Chicken)  | ~Seated(Chicken)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Seated(Chicken) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 28
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+
+
+Query	: ~Good(Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 29
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~Good(Chicken)  | ~HaveMoney(Chicken) 
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~Ate(Bob,Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(Bob)  | ~Stocked(Bob)  | ~Ate(Bob,Bob) 
+Visited	: 31
+
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Ate(Bob,Bob) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Bob,Bob)  | ~Stocked(Bob)  | ~Good(Bob)  | ~Open(Restaurant) 
+Visited	: 31
+
+
+
+Query	: ~Stocked(Bob)  | ~Good(Bob)  | ~Ate(Bob,Bob) 
+
+Pred	: NOT Ate(Bob,Bob) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Bob,Bob)  | ~Stocked(Bob)  | ~Good(Bob) 
+Visited	: 32
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+
+
+Query	: ~Order(Bob,Bob)  | ~Good(Bob)  | ~Stocked(Bob) 
+
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Order(Bob,Bob) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Bob)  | ~Good(Bob)  | ~Stocked(Bob) 
+Visited	: 33
+
+
+
+Query	: ~Seated(Bob)  | ~Stocked(Bob)  | ~Good(Bob) 
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Seated(Bob) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+Visited	: 34
+
+
+
+Query	: ~Paid(y)  | ~Stocked(y)  | ~Good(y)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(y)  | ~Good(y)  | ~Paid(y) 
+Visited	: 35
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~Paid(Chicken)  | ~Open(Restaurant) 
+Visited	: 35
+
+Pred	: NOT Paid(y) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(y)  | ~Good(y)  | ~Stocked(y)  | ~Open(Restaurant)  | ~HaveMoney(y) 
+Visited	: 35
+
+
+
+Query	: ~Good(y)  | ~Stocked(y)  | ~Paid(y) 
+
+Pred	: NOT Paid(y) 
+Clauses	: 3 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(y)  | ~Good(y)  | ~Stocked(y)  | ~HaveMoney(y) 
+Visited	: 36
+
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~Paid(Chicken) 
+Visited	: 36
+
+Pred	: NOT Good(y) 
+Clauses	: 
+
+
+Query	: ~Seated(Charley)  | ~HaveMoney(Charley)  | ~Stocked(y)  | ~Good(y) 
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~HaveMoney(Charley)  | ~Seated(Charley)  | ~Good(Chicken) 
+Visited	: 37
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(Charley)  | ~Good(y)  | ~Stocked(y)  | ~Open(Restaurant) 
+Visited	: 37
+
+
+
+Query	: ~HaveMoney(Charley)  | ~Seated(Charley)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Charley)  | ~Open(Restaurant) 
+Visited	: 38
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+
+
+Query	: ~Good(Chicken)  | ~HaveMoney(Charley)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Charley) 
+Visited	: 39
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~Good(Chicken)  | ~HaveMoney(Charley) 
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~HaveMoney(Charley)  | ~Stocked(y)  | ~Good(y)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(y)  | ~Good(y)  | ~HaveMoney(Charley) 
+Visited	: 41
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Charley)  | ~Open(Restaurant) 
+Visited	: 41
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+
+
+Query	: ~Good(y)  | ~Stocked(y)  | ~HaveMoney(Charley) 
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Charley) 
+Visited	: 42
+
+Pred	: NOT Good(y) 
+Clauses	: 
+
+
+Query	: ~GetCheck(y)  | ~Stocked(y)  | ~Good(y)  | ~HaveMoney(y) 
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob)  | ~GetCheck(Bob) 
+Visited	: 43
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~GetCheck(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 43
+
+Pred	: NOT GetCheck(y) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(y)  | ~Ate(y,y)  | ~Stocked(y)  | ~Good(y) 
+Visited	: 43
+
+
+
+Query	: ~Good(Bob)  | ~Stocked(Bob)  | ~GetCheck(Bob) 
+
+Pred	: NOT GetCheck(Bob) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob)  | ~Ate(Bob,y) 
+Visited	: 44
+
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Good(Bob) 
+Clauses	: 
+
+
+Query	: ~HaveMoney(Chicken)  | ~Stocked(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(Chicken)  | ~Good(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 45
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Stocked(Chicken) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 45
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+
+
+Query	: ~Good(Chicken)  | ~Stocked(Chicken)  | ~HaveMoney(Chicken) 
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Stocked(Chicken) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 46
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~GetCheck(Bob)  | ~Stocked(Bob)  | ~Good(Bob)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob)  | ~GetCheck(Bob) 
+Visited	: 47
+
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT GetCheck(Bob) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Open(Restaurant)  | ~Stocked(Bob)  | ~Good(Bob)  | ~Ate(Bob,y) 
+Visited	: 47
+
+
+
+Query	: ~Order(Bob,Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(Bob)  | ~Stocked(Bob)  | ~Order(Bob,Bob) 
+Visited	: 48
+
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Order(Bob,Bob) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Bob)  | ~Stocked(Bob)  | ~Good(Bob)  | ~Open(Restaurant) 
+Visited	: 48
+
+
+
+Query	: ~Ate(y,y)  | ~HaveMoney(y)  | ~Order(Charley,y)  | ~Good(y) 
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Order(Charley,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(y)  | ~Ate(y,y)  | ~Good(y)  | ~Stocked(y) 
+Visited	: 49
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Order(Charley,Bob)  | ~Ate(Bob,Bob)  | ~Good(Bob) 
+Visited	: 49
+
+Pred	: NOT Ate(y,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Charley,y)  | ~HaveMoney(y)  | ~Good(y) 
+Visited	: 49
+
+
+
+Query	: ~Ate(y,y)  | ~HaveMoney(y)  | ~Good(y)  | ~Stocked(y) 
+
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~HaveMoney(Chicken)  | ~Ate(Chicken,Chicken)  | ~Good(Chicken) 
+Visited	: 50
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Good(Bob)  | ~Stocked(Bob)  | ~Ate(Bob,Bob) 
+Visited	: 50
+
+Pred	: NOT Ate(y,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(y,y)  | ~Good(y)  | ~Stocked(y)  | ~HaveMoney(y) 
+Visited	: 50
+
+
+
+Query	: ~Seated(Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(Bob)  | ~Stocked(Bob)  | ~Seated(Bob) 
+Visited	: 51
+
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Good(Bob) 
+Clauses	: 
+Pred	: NOT Seated(Bob) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Open(Restaurant)  | ~Good(Bob)  | ~Stocked(Bob) 
+Visited	: 51
+
+
+
+Query	: ~Seated(Charley)  | ~GetCheck(Chicken)  | ~Good(Chicken)  | ~HaveMoney(Chicken) 
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT GetCheck(Chicken) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(Chicken)  | ~Ate(Chicken,y)  | ~Seated(Charley)  | ~Good(Chicken) 
+Visited	: 52
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(Chicken)  | ~GetCheck(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+Visited	: 52
+
+
+
+Query	: ~Order(y,y)  | ~Stocked(y)  | ~Good(y)  | ~HaveMoney(y) 
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob)  | ~Order(Bob,Bob) 
+Visited	: 53
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 53
+
+Pred	: NOT Order(y,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(y)  | ~Good(y)  | ~Stocked(y)  | ~HaveMoney(y) 
+Visited	: 53
+
+
+
+Query	: ~Ate(Chicken,y)  | ~HaveMoney(Chicken)  | ~Seated(Charley)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~Ate(Chicken,y)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 54
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Ate(Chicken,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Chicken,Chicken)  | ~Seated(Charley)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+Visited	: 54
+
+
+
+Query	: ~HaveMoney(Chicken)  | ~GetCheck(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~GetCheck(Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+Visited	: 55
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT GetCheck(Chicken) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Open(Restaurant)  | ~HaveMoney(Chicken)  | ~Ate(Chicken,y)  | ~Good(Chicken) 
+Visited	: 55
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+
+
+Query	: ~Good(Chicken)  | ~HaveMoney(Chicken)  | ~Ate(Chicken,y)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~HaveMoney(Chicken)  | ~Ate(Chicken,y)  | ~Good(Chicken) 
+Visited	: 56
+
+Pred	: NOT Ate(Chicken,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+Visited	: 56
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+
+
+Query	: ~Seated(Charley)  | ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Order(Chicken,Chicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~HaveMoney(Chicken)  | ~Seated(Charley)  | ~Good(Chicken)  | ~Stocked(Chicken) 
+Visited	: 57
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 57
+
+
+
+Query	: ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~HaveMoney(Chicken)  | ~Order(Chicken,Chicken)  | ~Good(Chicken) 
+Visited	: 58
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Order(Chicken,Chicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Chicken)  | ~Good(Chicken)  | ~Stocked(Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 58
+
+
+
+Query	: ~HaveMoney(Chicken)  | ~Seated(Charley)  | ~Stocked(Chicken)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Stocked(Chicken) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+Visited	: 59
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(Chicken)  | ~Good(Chicken)  | ~Stocked(Chicken)  | ~Open(Restaurant) 
+Visited	: 59
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+
+
+Query	: ~Seated(Charley)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Good(Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 60
+
+
+
+Query	: ~Good(Bob)  | ~Stocked(Bob)  | ~Seated(Charley)  | ~Order(Bob,Bob) 
+
+Pred	: NOT Order(Bob,Bob) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob)  | ~Seated(Charley) 
+Visited	: 61
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Order(Bob,Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+Visited	: 61
+
+Pred	: NOT Stocked(Bob) 
+Clauses	: CU 
+Pred	: NOT Good(Bob) 
+Clauses	: 
+
+
+Query	: ~Seated(Chicken)  | ~Stocked(Chicken)  | ~Good(Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Seated(Chicken)  | ~Good(Chicken)  | ~Stocked(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 62
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Stocked(Chicken) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~HaveMoney(Chicken)  | ~Seated(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+Visited	: 62
+
+Pred	: NOT Seated(Chicken) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Open(Restaurant)  | ~Good(Chicken)  | ~Stocked(Chicken)  | ~HaveMoney(Chicken) 
+Visited	: 62
+
+
+
+Query	: ~HaveMoney(Chicken)  | ~Seated(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Seated(Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+Visited	: 63
+
+Pred	: NOT Good(Chicken) 
+Clauses	: 
+Pred	: NOT Seated(Chicken) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Open(Restaurant)  | ~HaveMoney(Chicken)  | ~Good(Chicken) 
+Visited	: 63
+
+Pred	: NOT HaveMoney(Chicken) 
+Clauses	: CU 
+
+
+Query	: ~Seated(Charley)  | ~Ate(y,y)  | ~HaveMoney(y)  | ~Stocked(y)  | ~Good(y) 
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(Chicken)  | ~Ate(Chicken,Chicken)  | ~Good(Chicken) 
+Visited	: 64
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Stocked(Bob)  | ~Good(Bob)  | ~Seated(Charley)  | ~Ate(Bob,Bob) 
+Visited	: 64
+
+Pred	: NOT Ate(y,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Stocked(y)  | ~Good(y)  | ~Order(y,y)  | ~Seated(Charley)  | ~HaveMoney(y) 
+Visited	: 64
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(y)  | ~Ate(y,y)  | ~Good(y)  | ~Stocked(y)  | ~Open(Restaurant) 
+Visited	: 64
+
+
+
+Query	: ~Good(y)  | ~Stocked(y)  | ~Seated(Charley)  | ~GetCheck(y)  | ~HaveMoney(y) 
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Seated(Charley)  | ~GetCheck(Bob)  | ~Good(Bob)  | ~Stocked(Bob) 
+Visited	: 65
+
+Pred	: NOT GetCheck(y) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(y)  | ~Ate(y,y)  | ~Stocked(y)  | ~Good(y)  | ~Seated(Charley) 
+Visited	: 65
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(y)  | ~Stocked(y)  | ~Good(y)  | ~GetCheck(y)  | ~Open(Restaurant) 
+Visited	: 65
+
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~GetCheck(Chicken)  | ~Seated(Charley)  | ~HaveMoney(Chicken) 
+Visited	: 65
+
+Pred	: NOT Good(y) 
+Clauses	: 
+
+
+Query	: ~Ate(y,y)  | ~HaveMoney(y)  | ~Stocked(y)  | ~Good(y)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(y)  | ~Good(y)  | ~Ate(y,y)  | ~HaveMoney(y) 
+Visited	: 66
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~Ate(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 66
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Ate(Bob,Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+Visited	: 66
+
+Pred	: NOT Ate(y,y) 
+Clauses	: 1 
+Clause	: Ate(x,y)  | ~Order(x,y)  | ~Good(y) 
+Unified	: ~Order(y,y)  | ~HaveMoney(y)  | ~Good(y)  | ~Stocked(y)  | ~Open(Restaurant) 
+Visited	: 66
+
+
+
+Query	: ~HaveMoney(y)  | ~Good(y)  | ~Stocked(y)  | ~GetCheck(y)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~HaveMoney(y)  | ~Stocked(y)  | ~Good(y)  | ~GetCheck(y) 
+Visited	: 67
+
+Pred	: NOT GetCheck(y) 
+Clauses	: 4 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Open(Restaurant)  | ~Good(y)  | ~Stocked(y)  | ~HaveMoney(y)  | ~Ate(y,y) 
+Visited	: 67
+
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~GetCheck(Chicken)  | ~HaveMoney(Chicken)  | ~Good(Chicken)  | ~Open(Restaurant) 
+Visited	: 67
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~GetCheck(Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+Visited	: 67
+
+
+
+Query	: ~Order(y,y)  | ~HaveMoney(y)  | ~Stocked(y)  | ~Good(y)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 9 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(y)  | ~Good(y)  | ~Order(y,y)  | ~HaveMoney(y) 
+Visited	: 68
+
+Pred	: NOT Good(y) 
+Clauses	: 
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~Order(Chicken,Chicken)  | ~HaveMoney(Chicken)  | ~Open(Restaurant) 
+Visited	: 68
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Order(Bob,Bob)  | ~Good(Bob)  | ~Stocked(Bob)  | ~Open(Restaurant) 
+Visited	: 68
+
+Pred	: NOT Order(y,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(y)  | ~HaveMoney(y)  | ~Good(y)  | ~Stocked(y)  | ~Open(Restaurant) 
+Visited	: 68
+
+
+
+Query	: ~Good(y)  | ~Stocked(y)  | ~Seated(Charley)  | ~Order(y,y)  | ~HaveMoney(y) 
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 12 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Seated(Charley)  | ~Order(Bob,Bob)  | ~Good(Bob)  | ~Stocked(Bob) 
+Visited	: 69
+
+Pred	: NOT Order(y,y) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Good(y)  | ~Stocked(y)  | ~HaveMoney(y) 
+Visited	: 69
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 6 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(y)  | ~Stocked(y)  | ~Good(y)  | ~Order(y,y)  | ~Open(Restaurant) 
+Visited	: 69
+
+Pred	: NOT Stocked(y) 
+Clauses	: 7 
+Clause	: Stocked(Chicken) 
+Unified	: ~Good(Chicken)  | ~Order(Chicken,Chicken)  | ~Seated(Charley)  | ~HaveMoney(Chicken) 
+Visited	: 69
+
+Pred	: NOT Good(y) 
+Clauses	: 
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 31 milliseconds
+=============================================================
+NOT Leave(Charley) 
+
+Orignal	: ((Seated(x) AND Stocked(y) )IMPLY Order(x,y) )
+Orignal	: ((Order(x,ChickenSoup) AND Good(ChickenSoup) )IMPLY Ate(x,ChickenSoup) )
+Orignal	: ((Order(x,PepperChicken) AND Good(PepperChicken) )IMPLY Ate(x,PepperChicken) )
+Orignal	: ((Order(x,y) AND Bad(y) )IMPLY NOT Ate(x,y) )
+Orignal	: ((GetCheck(x) AND HaveMoney(x) )IMPLY Paid(x) )
+Orignal	: (Ate(x,y) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(y) )IMPLY Leave(x) )
+Orignal	: ((Open(Restaurant) AND Open(Kitchen) )IMPLY Seated(x) )
+Orignal	: ((Stocked(Soup) AND Stocked(Chicken) )IMPLY Stocked(ChickenSoup) )
+Orignal	: Stocked(Chicken) 
+Orignal	: Good(Chicken) 
+Orignal	: Stocked(Pepper) 
+Orignal	: Good(Pepper) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+Orignal	: NOT HaveMoney(Charley) 
+Orignal	: HaveMoney(Bob) 
+
+KB
+clause 0 : Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+clause 1 : Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+clause 2 : Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+clause 3 : ~Ate(x,y)  | ~Order(x,y)  | ~Bad(y) 
+clause 4 : Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+clause 5 : GetCheck(x)  | ~Ate(x,y) 
+clause 6 : ~GetCheck(x)  | Leave(x)  | ~Paid(y) 
+clause 7 : Seated(x)  | ~Open(Restaurant) 
+clause 8 : Stocked(Chicken) 
+clause 9 : Good(Chicken) 
+clause 10 : Stocked(Pepper) 
+clause 11 : Good(Pepper) 
+clause 12 : Open(Restaurant) 
+clause 13 : Open(Kitchen) 
+clause 14 : ~HaveMoney(Charley) 
+clause 15 : HaveMoney(Bob) 
+KBMap
+HaveMoney(v) : 15 
+~Open(v) : 7 
+Good(v) : 9 11 
+~Paid(v) : 6 
+GetCheck(v) : 5 
+~Good(v) : 1 2 
+Paid(v) : 4 
+~GetCheck(v) : 4 6 
+Seated(v) : 7 
+Leave(v) : 6 
+Ate(v,v) : 1 2 
+~Stocked(v) : 0 
+Order(v,v) : 0 
+~HaveMoney(v) : 4 14 
+~Ate(v,v) : 3 5 
+Open(v) : 12 13 
+Stocked(v) : 8 10 
+~Bad(v) : 3 
+~Order(v,v) : 1 2 3 
+~Seated(v) : 0 
+
+
+
+Query	: ~Leave(Charley) 
+
+Pred	: NOT Leave(Charley) 
+Clauses	: 6 
+Clause	: ~GetCheck(x)  | Leave(x)  | ~Paid(y) 
+Unified	: ~GetCheck(Charley)  | ~Paid(y) 
+Visited	: 1
+
+
+
+Query	: ~Paid(y)  | ~GetCheck(Charley) 
+
+Pred	: NOT GetCheck(Charley) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Paid(y)  | ~Ate(Charley,y) 
+Visited	: 2
+
+Pred	: NOT Paid(y) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(Charley)  | ~HaveMoney(Charley) 
+Visited	: 2
+
+
+
+Query	: ~Ate(Charley,y)  | ~Paid(y) 
+
+Pred	: NOT Paid(y) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(y)  | ~Ate(Charley,y)  | ~HaveMoney(y) 
+Visited	: 3
+
+Pred	: NOT Ate(Charley,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~Order(Charley,ChickenSoup)  | ~Paid(ChickenSoup)  | ~Good(ChickenSoup) 
+Visited	: 3
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~Order(Charley,PepperChicken)  | ~Paid(PepperChicken)  | ~Good(PepperChicken) 
+Visited	: 3
+
+
+
+Query	: ~GetCheck(Charley)  | ~HaveMoney(Charley) 
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT GetCheck(Charley) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(Charley)  | ~Ate(Charley,y) 
+Visited	: 4
+
+
+
+Query	: ~HaveMoney(Charley)  | ~Ate(Charley,y) 
+
+Pred	: NOT Ate(Charley,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~Order(Charley,ChickenSoup)  | ~HaveMoney(Charley)  | ~Good(ChickenSoup) 
+Visited	: 5
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~Order(Charley,PepperChicken)  | ~HaveMoney(Charley)  | ~Good(PepperChicken) 
+Visited	: 5
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+
+
+Query	: ~HaveMoney(y)  | ~Ate(Charley,y)  | ~GetCheck(y) 
+
+Pred	: NOT GetCheck(y) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Ate(Charley,y)  | ~HaveMoney(y) 
+Visited	: 6
+
+Pred	: NOT Ate(Charley,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Order(Charley,ChickenSoup)  | ~GetCheck(ChickenSoup)  | ~Good(ChickenSoup) 
+Visited	: 6
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Order(Charley,PepperChicken)  | ~GetCheck(PepperChicken)  | ~Good(PepperChicken) 
+Visited	: 6
+
+Pred	: NOT HaveMoney(y) 
+Clauses	: 15 
+Clause	: HaveMoney(Bob) 
+Unified	: ~Ate(Charley,Bob)  | ~GetCheck(Bob) 
+Visited	: 6
+
+
+
+Query	: ~Ate(Charley,Bob)  | ~GetCheck(Bob) 
+
+Pred	: NOT GetCheck(Bob) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Ate(Charley,Bob) 
+Visited	: 7
+
+Pred	: NOT Ate(Charley,Bob) 
+Clauses	: CU CU 
+
+
+Query	: ~Ate(Charley,Bob) 
+
+Pred	: NOT Ate(Charley,Bob) 
+Clauses	: CU CU 
+
+
+Query	: ~Order(Charley,PepperChicken)  | ~HaveMoney(Charley)  | ~Good(PepperChicken) 
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Order(Charley,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(Charley)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken) 
+Visited	: 9
+
+
+
+Query	: ~Order(Charley,ChickenSoup)  | ~HaveMoney(Charley)  | ~Good(ChickenSoup) 
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Order(Charley,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(Charley)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup) 
+Visited	: 10
+
+
+
+Query	: ~Order(Charley,ChickenSoup)  | ~Paid(ChickenSoup)  | ~Good(ChickenSoup) 
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Paid(ChickenSoup) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(ChickenSoup)  | ~Order(Charley,ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 11
+
+Pred	: NOT Order(Charley,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Paid(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup) 
+Visited	: 11
+
+
+
+Query	: ~Order(Charley,PepperChicken)  | ~Paid(PepperChicken)  | ~Good(PepperChicken) 
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Paid(PepperChicken) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(PepperChicken)  | ~Order(Charley,PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 12
+
+Pred	: NOT Order(Charley,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Paid(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken) 
+Visited	: 12
+
+
+
+Query	: ~HaveMoney(PepperChicken)  | ~GetCheck(PepperChicken)  | ~Order(Charley,PepperChicken)  | ~Good(PepperChicken) 
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Order(Charley,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~GetCheck(PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken) 
+Visited	: 13
+
+Pred	: NOT GetCheck(PepperChicken) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Good(PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Ate(PepperChicken,y)  | ~Order(Charley,PepperChicken) 
+Visited	: 13
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+
+
+Query	: ~Seated(Charley)  | ~HaveMoney(Charley)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken) 
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(Charley)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 14
+
+
+
+Query	: ~Seated(Charley)  | ~Paid(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup) 
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Paid(ChickenSoup) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~GetCheck(ChickenSoup)  | ~Seated(Charley)  | ~HaveMoney(ChickenSoup) 
+Visited	: 15
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Paid(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 15
+
+
+
+Query	: ~Seated(Charley)  | ~Paid(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken) 
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Paid(PepperChicken) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~GetCheck(PepperChicken)  | ~Seated(Charley)  | ~HaveMoney(PepperChicken) 
+Visited	: 16
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Paid(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 16
+
+
+
+Query	: ~Good(PepperChicken)  | ~Ate(PepperChicken,y)  | ~HaveMoney(PepperChicken)  | ~Order(Charley,PepperChicken) 
+
+Pred	: NOT Order(Charley,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Ate(PepperChicken,PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken) 
+Visited	: 17
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Ate(PepperChicken,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Order(Charley,ChickenSoup) 
+Visited	: 17
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Order(Charley,PepperChicken) 
+Visited	: 17
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+
+
+Query	: ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Order(Charley,ChickenSoup) 
+
+Pred	: NOT Order(Charley,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup) 
+Visited	: 18
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+
+
+Query	: ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Order(Charley,PepperChicken) 
+
+Pred	: NOT Order(Charley,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken) 
+Visited	: 19
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+
+
+Query	: ~Paid(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Paid(ChickenSoup) 
+Visited	: 20
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Paid(ChickenSoup) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant)  | ~HaveMoney(ChickenSoup) 
+Visited	: 20
+
+
+
+Query	: ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Paid(ChickenSoup) 
+
+Pred	: NOT Paid(ChickenSoup) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 21
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+
+
+Query	: ~Seated(Charley)  | ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup) 
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 22
+
+
+
+Query	: ~Seated(Charley)  | ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken) 
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 23
+
+
+
+Query	: ~HaveMoney(ChickenSoup)  | ~GetCheck(ChickenSoup)  | ~Order(Charley,ChickenSoup)  | ~Good(ChickenSoup) 
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Order(Charley,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~GetCheck(ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup) 
+Visited	: 24
+
+Pred	: NOT GetCheck(ChickenSoup) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Ate(ChickenSoup,y)  | ~Order(Charley,ChickenSoup) 
+Visited	: 24
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+
+
+Query	: ~GetCheck(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT GetCheck(ChickenSoup) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Ate(ChickenSoup,y)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup) 
+Visited	: 25
+
+
+
+Query	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 26
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+
+
+Query	: ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+
+
+Query	: ~Good(ChickenSoup)  | ~Ate(ChickenSoup,y)  | ~HaveMoney(ChickenSoup)  | ~Order(Charley,ChickenSoup) 
+
+Pred	: NOT Order(Charley,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Ate(ChickenSoup,ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup) 
+Visited	: 28
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Ate(ChickenSoup,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Order(Charley,ChickenSoup) 
+Visited	: 28
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Order(Charley,PepperChicken) 
+Visited	: 28
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+
+
+Query	: ~Paid(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Paid(PepperChicken) 
+Visited	: 29
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Paid(PepperChicken) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Open(Restaurant)  | ~HaveMoney(PepperChicken) 
+Visited	: 29
+
+
+
+Query	: ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Paid(PepperChicken) 
+
+Pred	: NOT Paid(PepperChicken) 
+Clauses	: 4 
+Clause	: Paid(x)  | ~GetCheck(x)  | ~HaveMoney(x) 
+Unified	: ~GetCheck(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 30
+
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+
+
+Query	: ~Ate(ChickenSoup,y)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup) 
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Ate(ChickenSoup,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~Order(ChickenSoup,ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 31
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~Order(ChickenSoup,PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 31
+
+
+
+Query	: ~HaveMoney(Charley)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(Charley) 
+Visited	: 32
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+
+
+Query	: ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(Charley) 
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+
+
+Query	: ~GetCheck(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT GetCheck(PepperChicken) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Ate(PepperChicken,y)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken) 
+Visited	: 34
+
+
+
+Query	: ~Order(ChickenSoup,PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Order(ChickenSoup,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(ChickenSoup)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 35
+
+
+
+Query	: ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 36
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+
+
+Query	: ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+
+
+Query	: ~Order(ChickenSoup,ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Order(ChickenSoup,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 38
+
+
+
+Query	: ~Ate(PepperChicken,y)  | ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken) 
+
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Ate(PepperChicken,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~Order(PepperChicken,ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 39
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~Order(PepperChicken,PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 39
+
+
+
+Query	: ~Seated(ChickenSoup)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Seated(ChickenSoup) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 40
+
+
+
+Query	: ~Seated(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Seated(ChickenSoup) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 41
+
+
+
+Query	: ~Order(PepperChicken,ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Order(PepperChicken,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(PepperChicken)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 42
+
+
+
+Query	: ~Order(PepperChicken,PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Order(PepperChicken,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 43
+
+
+
+Query	: ~Seated(PepperChicken)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Seated(PepperChicken) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 44
+
+
+
+Query	: ~Seated(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Seated(PepperChicken) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 45
+
+
+
+Query	: ~Seated(Charley)  | ~HaveMoney(Charley)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup) 
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(Charley)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 46
+
+
+
+Query	: ~HaveMoney(Charley)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(Charley) 
+Visited	: 47
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+
+
+Query	: ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(Charley) 
+
+Pred	: NOT HaveMoney(Charley) 
+Clauses	: CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+
+
+Query	: ~Seated(Charley)  | ~HaveMoney(ChickenSoup)  | ~Ate(ChickenSoup,ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup) 
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Ate(ChickenSoup,ChickenSoup) 
+Clauses	: 1 CU 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Order(ChickenSoup,ChickenSoup)  | ~Seated(Charley)  | ~HaveMoney(ChickenSoup) 
+Visited	: 49
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Ate(ChickenSoup,ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 49
+
+
+
+Query	: ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Seated(Charley)  | ~GetCheck(PepperChicken)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT GetCheck(PepperChicken) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Ate(PepperChicken,y)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Seated(Charley) 
+Visited	: 50
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~GetCheck(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 50
+
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+
+
+Query	: ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Seated(Charley)  | ~GetCheck(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT GetCheck(ChickenSoup) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Ate(ChickenSoup,y)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Seated(Charley) 
+Visited	: 51
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~GetCheck(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 51
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+
+
+Query	: ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Seated(Charley)  | ~Order(ChickenSoup,ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Order(ChickenSoup,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(Charley)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 52
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Order(ChickenSoup,ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 52
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+
+
+Query	: ~HaveMoney(ChickenSoup)  | ~Ate(ChickenSoup,ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Ate(ChickenSoup,ChickenSoup) 
+Visited	: 53
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Ate(ChickenSoup,ChickenSoup) 
+Clauses	: 1 CU 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~Order(ChickenSoup,ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 53
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+
+
+Query	: ~Ate(PepperChicken,y)  | ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Seated(Charley) 
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Ate(PepperChicken,y)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 54
+
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Ate(PepperChicken,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Order(PepperChicken,ChickenSoup)  | ~Seated(Charley) 
+Visited	: 54
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Order(PepperChicken,PepperChicken)  | ~Seated(Charley) 
+Visited	: 54
+
+
+
+Query	: ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Order(ChickenSoup,ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Order(ChickenSoup,ChickenSoup) 
+Visited	: 55
+
+Pred	: NOT Order(ChickenSoup,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 55
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+
+
+Query	: ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~GetCheck(PepperChicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~GetCheck(PepperChicken) 
+Visited	: 56
+
+Pred	: NOT GetCheck(PepperChicken) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~Open(Restaurant)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Ate(PepperChicken,y) 
+Visited	: 56
+
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+
+
+Query	: ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Seated(Charley)  | ~Order(PepperChicken,PepperChicken) 
+
+Pred	: NOT Order(PepperChicken,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Seated(Charley) 
+Visited	: 57
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Order(PepperChicken,PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 57
+
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+
+
+Query	: ~Open(Restaurant)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Ate(PepperChicken,y)  | ~HaveMoney(PepperChicken) 
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Ate(PepperChicken,y) 
+Clauses	: 1 2 
+Clause	: Ate(x,ChickenSoup)  | ~Order(x,ChickenSoup)  | ~Good(ChickenSoup) 
+Unified	: ~Order(x,ChickenSoup)  | ~Open(Restaurant)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 58
+
+Clause	: Ate(x,PepperChicken)  | ~Order(x,PepperChicken)  | ~Good(PepperChicken) 
+Unified	: ~Order(PepperChicken,PepperChicken)  | ~Open(Restaurant)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 58
+
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Ate(PepperChicken,y)  | ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken) 
+Visited	: 58
+
+
+
+Query	: ~Order(PepperChicken,PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Order(PepperChicken,PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 59
+
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Order(PepperChicken,PepperChicken) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Stocked(PepperChicken)  | ~Good(PepperChicken)  | ~Open(Restaurant) 
+Visited	: 59
+
+
+
+Query	: ~Seated(ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Seated(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 60
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Seated(ChickenSoup) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Open(Restaurant)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 60
+
+
+
+Query	: ~Seated(PepperChicken)  | ~HaveMoney(PepperChicken)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~Seated(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 61
+
+Pred	: NOT Stocked(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT Good(PepperChicken) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(PepperChicken) 
+Clauses	: CU 
+Pred	: NOT Seated(PepperChicken) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Open(Restaurant)  | ~Good(PepperChicken)  | ~Stocked(PepperChicken)  | ~HaveMoney(PepperChicken) 
+Visited	: 61
+
+
+
+Query	: ~GetCheck(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant)  | ~HaveMoney(ChickenSoup) 
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~GetCheck(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 62
+
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT GetCheck(ChickenSoup) 
+Clauses	: 5 
+Clause	: GetCheck(x)  | ~Ate(x,y) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Ate(ChickenSoup,y)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 62
+
+
+
+Query	: ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Seated(Charley)  | ~Order(PepperChicken,ChickenSoup) 
+
+Pred	: NOT Order(PepperChicken,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Seated(Charley) 
+Visited	: 63
+
+Pred	: NOT Seated(Charley) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Order(PepperChicken,ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 63
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+
+
+Query	: ~Order(PepperChicken,ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~HaveMoney(ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Order(PepperChicken,ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 64
+
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Order(PepperChicken,ChickenSoup) 
+Clauses	: 0 
+Clause	: Order(x,y)  | ~Seated(x)  | ~Stocked(y) 
+Unified	: ~Seated(PepperChicken)  | ~HaveMoney(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Good(ChickenSoup)  | ~Open(Restaurant) 
+Visited	: 64
+
+
+
+Query	: ~Seated(PepperChicken)  | ~HaveMoney(ChickenSoup)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Open(Restaurant) 
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 12 CU 
+Clause	: Open(Restaurant) 
+Unified	: ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~Seated(PepperChicken)  | ~HaveMoney(ChickenSoup) 
+Visited	: 65
+
+Pred	: NOT Stocked(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT Good(ChickenSoup) 
+Clauses	: CU CU 
+Pred	: NOT HaveMoney(ChickenSoup) 
+Clauses	: CU 
+Pred	: NOT Seated(PepperChicken) 
+Clauses	: 7 
+Clause	: Seated(x)  | ~Open(Restaurant) 
+Unified	: ~Open(Restaurant)  | ~Good(ChickenSoup)  | ~Stocked(ChickenSoup)  | ~HaveMoney(ChickenSoup) 
+Visited	: 65
+
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 30 milliseconds
+=============================================================
