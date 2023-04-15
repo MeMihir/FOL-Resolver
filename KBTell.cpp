@@ -254,23 +254,100 @@ FOL *distributeCNF(FOL *fol)
 
 // =================================================================================================
 // insert predicate in clause
-Clause insertPredicate(Predicate predicate, Clause clause) {
+
+void Clause::insert(Predicate predicate) 
+{
     predicate.sign = !predicate.sign;
-    auto it = clause.find(predicate);
-    if (it != clause.end())
-        clause.erase(it);
-    else {
-        predicate.sign = !predicate.sign;
-        clause.insert(predicate);
+    auto it = find(predicate);
+
+    if (it != clause.end()) {
+        erase(it);
+        return;
     }
-    return clause;
+    
+    predicate.sign = !predicate.sign;
+    it = find(predicate);
+    if (it == clause.end()){
+        // printPredicate(predicate);
+        clause.push_back(predicate);
+    }
+}
+
+ClauseVect::iterator Clause::find(Predicate predicate) 
+{
+    for (auto it = clause.begin(); it != clause.end(); it++) {
+        bool flag = true;
+        if (it->sign == predicate.sign && it->name == predicate.name && it->arity == predicate.arity) {
+            for (int i = 0; i < it->arity; i++) {
+                if (!isVariable(it->arguments[i]) 
+                    && !isVariable(predicate.arguments[i]) 
+                    && (it->arguments[i] != predicate.arguments[i])
+                ) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+                return it;
+        }
+    }
+    return clause.end();
+}
+
+void Clause::erase(ClauseVect::iterator it) 
+{
+    clause.erase(it);
+}
+
+size_t Clause::size() 
+{
+    return clause.size();
+}
+
+void Clause::clear() 
+{
+    clause.clear();
+}
+
+bool Clause::empty() 
+{
+    return clause.empty();
+}
+
+bool Clause::compare(Clause c)
+{
+    if (c.size() != size())
+        return false;
+    for (auto it = clause.begin(); it != clause.end(); it++) {
+        if (c.find(*it) == c.clause.end())
+            return false;
+    }
+    return true;
+}
+
+void Clause::print()
+{
+    for (auto it = clause.begin(); it != clause.end(); it++) {
+        if (it != clause.begin())
+            cout << " | ";
+        if (!it->sign)
+            cout << "~";
+        cout << it->name << "(";
+        for (int i = 0; i < it->arity; i++) {
+            cout << it->arguments[i];
+            if (i != it->arity - 1)
+                cout << ",";
+        }
+        cout << ")";
+    }
+    cout << endl;
 }
 
 void insertClause(Clause clause) {
     if(clause.size() == 0)
         return;
     KB.push_back(clause);
-    for(Predicate predicate : clause) {
+    for(Predicate predicate : clause.clause) {
         for(int i=0; i<predicate.arity; i++)
             predicate.arguments[i] = "v";
         KBMap[predicate].push_back(KB.size()-1);
@@ -305,7 +382,7 @@ void buildKB(FOL *fol)
         else
         {
             if(curr->predicate.arity != 0) {
-                clause = insertPredicate(curr->predicate, clause);
+                clause.insert(curr->predicate);
             }
         }
 
@@ -320,22 +397,7 @@ void printKB() {
     for (int i = 0; i < KB.size(); i++)
     {
         cout << "clause " << i << " : ";
-        for (auto it = KB[i].begin(); it != KB[i].end(); it++)
-        {   
-            if(it != KB[i].begin())
-                cout << " | ";
-            if (it->sign == false)
-                cout << "~";
-            cout << it->name << "(";
-            for (int j = 0; j < it->arity; j++)
-            {
-                cout << it->arguments[j];
-                if (j != it->arity - 1)
-                    cout << ",";
-            }
-            cout << ") ";
-        }
-        cout << endl;
+        KB[i].print();
     }
 
     // print KBMap

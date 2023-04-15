@@ -13,4 +13,3 @@ void printClauses(vector<Clause> clauses);
 void printClause(Clause clause);
 void addClauseToVisited(Clause clause);
 bool isClauseVisited(Clause clause);
-bool clauseCompare(Clause a, Clause b);

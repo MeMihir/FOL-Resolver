@@ -9,7 +9,7 @@
 #define OR 2
 #define IMPLY 3
 
-#define Clause unordered_set<Predicate, PredicateHash>
+#define ClauseVect vector<Predicate>
 
 struct Predicate
 {
@@ -73,6 +73,24 @@ struct PredicateHash {
     }
 };
 
+struct Clause {
+    ClauseVect clause;
+
+    Clause()
+    {
+        clause = ClauseVect();
+    }
+
+    void insert(Predicate p);
+    void clear();
+    ClauseVect::iterator find(Predicate p);
+    void erase(ClauseVect::iterator it);
+    size_t size();
+    bool empty();
+    bool compare(Clause c);
+    void print();
+};
+
 struct FOL
 {
     bool sign = true; // true = positive, false = negative
@@ -108,7 +126,7 @@ void printFOL(FOL *fol);
 FOL *FOLtoCNF(FOL *fol);
 FOL *deMorgan(FOL *fol);
 FOL *distributeCNF(FOL *fol);
-Clause insertPredicate(Predicate p, Clause clause);
+// Clause insertPredicate(Predicate p, Clause clause);
 void insertClause(Clause clause);
 void buildKB(FOL *fol);
 void printKB();
