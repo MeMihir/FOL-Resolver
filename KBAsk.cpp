@@ -113,15 +113,17 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
                     {
                         if(substitution.find(queryPredicate.arguments[i]) == substitution.end())
                         {
-                            if(!isVariable(clausePredicate.arguments[i]))
+                            if(isVariable(queryPredicate.arguments[i]) && isVariable(clausePredicate.arguments[i]))
+                                substitution[clausePredicate.arguments[i]] = queryPredicate.arguments[i];
+                            else if(isVariable(queryPredicate.arguments[i]))
                                 substitution[queryPredicate.arguments[i]] = clausePredicate.arguments[i];
-                            else
+                            else if(isVariable(clausePredicate.arguments[i]))
                                 substitution[clausePredicate.arguments[i]] = queryPredicate.arguments[i];
                         }
                         // !CHECK THIS
                         // else
                         // {
-                        //     substitution[clausePredicate.arguments[i]] = substitution[queryPredicate.arguments[i]];
+                        //     if substitution[clausePredicate.arguments[i]] = substitution[queryPredicate.arguments[i]];
                         // }
                     }
                 }
@@ -129,41 +131,38 @@ Clause unifyClauses(Clause query, Clause clause, Predicate target)
         }
     }
 
-
+    cout<<"Sub\t: "; // debug
+    for(auto it = substitution.begin(); it != substitution.end(); it++)
+    {
+        cout<<it->first<<"->"<<it->second<<" "; // debug
+    }
+    cout<<endl; // debug
     // substitute
     for(auto it = query.clause.begin(); it != query.clause.end(); it++)
     {
         Predicate queryPredicate = *it;
-        if(queryPredicate.name != target.name)
+        for(int i=0; i<queryPredicate.arity; i++)
         {
-            for(int i=0; i<queryPredicate.arity; i++)
+            if(substitution.find(queryPredicate.arguments[i]) != substitution.end())
             {
-                if(substitution.find(queryPredicate.arguments[i]) != substitution.end())
-                {
-                    queryPredicate.arguments[i] = substitution[queryPredicate.arguments[i]];
-                }
+                queryPredicate.arguments[i] = substitution[queryPredicate.arguments[i]];
             }
-            // !CHANGE RESULT.INSET TO RESULT.INSERT
-            // result.insert(queryPredicate);
-            result.insert(queryPredicate);
         }
+        // !CHANGE RESULT.INSET TO RESULT.INSERT
+        result.insert(queryPredicate);
     }
 
     for(auto it = clause.clause.begin(); it != clause.clause.end(); it++)
     {
         Predicate clausePredicate = *it;
-        if(clausePredicate.name != target.name)
+        for(int i=0; i<clausePredicate.arity; i++)
         {
-            for(int i=0; i<clausePredicate.arity; i++)
+            if(substitution.find(clausePredicate.arguments[i]) != substitution.end())
             {
-                if(substitution.find(clausePredicate.arguments[i]) != substitution.end())
-                {
-                    clausePredicate.arguments[i] = substitution[clausePredicate.arguments[i]];
-                }
+                clausePredicate.arguments[i] = substitution[clausePredicate.arguments[i]];
             }
-            result.insert(clausePredicate);
-            // result.insert(clausePredicate);
         }
+        result.insert(clausePredicate);
     }
 
     return result;
