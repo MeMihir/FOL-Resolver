@@ -51,7 +51,7 @@ int main()
         fol = FOLtoCNF(fol);
         buildKB(fol);
     }
-
+    standardizeKB();
     cout<<endl; printKB(); cout<<endl; // debug
 
     bool ans = queryKB(query);

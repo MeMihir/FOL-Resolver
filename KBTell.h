@@ -84,6 +84,7 @@ struct Clause {
     void insert(Predicate p);
     void clear();
     ClauseVect::iterator find(Predicate p);
+    ClauseVect::iterator findStrict(Predicate p);
     void erase(ClauseVect::iterator it);
     size_t size();
     bool empty();
@@ -129,4 +130,5 @@ FOL *distributeCNF(FOL *fol);
 // Clause insertPredicate(Predicate p, Clause clause);
 void insertClause(Clause clause);
 void buildKB(FOL *fol);
+void standardizeKB();
 void printKB();

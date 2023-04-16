@@ -258,7 +258,7 @@ FOL *distributeCNF(FOL *fol)
 void Clause::insert(Predicate predicate) 
 {
     predicate.sign = !predicate.sign;
-    auto it = find(predicate);
+    auto it = findStrict(predicate);
 
     if (it != clause.end()) {
         erase(it);
@@ -266,7 +266,7 @@ void Clause::insert(Predicate predicate)
     }
     
     predicate.sign = !predicate.sign;
-    it = find(predicate);
+    it = findStrict(predicate);
     if (it == clause.end()){
         // printPredicate(predicate);
         clause.push_back(predicate);
@@ -283,6 +283,24 @@ ClauseVect::iterator Clause::find(Predicate predicate)
                     && !isVariable(predicate.arguments[i]) 
                     && (it->arguments[i] != predicate.arguments[i])
                 ) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+                return it;
+        }
+    }
+    return clause.end();
+}
+
+ClauseVect::iterator Clause::findStrict(Predicate predicate) 
+{
+    for (auto it = clause.begin(); it != clause.end(); it++) {
+        if (it->sign == predicate.sign && it->name == predicate.name && it->arity == predicate.arity) {
+            bool flag = true;
+            for (int i = 0; i < it->arity; i++) {
+                if (it->arguments[i] != predicate.arguments[i]) {
                     flag = false;
                     break;
                 }
@@ -419,5 +437,22 @@ void printKB() {
             cout << it->second[i] << " ";
         }
         cout << endl;
+    }
+}
+
+// Standardize variables in KB
+void standardizeKB() {
+    for (int i = 0; i < KB.size(); i++)
+    {
+        for (int j = 0; j < KB[i].size(); j++)
+        {
+            for (int k = 0; k < KB[i].clause[j].arity; k++)
+            {
+                if (isVariable(KB[i].clause[j].arguments[k]))
+                {
+                    KB[i].clause[j].arguments[k] = KB[i].clause[j].arguments[k] + to_string(i);
+                }
+            }
+        }
     }
 }
