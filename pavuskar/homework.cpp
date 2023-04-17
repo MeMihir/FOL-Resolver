@@ -7,6 +7,7 @@
 #include <stack>
 #include <queue>
 #include <fstream>
+#include <chrono>
 
 using namespace std;
 
@@ -375,9 +376,7 @@ void addClause2KB(Clause clause) {
 FOL *FOLtoCNF(FOL *fol)
 {
 
-    cout << "Orignal\t: ";
-    printFOL(fol);
-    cout << endl; // debug
+    // cout << "Orignal\t: "; printFOL(fol); cout << endl; // debugM
 
     // if fol is a predicate
     if (fol->left == nullptr && fol->right == nullptr)
@@ -646,7 +645,7 @@ vector <Clause> getKBClauses(Predicate target)
     
     // vector <int> clauseIndices = KBMap[target];
     unordered_set <int> clauseIndices = KBMap[target];
-    cout<<"Clauses\t: "<<clauseIndices.size()<<" : ";  // debug
+    // cout<<"Clauses\t: "<<clauseIndices.size()<<" : ";  // debugM
 
     for(auto it = clauseIndices.begin(); it != clauseIndices.end(); it++)
     {
@@ -657,9 +656,9 @@ vector <Clause> getKBClauses(Predicate target)
         }
         Predicate p = *it2;
         clauses.push_back(KB[*it]);
-        cout<<*it<<" "; // debug
+        // cout<<*it<<" "; // debugM
     }
-    cout<<endl; // debug
+    // cout<<endl; // debugM
     return clauses;
 }
 
@@ -800,29 +799,29 @@ bool askKB(Predicate target)
         addClauseToVisited(query);
 
         query = query.standardize();
-        cout<<"\n\nQuery\t: "; query.print(); // debug
+        // cout<<"\n\nQuery\t: "; query.print(); M
 
         if (query.empty()) return true;
 
         for(auto it = query.clause.begin(); it != query.clause.end(); it++)
         {
             Predicate p = *it;
-            cout<<"Pred\t: "; p.print(); cout<<endl; // debug
+            // cout<<"Pred\t: "; p.print(); cout<<endl; // debugM
             vector <Clause> clauses = getKBClauses(p);
             for (int i=0; i<clauses.size(); i++)
             {
-                cout<<"Clause\t: "; clauses[i].print(); // debug
+                // cout<<"Clause\t: "; clauses[i].print(); // debugM
                 vector<Clause> unifiedResults = unifyClauses(query, clauses[i], p);
-                cout<<"Unified\n ";  // debug
+                // cout<<"Unified\n ";  // debugM
                 for(int j=0; j<unifiedResults.size(); j++) {
-                    cout<<"\t"; unifiedResults[j].print(); // debug
+                    // cout<<"\t"; unifiedResults[j].print(); // debugM
                     if(unifiedResults[j].size() != 0)
                        resolver.push(unifiedResults[j]);
                     else 
                         return true;
                 }
-                cout<<"Visited\t: "<< visited.size() <<endl; // debug
-                cout<<"Resolve\t: "<< resolver.size() <<endl<<endl; // debug
+                // cout<<"Visited\t: "<< visited.size() <<endl; // debugM
+                // cout<<"Resolve\t: "<< resolver.size() <<endl<<endl; // debugM
             }
             // printClauses(clauses); // debug
 
@@ -869,6 +868,7 @@ void writeOutput(bool result)
         fout << "TRUE";
     else
         fout << "FALSE";
+    fout.close();
 }
 
 int main()
@@ -877,7 +877,7 @@ int main()
 
     Predicate query(target);
     query.sign = !query.sign;
-    query.print(); cout<<endl<<endl; // debug
+    // query.print(); cout<<endl<<endl; // debugM
 
     auto start = chrono::high_resolution_clock::now();
     for(int i = 0; i < input.size(); i++)
@@ -887,20 +887,20 @@ int main()
         tellKB(fol);
     }
     standardizeKB();
-    cout<<endl; printKB(); cout<<endl; // debug
+    // cout<<endl; printKB(); cout<<endl; // debugM
 
     bool ans = askKB(query);
-    cout<<"FINAL ANSWER \t: "<<ans<<endl<<endl<<endl; 
+    // cout<<"FINAL ANSWER \t: "<<ans<<endl<<endl<<endl; // debugM
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
     int minutes = chrono::duration_cast<chrono::minutes>(duration).count();
     int seconds = chrono::duration_cast<chrono::seconds>(duration).count() - minutes * 60;
     int milliseconds = chrono::duration_cast<chrono::milliseconds>(duration).count() - minutes * 60 * 1000 - seconds * 1000;
-    cout << "Time taken: " << minutes << " minutes " << seconds << " seconds " << milliseconds << " milliseconds" << endl;
+    // cout << "Time taken: " << minutes << " minutes " << seconds << " seconds " << milliseconds << " milliseconds" << endl; // debugM
     
-    printKB();
+    // printKB(); // debugM
     writeOutput(ans);
-    cout<<"=============================================================\n";
+    // cout<<"=============================================================\n"; // debugM
 
     return 0;
 }
