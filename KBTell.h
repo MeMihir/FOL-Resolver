@@ -52,6 +52,7 @@ struct Predicate
     bool operator==(const Predicate& p) const {
         return (sign == p.sign && name == p.name && arity == p.arity);
     }
+    bool compare(Predicate p);
 };
 
 bool isVariable(string s);

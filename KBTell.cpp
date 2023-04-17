@@ -252,6 +252,18 @@ FOL *distributeCNF(FOL *fol)
     return fol;
 }
 
+bool Predicate::compare(Predicate predicate)
+{
+    if (sign != predicate.sign || name != predicate.name || arity != predicate.arity)
+        return false;
+    for (int i = 0; i < arity; i++)
+    {
+        if (arguments[i] != predicate.arguments[i])
+            return false;
+    }
+    return true;
+}
+
 // =================================================================================================
 // insert predicate in clause
 

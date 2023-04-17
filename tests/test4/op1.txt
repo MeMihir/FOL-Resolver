@@ -1,0 +1,44 @@
+NOT Order(Jenny,Pizza) 
+
+Orignal	: (Order(x,y) IMPLY Seated(x) )
+Orignal	: (Order(x,y) IMPLY Stocked(y) )
+Orignal	: (Ate(x) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(x) )IMPLY Leave(x) )
+Orignal	: (Seated(x) IMPLY Open(Restaurant) )
+Orignal	: (Seated(x) IMPLY Open(Kitchen) )
+Orignal	: Stocked(Hamburger) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+
+KB
+clause 0 : ~Order(x0,y0) | Seated(x0)
+clause 1 : ~Order(x1,y1) | Stocked(y1)
+clause 2 : ~Ate(x2) | GetCheck(x2)
+clause 3 : ~GetCheck(x3) | ~Paid(x3) | Leave(x3)
+clause 4 : ~Seated(x4) | Open(Restaurant)
+clause 5 : ~Seated(x5) | Open(Kitchen)
+clause 6 : Stocked(Hamburger)
+clause 7 : Open(Restaurant)
+clause 8 : Open(Kitchen)
+KBMap
+~Seated(v) : 4 5 
+~GetCheck(v) : 3 
+Leave(v) : 3 
+GetCheck(v) : 2 
+~Order(v,v) : 0 1 
+Stocked(v) : 1 6 
+~Paid(v) : 3 
+~Ate(v) : 2 
+Open(v) : 4 5 7 8 
+Seated(v) : 0 
+
+
+
+Query	: ~Order(Jenny,Pizza)
+Pred	: NOT Order(Jenny,Pizza) 
+Clauses	: 0 : 
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+=============================================================

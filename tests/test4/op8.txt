@@ -1,0 +1,91 @@
+NOT A(Maackia,Lythrum,Myrica) 
+
+Orignal	: (NOT B(x,y,z) OR (NOT C(z,w,q) OR (NOT D(q,u,x) OR A(y,w,u) )))
+Orignal	: B(One,Maackia,Two) 
+Orignal	: C(Two,Lythrum,Three) 
+Orignal	: D(Three,Myrica,One) 
+
+KB
+clause 0 : ~B(x0,y0,z0) | ~C(z0,w0,q0) | ~D(q0,u0,x0) | A(y0,w0,u0)
+clause 1 : B(One,Maackia,Two)
+clause 2 : C(Two,Lythrum,Three)
+clause 3 : D(Three,Myrica,One)
+KBMap
+D(v,v,v) : 3 
+C(v,v,v) : 2 
+A(v,v,v) : 0 
+~D(v,v,v) : 0 
+B(v,v,v) : 1 
+~C(v,v,v) : 0 
+~B(v,v,v) : 0 
+
+
+
+Query	: ~A(Maackia,Lythrum,Myrica)
+Pred	: NOT A(Maackia,Lythrum,Myrica) 
+Clauses	: 1 : 0 
+Clause	: ~B(x0,y0,z0) | ~C(z0,w0,q0) | ~D(q0,u0,x0) | A(y0,w0,u0)
+Unified
+ 	~B(x0,Maackia,z0) | ~C(z0,Lythrum,q0) | ~D(q0,Myrica,x0)
+Visited	: 1
+Resolve	: 1
+
+
+
+Query	: ~B(x0,Maackia,z0) | ~C(z0,Lythrum,q0) | ~D(q0,Myrica,x0)
+Pred	: NOT B(x0,Maackia,z0) 
+Clauses	: 1 : 1 
+Clause	: B(One,Maackia,Two)
+Unified
+ 	~C(Two,Lythrum,q0) | ~D(q0,Myrica,One)
+Visited	: 2
+Resolve	: 1
+
+Pred	: NOT C(z0,Lythrum,q0) 
+Clauses	: 1 : 2 
+Clause	: C(Two,Lythrum,Three)
+Unified
+ 	~B(x0,Maackia,Two) | ~D(Three,Myrica,x0)
+Visited	: 2
+Resolve	: 2
+
+Pred	: NOT D(q0,Myrica,x0) 
+Clauses	: 1 : 3 
+Clause	: D(Three,Myrica,One)
+Unified
+ 	~B(One,Maackia,z0) | ~C(z0,Lythrum,Three)
+Visited	: 2
+Resolve	: 3
+
+
+
+Query	: ~C(Two,Lythrum,q0) | ~D(q0,Myrica,One)
+Pred	: NOT C(Two,Lythrum,q0) 
+Clauses	: 1 : 2 
+Clause	: C(Two,Lythrum,Three)
+Unified
+ 	~D(Three,Myrica,One)
+Visited	: 3
+Resolve	: 3
+
+Pred	: NOT D(q0,Myrica,One) 
+Clauses	: 1 : 3 
+Clause	: D(Three,Myrica,One)
+Unified
+ 	~C(Two,Lythrum,Three)
+Visited	: 3
+Resolve	: 4
+
+
+
+Query	: ~D(Three,Myrica,One)
+Pred	: NOT D(Three,Myrica,One) 
+Clauses	: 1 : 3 
+Clause	: D(Three,Myrica,One)
+Unified
+ 	
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 1 milliseconds
+=============================================================

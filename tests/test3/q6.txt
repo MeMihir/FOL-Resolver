@@ -1,0 +1,27 @@
+NOT A(Daphne) 
+
+Orignal	: ((B(x) AND C(y,y,x) )IMPLY A(Daphne) )
+Orignal	: C(One,Two,Three) 
+Orignal	: B(Three) 
+
+KB
+clause 0 : ~B(x0) | ~C(y0,y0,x0) | A(Daphne)
+clause 1 : C(One,Two,Three)
+clause 2 : B(Three)
+KBMap
+B(v) : 2 
+C(v,v,v) : 1 
+A(v) : 0 
+~C(v,v,v) : 0 
+~B(v) : 0 
+
+
+
+Query	: ~A(Daphne)
+Pred	: NOT A(Daphne) 
+Clauses	: 
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+=============================================================

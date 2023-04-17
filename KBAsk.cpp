@@ -39,15 +39,18 @@ bool queryKB(Predicate target)
             vector <Clause> clauses = getKBClauses(p);
             for (int i=0; i<clauses.size(); i++)
             {
-                Clause unified = unifyClauses(query, clauses[i], p);
                 cout<<"Clause\t: "; clauses[i].print(); // debug
-                cout<<"Unified\t: "; unified.print(); // debug
-                if(unified.size() != 0) {
-                    resolver.push(unified);
+                vector<Clause> unifiedResults = unifyClauses(query, clauses[i], p);
+                cout<<"Unified\n ";  // debug
+                for(int j=0; j<unifiedResults.size(); j++) {
+                    cout<<"\t"; unifiedResults[j].print(); // debug
+                    if(unifiedResults[j].size() != 0)
+                       resolver.push(unifiedResults[j]);
+                    else 
+                        return true;
                 }
-                else 
-                    return true;
-                cout<<"Visited\t: "<< visited.size() <<endl<<endl; // debug
+                cout<<"Visited\t: "<< visited.size() <<endl; // debug
+                cout<<"Resolve\t: "<< resolver.size() <<endl<<endl; // debug
             }
             // printClauses(clauses); // debug
 
@@ -65,13 +68,12 @@ vector <Clause> getKBClauses(Predicate target)
     vector <Clause> clauses;
     target.sign = !target.sign;
     
-
     vector <int> clauseIndices = KBMap[target];
-    cout<<"Clauses\t: "; // debug
+    cout<<"Clauses\t: "<<clauseIndices.size()<<" : ";  // debug
     for(int i=0; i<clauseIndices.size(); i++) {
         ClauseVect::iterator it = KB[clauseIndices[i]].find(target);
         if(it == KB[clauseIndices[i]].clause.end()) {
-            cout<<clauseIndices[i]<<":CU "; // debug
+            // cout<<clauseIndices[i]<<":CU "; // debug
             continue;
         }
         Predicate p = *it;
@@ -93,76 +95,81 @@ void printClauses(vector<Clause> clauses)
 }
 
 
-Clause unifyClauses(Clause query, Clause clause, Predicate target)
+vector<Clause> unifyClauses(Clause query, Clause clause, Predicate target)
 {
-    Clause result;
-    unordered_map<string, string> substitution;
-
-    // unify query and clause
-    for(auto it = query.clause.begin(); it != query.clause.end(); it++)
-    {
-        Predicate queryPredicate = *it;
-        for(auto it2 = clause.clause.begin(); it2 != clause.clause.end(); it2++)
-        {
-            Predicate clausePredicate = *it2;
-            if(queryPredicate.name == clausePredicate.name && queryPredicate.arity == clausePredicate.arity)
-            {
-                for(int i=0; i<queryPredicate.arity; i++)
-                {
-                    if(queryPredicate.arguments[i] != clausePredicate.arguments[i])
-                    {
-                        if(substitution.find(queryPredicate.arguments[i]) == substitution.end())
-                        {
-                            if(isVariable(queryPredicate.arguments[i]) && isVariable(clausePredicate.arguments[i]))
-                                substitution[clausePredicate.arguments[i]] = queryPredicate.arguments[i];
-                            else if(isVariable(queryPredicate.arguments[i]))
-                                substitution[queryPredicate.arguments[i]] = clausePredicate.arguments[i];
-                            else if(isVariable(clausePredicate.arguments[i]))
-                                substitution[clausePredicate.arguments[i]] = queryPredicate.arguments[i];
-                        }
-                        // !CHECK THIS
-                        // else
-                        // {
-                        //     if substitution[clausePredicate.arguments[i]] = substitution[queryPredicate.arguments[i]];
-                        // }
-                    }
-                }
-            }
-        }
-    }
-
-    cout<<"Sub\t: "; // debug
-    for(auto it = substitution.begin(); it != substitution.end(); it++)
-    {
-        cout<<it->first<<"->"<<it->second<<" "; // debug
-    }
-    cout<<endl; // debug
-    // substitute
-    for(auto it = query.clause.begin(); it != query.clause.end(); it++)
-    {
-        Predicate queryPredicate = *it;
-        for(int i=0; i<queryPredicate.arity; i++)
-        {
-            if(substitution.find(queryPredicate.arguments[i]) != substitution.end())
-            {
-                queryPredicate.arguments[i] = substitution[queryPredicate.arguments[i]];
-            }
-        }
-        // !CHANGE RESULT.INSET TO RESULT.INSERT
-        result.insert(queryPredicate);
-    }
+    vector<Clause> result;
 
     for(auto it = clause.clause.begin(); it != clause.clause.end(); it++)
     {
-        Predicate clausePredicate = *it;
-        for(int i=0; i<clausePredicate.arity; i++)
+        Predicate p = *it;
+        if(p.name == target.name && p.arity == target.arity)
         {
-            if(substitution.find(clausePredicate.arguments[i]) != substitution.end())
+            unordered_map<string, string> substitution;
+            bool canUnify = true;
+
+            // create substitution map
+            for(int i=0; i<p.arity; i++)
             {
-                clausePredicate.arguments[i] = substitution[clausePredicate.arguments[i]];
+                if(p.arguments[i] != target.arguments[i])
+                {
+                    if(!isVariable(p.arguments[i]) && !isVariable(target.arguments[i]) && p.arguments[i] != target.arguments[i]) {
+                        canUnify = false;
+                        break;
+                    }
+                    else if(isVariable(p.arguments[i]) && isVariable(target.arguments[i])) {
+                        if(substitution.find(p.arguments[i]) != substitution.end() || substitution.find(target.arguments[i]) != substitution.end()) 
+                        {
+                            canUnify = false;
+                            break;
+                        }
+                        substitution[p.arguments[i]] = target.arguments[i];
+                    }
+                    else if(isVariable(p.arguments[i])) {
+                        if(substitution.find(p.arguments[i]) != substitution.end() && substitution[p.arguments[i]] != target.arguments[i]) {
+                            canUnify = false;
+                            break;
+                        }
+                        substitution[p.arguments[i]] = target.arguments[i];
+                    }
+                    else if(isVariable(target.arguments[i])) {
+                        if(substitution.find(target.arguments[i]) != substitution.end() && substitution[target.arguments[i]] != p.arguments[i]) {
+                            canUnify = false;
+                            break;
+                        }
+                        substitution[target.arguments[i]] = p.arguments[i];
+                    }
+                }
             }
+
+            // unify query and clause
+            if(!canUnify) continue;
+            Clause unified;
+            for(auto it = query.clause.begin(); it != query.clause.end(); it++)
+            {
+                Predicate queryPredicate = *it;
+                for(int i=0; i<queryPredicate.arity; i++)
+                {
+                    if(substitution.find(queryPredicate.arguments[i]) != substitution.end())
+                        queryPredicate.arguments[i] = substitution[queryPredicate.arguments[i]];
+                }
+                if(!queryPredicate.compare(target))
+                    unified.insert(queryPredicate);
+            }
+            target.sign = !target.sign;
+            for(auto it = clause.clause.begin(); it != clause.clause.end(); it++)
+            {
+                Predicate clausePredicate = *it;
+                for(int i=0; i<clausePredicate.arity; i++)
+                {
+                    if(substitution.find(clausePredicate.arguments[i]) != substitution.end())
+                        clausePredicate.arguments[i] = substitution[clausePredicate.arguments[i]];
+                }
+                if(!clausePredicate.compare(target))
+                    unified.insert(clausePredicate);
+            }
+
+            result.push_back(unified);
         }
-        result.insert(clausePredicate);
     }
 
     return result;
