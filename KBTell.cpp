@@ -380,7 +380,7 @@ void insertClause(Clause clause) {
     for(Predicate predicate : clause.clause) {
         for(int i=0; i<predicate.arity; i++)
             predicate.arguments[i] = "v";
-        KBMap[predicate].push_back(KB.size()-1);
+        KBMap[predicate].insert(KB.size()-1);
     }
 }
 
@@ -444,9 +444,9 @@ void printKB() {
                 cout << ",";
         }
         cout << ") : ";
-        for (int i = 0; i < it->second.size(); i++)
+        for (auto it2 = it->second.begin(); it2 != it->second.end(); it2++)
         {
-            cout << it->second[i] << " ";
+            cout << *it2 << " ";
         }
         cout << endl;
     }

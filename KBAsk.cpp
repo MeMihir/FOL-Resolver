@@ -68,17 +68,20 @@ vector <Clause> getKBClauses(Predicate target)
     vector <Clause> clauses;
     target.sign = !target.sign;
     
-    vector <int> clauseIndices = KBMap[target];
+    // vector <int> clauseIndices = KBMap[target];
+    unordered_set <int> clauseIndices = KBMap[target];
     cout<<"Clauses\t: "<<clauseIndices.size()<<" : ";  // debug
-    for(int i=0; i<clauseIndices.size(); i++) {
-        ClauseVect::iterator it = KB[clauseIndices[i]].find(target);
-        if(it == KB[clauseIndices[i]].clause.end()) {
-            // cout<<clauseIndices[i]<<":CU "; // debug
+
+    for(auto it = clauseIndices.begin(); it != clauseIndices.end(); it++)
+    {
+        ClauseVect::iterator it2 = KB[*it].find(target);
+        if(it2 == KB[*it].clause.end()) {
+            // cout<<*it<<":CU "; // debug
             continue;
         }
-        Predicate p = *it;
-        clauses.push_back(KB[clauseIndices[i]]);
-        cout<<clauseIndices[i]<<" "; // debug
+        Predicate p = *it2;
+        clauses.push_back(KB[*it]);
+        cout<<*it<<" "; // debug
     }
     cout<<endl; // debug
     return clauses;
@@ -102,7 +105,7 @@ vector<Clause> unifyClauses(Clause query, Clause clause, Predicate target)
     for(auto it = clause.clause.begin(); it != clause.clause.end(); it++)
     {
         Predicate p = *it;
-        if(p.name == target.name && p.arity == target.arity)
+        if(p.name == target.name && p.arity == target.arity  && p.sign == !target.sign)
         {
             unordered_map<string, string> substitution;
             bool canUnify = true;
@@ -144,6 +147,11 @@ vector<Clause> unifyClauses(Clause query, Clause clause, Predicate target)
             // unify query and clause
             if(!canUnify) continue;
             Clause unified;
+
+            for(int i=0; i<target.arity; i++)
+                if(substitution.find(target.arguments[i]) != substitution.end())
+                    target.arguments[i] = substitution[target.arguments[i]];
+
             for(auto it = query.clause.begin(); it != query.clause.end(); it++)
             {
                 Predicate queryPredicate = *it;

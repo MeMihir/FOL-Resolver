@@ -10,7 +10,7 @@ using namespace std;
 #include "KBAsk.h"
 
 vector <Clause> KB; // Knowledge Base (vector of clauses)
-unordered_map <Predicate, vector<int>, PredicateHash> KBMap; // Knowledge Base (map of clauses)
+unordered_map <Predicate, unordered_set<int>, PredicateHash> KBMap; // Knowledge Base (map of clauses)
 vector <Clause> visited; // visited clauses vector
 unordered_map <Predicate, vector<int>, PredicateHash> visitedMap; // visited clauses HashMap
 

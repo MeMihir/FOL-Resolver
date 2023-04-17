@@ -120,7 +120,7 @@ struct FOL
 };
 
 extern vector<Clause> KB; // Knowledge Base (vector of clauses) 
-extern unordered_map<Predicate, vector<int>, PredicateHash> KBMap; // Knowledge Base Table (map of predicate to clause number)
+extern unordered_map<Predicate, unordered_set<int>, PredicateHash> KBMap; // Knowledge Base Table (map of predicate to clause number)
 
 FOL *stringToFOL(string s);
 void printPredicate(Predicate p);
