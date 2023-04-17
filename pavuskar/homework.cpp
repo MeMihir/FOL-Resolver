@@ -799,7 +799,7 @@ bool askKB(Predicate target)
         addClauseToVisited(query);
 
         query = query.standardize();
-        // cout<<"\n\nQuery\t: "; query.print(); M
+        // cout<<"\n\nQuery\t: "; query.print(); cout<<endl; // debugM
 
         if (query.empty()) return true;
 
@@ -820,12 +820,11 @@ bool askKB(Predicate target)
                     else 
                         return true;
                 }
-                // cout<<"Visited\t: "<< visited.size() <<endl; // debugM
-                // cout<<"Resolve\t: "<< resolver.size() <<endl<<endl; // debugM
             }
             // printClauses(clauses); // debug
-
         }
+        // cout<<"Visited\t: "<< visited.size() <<endl; // debugM
+        // cout<<"Resolve\t: "<< resolver.size() <<endl<<endl; // debugM
 
         addClause2KB(query);
     }
@@ -870,6 +869,9 @@ void writeOutput(bool result)
         fout << "FALSE";
     fout.close();
 }
+
+// ============================================================================================================
+// ======================================= MAIN =======================================================
 
 int main()
 {
