@@ -62,6 +62,8 @@ int main()
     int seconds = chrono::duration_cast<chrono::seconds>(duration).count() - minutes * 60;
     int milliseconds = chrono::duration_cast<chrono::milliseconds>(duration).count() - minutes * 60 * 1000 - seconds * 1000;
     cout << "Time taken: " << minutes << " minutes " << seconds << " seconds " << milliseconds << " milliseconds" << endl;
+    
+    printKB();
     cout<<"=============================================================\n";
 
     return 0;

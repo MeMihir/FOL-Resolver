@@ -11,6 +11,34 @@ struct ClauseCompare {
   }
 };
 
+Clause standardizeQuery(Clause query) 
+{
+    Clause result;
+    for(auto it = query.clause.begin(); it != query.clause.end(); it++)
+    {
+        Predicate p = *it;
+        for(int i=0; i<p.arity; i++)
+        {
+            if(isVariable(p.arguments[i]))
+            {
+                p.arguments[i] = p.arguments[i][0] + to_string(KB.size());
+            }
+        }
+        result.insert(p);
+    }
+
+    return result;
+}
+
+void addQueryToKB(Clause query)
+{
+    KB.push_back(query);
+    for(auto it = query.clause.begin(); it != query.clause.end(); it++)
+    {
+        Predicate p = *it;
+        KBMap[p].insert(KB.size()-1);
+    }
+}
 
 bool queryKB(Predicate target)
 {
@@ -28,6 +56,8 @@ bool queryKB(Predicate target)
         if(isClauseVisited(query))
             continue;
         addClauseToVisited(query);
+
+        query = standardizeQuery(query);
         cout<<"\n\nQuery\t: "; query.print(); // debug
 
         if (query.empty()) return true;
@@ -55,6 +85,8 @@ bool queryKB(Predicate target)
             // printClauses(clauses); // debug
 
         }
+
+        addQueryToKB(query);
     }
 
     // vector <Clause> clauses = getKBClauses(target);
