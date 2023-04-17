@@ -86,7 +86,7 @@ bool queryKB(Predicate target)
 
         }
 
-        addQueryToKB(query);
+        insertClause(query);
     }
 
     // vector <Clause> clauses = getKBClauses(target);
