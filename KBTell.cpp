@@ -269,15 +269,15 @@ bool Predicate::compare(Predicate predicate)
 
 void Clause::insert(Predicate predicate) 
 {
-    predicate.sign = !predicate.sign;
+    // predicate.sign = !predicate.sign;
     auto it = findStrict(predicate);
 
-    if (it != clause.end()) {
-        erase(it);
-        return;
-    }
+    // if (it != clause.end()) {
+    //     erase(it);
+    //     return;
+    // }
     
-    predicate.sign = !predicate.sign;
+    // predicate.sign = !predicate.sign;
     it = findStrict(predicate);
     if (it == clause.end()){
         // printPredicate(predicate);
@@ -372,6 +372,19 @@ void Clause::print()
     }
     cout << endl;
 }
+
+bool Clause::checkTautology()
+{
+    for (auto it = clause.begin(); it != clause.end(); it++) {
+        Predicate predicate = *it;
+        predicate.sign = !predicate.sign;
+        if (find(predicate) != clause.end())
+            return true;
+    }
+    return false;
+}
+
+// =================================================================================================
 
 void insertClause(Clause clause) {
     if(clause.size() == 0)

@@ -176,6 +176,7 @@ vector<Clause> unifyClauses(Clause query, Clause clause, Predicate target)
                     unified.insert(clausePredicate);
             }
 
+            if(unified.checkTautology()) continue;
             result.push_back(unified);
         }
     }

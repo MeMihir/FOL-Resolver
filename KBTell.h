@@ -91,6 +91,7 @@ struct Clause {
     bool empty();
     bool compare(Clause c);
     void print();
+    bool checkTautology();
 };
 
 struct FOL
