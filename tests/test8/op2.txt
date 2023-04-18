@@ -1,0 +1,292 @@
+NOT Leave(Helena) 
+
+Orignal	: ((Seated(x) AND Stocked(y) )IMPLY Order(x,y) )
+Orignal	: (Order(x,y) IMPLY Ate(x) )
+Orignal	: ((GetCheck(x) AND HaveMoney(x) )IMPLY Paid(x) )
+Orignal	: (Ate(x) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(x) )IMPLY Leave(x) )
+Orignal	: ((Open(Restaurant) AND Open(Kitchen) )IMPLY Seated(x) )
+Orignal	: ((Stocked(Portabello) OR Stocked(Tofu) )IMPLY Stocked(VeganHamburger) )
+Orignal	: Stocked(Portabello) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+Orignal	: HaveMoney(Helena) 
+
+KB
+clause 0 : ~Seated(x) | ~Stocked(y) | Order(x,y)
+clause 1 : ~Order(x,y) | Ate(x)
+clause 2 : ~GetCheck(x) | ~HaveMoney(x) | Paid(x)
+clause 3 : ~Ate(x) | GetCheck(x)
+clause 4 : ~GetCheck(x) | ~Paid(x) | Leave(x)
+clause 5 : ~Open(Restaurant) | ~Open(Kitchen) | Seated(x)
+clause 6 : ~Stocked(Portabello) | Stocked(VeganHamburger)
+clause 7 : ~Stocked(Tofu) | Stocked(VeganHamburger)
+clause 8 : Stocked(Portabello)
+clause 9 : Open(Restaurant)
+clause 10 : Open(Kitchen)
+clause 11 : HaveMoney(Helena)
+clause 12 : ~Leave(Helena)
+KBMap
+~Leave(v) : 12 
+HaveMoney(v) : 11 
+Open(v) : 10 9 
+Stocked(v) : 8 7 6 
+Seated(v) : 5 
+Leave(v) : 4 
+~Paid(v) : 4 
+~Open(v) : 5 
+~Ate(v) : 3 
+Paid(v) : 2 
+~GetCheck(v) : 4 2 
+~Stocked(v) : 7 6 0 
+Order(v,v) : 0 
+GetCheck(v) : 3 
+~Seated(v) : 0 
+Ate(v) : 1 
+~HaveMoney(v) : 2 
+~Order(v,v) : 1 
+
+
+
+Query	: ~Leave(Helena)
+
+Pred	: NOT Leave(Helena) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4) | ~Paid(x4) | Leave(x4)
+Unified
+ 	~GetCheck(Helena) | ~Paid(Helena)
+Visited	: 1
+Resolve	: 1
+
+
+
+Query	: ~GetCheck(Helena) | ~Paid(Helena)
+
+Pred	: NOT GetCheck(Helena) 
+Clauses	: 1 : 3 
+Clause	: ~Ate(x3) | GetCheck(x3)
+Unified
+ 	~Paid(Helena) | ~Ate(Helena)
+Pred	: NOT Paid(Helena) 
+Clauses	: 1 : 2 
+Clause	: ~GetCheck(x2) | ~HaveMoney(x2) | Paid(x2)
+Unified
+ 	~GetCheck(Helena) | ~HaveMoney(Helena)
+Visited	: 2
+Resolve	: 2
+
+
+
+Query	: ~Paid(Helena) | ~Ate(Helena)
+
+Pred	: NOT Paid(Helena) 
+Clauses	: 1 : 2 
+Clause	: ~GetCheck(x2) | ~HaveMoney(x2) | Paid(x2)
+Unified
+ 	~Ate(Helena) | ~GetCheck(Helena) | ~HaveMoney(Helena)
+Pred	: NOT Ate(Helena) 
+Clauses	: 1 : 1 
+Clause	: ~Order(x1,y1) | Ate(x1)
+Unified
+ 	~Paid(Helena) | ~Order(Helena,y1)
+Visited	: 3
+Resolve	: 3
+
+
+
+Query	: ~GetCheck(Helena) | ~HaveMoney(Helena)
+
+Pred	: NOT GetCheck(Helena) 
+Clauses	: 1 : 3 
+Clause	: ~Ate(x3) | GetCheck(x3)
+Unified
+ 	~HaveMoney(Helena) | ~Ate(Helena)
+Pred	: NOT HaveMoney(Helena) 
+Clauses	: 1 : 11 
+Clause	: HaveMoney(Helena)
+Unified
+ 	~GetCheck(Helena)
+Visited	: 4
+Resolve	: 4
+
+
+
+Query	: ~GetCheck(Helena)
+
+Pred	: NOT GetCheck(Helena) 
+Clauses	: 1 : 3 
+Clause	: ~Ate(x3) | GetCheck(x3)
+Unified
+ 	~Ate(Helena)
+Visited	: 5
+Resolve	: 4
+
+
+
+Query	: ~Ate(Helena)
+
+Pred	: NOT Ate(Helena) 
+Clauses	: 1 : 1 
+Clause	: ~Order(x1,y1) | Ate(x1)
+Unified
+ 	~Order(Helena,y1)
+Visited	: 6
+Resolve	: 4
+
+
+
+Query	: ~Order(Helena,y19)
+
+Pred	: NOT Order(Helena,y19) 
+Clauses	: 1 : 0 
+Clause	: ~Seated(x0) | ~Stocked(y0) | Order(x0,y0)
+Unified
+ 	~Seated(Helena) | ~Stocked(y19)
+Visited	: 7
+Resolve	: 4
+
+
+
+Query	: ~Paid(Helena) | ~Order(Helena,y20)
+
+Pred	: NOT Paid(Helena) 
+Clauses	: 1 : 2 
+Clause	: ~GetCheck(x2) | ~HaveMoney(x2) | Paid(x2)
+Unified
+ 	~Order(Helena,y20) | ~GetCheck(Helena) | ~HaveMoney(Helena)
+Pred	: NOT Order(Helena,y20) 
+Clauses	: 1 : 0 
+Clause	: ~Seated(x0) | ~Stocked(y0) | Order(x0,y0)
+Unified
+ 	~Paid(Helena) | ~Seated(Helena) | ~Stocked(y20)
+Visited	: 8
+Resolve	: 5
+
+
+
+Query	: ~Seated(Helena) | ~Stocked(y21)
+
+Pred	: NOT Seated(Helena) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Stocked(y21) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Stocked(y21) 
+Clauses	: 3 : 6 7 8 
+Clause	: ~Stocked(Portabello) | Stocked(VeganHamburger)
+Unified
+ 	~Seated(Helena) | ~Stocked(Portabello)
+Clause	: ~Stocked(Tofu) | Stocked(VeganHamburger)
+Unified
+ 	~Seated(Helena) | ~Stocked(Tofu)
+Clause	: Stocked(Portabello)
+Unified
+ 	~Seated(Helena)
+Visited	: 9
+Resolve	: 8
+
+
+
+Query	: ~Seated(Helena)
+
+Pred	: NOT Seated(Helena) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Open(Restaurant) | ~Open(Kitchen)
+Visited	: 10
+Resolve	: 8
+
+
+
+Query	: ~HaveMoney(Helena) | ~Ate(Helena)
+
+Pred	: NOT HaveMoney(Helena) 
+Clauses	: 1 : 11 
+Clause	: HaveMoney(Helena)
+Unified
+ 	~Ate(Helena)
+Pred	: NOT Ate(Helena) 
+Clauses	: 1 : 1 
+Clause	: ~Order(x1,y1) | Ate(x1)
+Unified
+ 	~HaveMoney(Helena) | ~Order(Helena,y1)
+Visited	: 11
+Resolve	: 9
+
+
+
+Query	: ~Open(Restaurant) | ~Open(Kitchen)
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 2 : 9 
+Clause	: Open(Restaurant)
+Unified
+ 	~Open(Kitchen)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 2 : 10 
+Clause	: Open(Kitchen)
+Unified
+ 	~Open(Restaurant)
+Visited	: 12
+Resolve	: 9
+
+
+
+Query	: ~Open(Kitchen)
+
+Pred	: NOT Open(Kitchen) 
+Clauses	: 2 : 10 
+Clause	: Open(Kitchen)
+Unified
+ 	
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 2 milliseconds
+KB
+clause 0 : ~Seated(x0) | ~Stocked(y0) | Order(x0,y0)
+clause 1 : ~Order(x1,y1) | Ate(x1)
+clause 2 : ~GetCheck(x2) | ~HaveMoney(x2) | Paid(x2)
+clause 3 : ~Ate(x3) | GetCheck(x3)
+clause 4 : ~GetCheck(x4) | ~Paid(x4) | Leave(x4)
+clause 5 : ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+clause 6 : ~Stocked(Portabello) | Stocked(VeganHamburger)
+clause 7 : ~Stocked(Tofu) | Stocked(VeganHamburger)
+clause 8 : Stocked(Portabello)
+clause 9 : Open(Restaurant)
+clause 10 : Open(Kitchen)
+clause 11 : HaveMoney(Helena)
+clause 12 : ~Leave(Helena)
+clause 13 : ~Leave(Helena)
+clause 14 : ~GetCheck(Helena) | ~Paid(Helena)
+clause 15 : ~Paid(Helena) | ~Ate(Helena)
+clause 16 : ~GetCheck(Helena) | ~HaveMoney(Helena)
+clause 17 : ~GetCheck(Helena)
+clause 18 : ~Ate(Helena)
+clause 19 : ~Order(Helena,y19)
+clause 20 : ~Paid(Helena) | ~Order(Helena,y20)
+clause 21 : ~Seated(Helena) | ~Stocked(y21)
+clause 22 : ~Seated(Helena)
+clause 23 : ~HaveMoney(Helena) | ~Ate(Helena)
+clause 24 : ~Open(Restaurant) | ~Open(Kitchen)
+KBMap
+~Leave(v) : 13 12 
+HaveMoney(v) : 11 
+Open(v) : 10 9 
+Stocked(v) : 8 7 6 
+Seated(v) : 5 
+Leave(v) : 4 
+~Paid(v) : 20 15 14 4 
+~Open(v) : 24 5 
+~Ate(v) : 15 23 18 3 
+Paid(v) : 2 
+~GetCheck(v) : 16 14 4 17 2 
+~Stocked(v) : 7 21 6 0 
+Order(v,v) : 0 
+GetCheck(v) : 3 
+~Seated(v) : 22 21 0 
+Ate(v) : 1 
+~HaveMoney(v) : 23 16 2 
+~Order(v,v) : 20 19 1 
+=============================================================

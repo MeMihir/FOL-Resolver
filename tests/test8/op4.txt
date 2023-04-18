@@ -1,0 +1,3734 @@
+NOT Hangout(Leia,Teddy) 
+
+Orignal	: (((Likes(x,y) AND Likes(y,x) )OR Meet(x,y,z) )IMPLY Hangout(x,y) )
+Orignal	: ((Leave(x,z) AND Leave(y,z) )IMPLY Meet(x,y,z) )
+Orignal	: ((GetCheck(x,z) AND Paid(x,z) )IMPLY Leave(x,z) )
+Orignal	: ((GetCheck(x,z) AND HaveMoney(x) )IMPLY Paid(x,z) )
+Orignal	: (Ate(x,y) IMPLY GetCheck(x,z) )
+Orignal	: ((Order(x,y) AND Good(y) )IMPLY Ate(x,y) )
+Orignal	: ((Seated(x,z) AND Stocked(y,z) )IMPLY Order(x,y) )
+Orignal	: ((OpenRestaurant(z) AND (Open(Kitchen,z) AND HasTable(z) ))IMPLY Seated(x,z) )
+Orignal	: ((TableOpen(x,z) OR TableOpen(y,z) )IMPLY HasTable(z) )
+Orignal	: ((HasIngredients(y,z) AND Open(Kitchen,z) )IMPLY Stocked(y,z) )
+Orignal	: (NOT Bad(x) IMPLY Good(x) )
+Orignal	: ((Has(Dough,z) AND Has(Cheese,z) )IMPLY HasIngredients(CheesePizza,z) )
+Orignal	: ((Has(Pasta,z) AND Has(Pesto,z) )IMPLY HasIngredients(PestoPasta,z) )
+Orignal	: ((Has(Falafel,z) AND Has(Hummus,z) )IMPLY HasIngredients(FalafelPlate,z) )
+Orignal	: ((Has(Rice,z) AND Has(Lamb,z) )IMPLY HasIngredients(LambPlate,z) )
+Orignal	: ((Has(LadyFingers,z) AND Has(Mascarpone,z) )IMPLY HasIngredients(Tiramisu,z) )
+Orignal	: ((Old(Cheese) OR Burnt(CheesePizza) )IMPLY Bad(CheesePizza) )
+Orignal	: (Moldy(Pesto) IMPLY Bad(PestoPasta) )
+Orignal	: ((Bad(Lamb) OR Soggy(Rice) )IMPLY Bad(LambPlate) )
+Orignal	: Has(Dough,Bestia) 
+Orignal	: Has(Cheese,Bestia) 
+Orignal	: Has(Cheese,Dune) 
+Orignal	: Has(Pasta,Bestia) 
+Orignal	: Has(Pesto,Bestia) 
+Orignal	: Has(Falafel,Dune) 
+Orignal	: Has(Hummus,Dune) 
+Orignal	: Has(Rice,Dune) 
+Orignal	: Has(Lamb,Dune) 
+Orignal	: Has(LadyFingers,Bestia) 
+Orignal	: Has(Mascarpone,Bestia) 
+Orignal	: Burnt(CheesePizza) 
+Orignal	: Soggy(Rice) 
+Orignal	: NOT Bad(Tiramisu) 
+Orignal	: Bad(Lamb) 
+Orignal	: OpenRestaurant(Bestia) 
+Orignal	: Open(Kitchen,Bestia) 
+Orignal	: OpenRestaurant(Dune) 
+Orignal	: Open(Kitchen,Dune) 
+Orignal	: HaveMoney(Leia) 
+Orignal	: HaveMoney(Teddy) 
+Orignal	: Likes(Leia,Teddy) 
+Orignal	: Likes(Leia,Mary) 
+Orignal	: Likes(Teddy,Harry) 
+Orignal	: Likes(Harry,Teddy) 
+Orignal	: TableOpen(Patio,Bestia) 
+
+KB
+clause 0 : ~Likes(x,y) | ~Likes(y,x) | Hangout(x,y)
+clause 1 : ~Meet(x,y,z) | Hangout(x,y)
+clause 2 : ~Leave(x,z) | ~Leave(y,z) | Meet(x,y,z)
+clause 3 : ~GetCheck(x,z) | ~Paid(x,z) | Leave(x,z)
+clause 4 : ~GetCheck(x,z) | ~HaveMoney(x) | Paid(x,z)
+clause 5 : ~Ate(x,y) | GetCheck(x,z)
+clause 6 : ~Order(x,y) | ~Good(y) | Ate(x,y)
+clause 7 : ~Seated(x,z) | ~Stocked(y,z) | Order(x,y)
+clause 8 : ~OpenRestaurant(z) | ~Open(Kitchen,z) | ~HasTable(z) | Seated(x,z)
+clause 9 : ~TableOpen(x,z) | HasTable(z)
+clause 10 : ~TableOpen(y,z) | HasTable(z)
+clause 11 : ~HasIngredients(y,z) | ~Open(Kitchen,z) | Stocked(y,z)
+clause 12 : Bad(x) | Good(x)
+clause 13 : ~Has(Dough,z) | ~Has(Cheese,z) | HasIngredients(CheesePizza,z)
+clause 14 : ~Has(Pasta,z) | ~Has(Pesto,z) | HasIngredients(PestoPasta,z)
+clause 15 : ~Has(Falafel,z) | ~Has(Hummus,z) | HasIngredients(FalafelPlate,z)
+clause 16 : ~Has(Rice,z) | ~Has(Lamb,z) | HasIngredients(LambPlate,z)
+clause 17 : ~Has(LadyFingers,z) | ~Has(Mascarpone,z) | HasIngredients(Tiramisu,z)
+clause 18 : ~Old(Cheese) | Bad(CheesePizza)
+clause 19 : ~Burnt(CheesePizza) | Bad(CheesePizza)
+clause 20 : ~Moldy(Pesto) | Bad(PestoPasta)
+clause 21 : ~Bad(Lamb) | Bad(LambPlate)
+clause 22 : ~Soggy(Rice) | Bad(LambPlate)
+clause 23 : Has(Dough,Bestia)
+clause 24 : Has(Cheese,Bestia)
+clause 25 : Has(Cheese,Dune)
+clause 26 : Has(Pasta,Bestia)
+clause 27 : Has(Pesto,Bestia)
+clause 28 : Has(Falafel,Dune)
+clause 29 : Has(Hummus,Dune)
+clause 30 : Has(Rice,Dune)
+clause 31 : Has(Lamb,Dune)
+clause 32 : Has(LadyFingers,Bestia)
+clause 33 : Has(Mascarpone,Bestia)
+clause 34 : Burnt(CheesePizza)
+clause 35 : Soggy(Rice)
+clause 36 : ~Bad(Tiramisu)
+clause 37 : Bad(Lamb)
+clause 38 : OpenRestaurant(Bestia)
+clause 39 : Open(Kitchen,Bestia)
+clause 40 : OpenRestaurant(Dune)
+clause 41 : Open(Kitchen,Dune)
+clause 42 : HaveMoney(Leia)
+clause 43 : HaveMoney(Teddy)
+clause 44 : Likes(Leia,Teddy)
+clause 45 : Likes(Leia,Mary)
+clause 46 : Likes(Teddy,Harry)
+clause 47 : Likes(Harry,Teddy)
+clause 48 : TableOpen(Patio,Bestia)
+clause 49 : ~Hangout(Leia,Teddy)
+KBMap
+Open(v,v) : 41 39 
+Soggy(v) : 35 
+Has(v,v) : 33 32 31 30 29 28 27 26 25 24 23 
+~Soggy(v) : 22 
+~Moldy(v) : 20 
+Burnt(v) : 34 
+~Old(v) : 18 
+HasIngredients(v,v) : 17 16 15 14 13 
+~Has(v,v) : 17 16 15 14 13 
+Good(v) : 12 
+Stocked(v,v) : 11 
+~Burnt(v) : 19 
+~HasIngredients(v,v) : 11 
+HasTable(v) : 10 9 
+~HasTable(v) : 8 
+~Open(v,v) : 11 8 
+~Stocked(v,v) : 7 
+Paid(v,v) : 4 
+Ate(v,v) : 6 
+OpenRestaurant(v) : 40 38 
+GetCheck(v,v) : 5 
+Bad(v) : 37 22 21 20 19 18 12 
+~Seated(v,v) : 7 
+~Likes(v,v) : 0 
+Hangout(v,v) : 1 0 
+~TableOpen(v,v) : 10 9 
+~Order(v,v) : 6 
+Leave(v,v) : 3 
+~Paid(v,v) : 3 
+~Good(v) : 6 
+Meet(v,v,v) : 2 
+Likes(v,v) : 47 46 45 44 
+~Bad(v) : 36 21 
+Seated(v,v) : 8 
+~Ate(v,v) : 5 
+~HaveMoney(v) : 4 
+~OpenRestaurant(v) : 8 
+~GetCheck(v,v) : 4 3 
+TableOpen(v,v) : 48 
+HaveMoney(v) : 43 42 
+Order(v,v) : 7 
+~Leave(v,v) : 2 
+~Hangout(v,v) : 49 
+~Meet(v,v,v) : 1 
+
+
+
+Query	: ~Hangout(Leia,Teddy)
+
+Pred	: NOT Hangout(Leia,Teddy) 
+Clauses	: 2 : 0 1 
+Clause	: ~Likes(x0,y0) | ~Likes(y0,x0) | Hangout(x0,y0)
+Unified
+ 	~Likes(Leia,Teddy) | ~Likes(Teddy,Leia)
+Clause	: ~Meet(x1,y1,z1) | Hangout(x1,y1)
+Unified
+ 	~Meet(Leia,Teddy,z1)
+Visited	: 1
+Resolve	: 2
+
+
+
+Query	: ~Meet(Leia,Teddy,z51)
+
+Pred	: NOT Meet(Leia,Teddy,z51) 
+Clauses	: 1 : 2 
+Clause	: ~Leave(x2,z2) | ~Leave(y2,z2) | Meet(x2,y2,z2)
+Unified
+ 	~Leave(Leia,z51) | ~Leave(Teddy,z51)
+Visited	: 2
+Resolve	: 2
+
+
+
+Query	: ~Likes(Leia,Teddy) | ~Likes(Teddy,Leia)
+
+Pred	: NOT Likes(Leia,Teddy) 
+Clauses	: 4 : 44 
+Clause	: Likes(Leia,Teddy)
+Unified
+ 	~Likes(Teddy,Leia)
+Pred	: NOT Likes(Teddy,Leia) 
+Clauses	: 4 : 
+Visited	: 3
+Resolve	: 2
+
+
+
+Query	: ~Likes(Teddy,Leia)
+
+Pred	: NOT Likes(Teddy,Leia) 
+Clauses	: 4 : 
+Visited	: 4
+Resolve	: 1
+
+
+
+Query	: ~Leave(Leia,z54) | ~Leave(Teddy,z54)
+
+Pred	: NOT Leave(Leia,z54) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Leave(Teddy,z54) | ~GetCheck(Leia,z54) | ~Paid(Leia,z54)
+Pred	: NOT Leave(Teddy,z54) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Leave(Leia,z54) | ~GetCheck(Teddy,z54) | ~Paid(Teddy,z54)
+Visited	: 5
+Resolve	: 2
+
+
+
+Query	: ~Leave(Teddy,z55) | ~GetCheck(Leia,z55) | ~Paid(Leia,z55)
+
+Pred	: NOT Leave(Teddy,z55) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~GetCheck(Leia,z55) | ~Paid(Leia,z55) | ~GetCheck(Teddy,z55) | ~Paid(Teddy,z55)
+Pred	: NOT GetCheck(Leia,z55) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Leave(Teddy,z55) | ~Paid(Leia,z55) | ~Ate(Leia,y5)
+Pred	: NOT Paid(Leia,z55) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Leave(Teddy,z55) | ~GetCheck(Leia,z55) | ~HaveMoney(Leia)
+Visited	: 6
+Resolve	: 4
+
+
+
+Query	: ~Leave(Leia,z56) | ~GetCheck(Teddy,z56) | ~Paid(Teddy,z56)
+
+Pred	: NOT Leave(Leia,z56) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~GetCheck(Teddy,z56) | ~Paid(Teddy,z56) | ~GetCheck(Leia,z56) | ~Paid(Leia,z56)
+Pred	: NOT GetCheck(Teddy,z56) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Leave(Leia,z56) | ~Paid(Teddy,z56) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,z56) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Leave(Leia,z56) | ~GetCheck(Teddy,z56) | ~HaveMoney(Teddy)
+Visited	: 7
+Resolve	: 6
+
+
+
+Query	: ~Leave(Teddy,z57) | ~GetCheck(Leia,z57) | ~HaveMoney(Leia)
+
+Pred	: NOT Leave(Teddy,z57) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~GetCheck(Leia,z57) | ~HaveMoney(Leia) | ~GetCheck(Teddy,z57) | ~Paid(Teddy,z57)
+Pred	: NOT GetCheck(Leia,z57) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Leave(Teddy,z57) | ~HaveMoney(Leia) | ~Ate(Leia,y5)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~Leave(Teddy,z57) | ~GetCheck(Leia,z57)
+Visited	: 8
+Resolve	: 8
+
+
+
+Query	: ~Leave(Teddy,z58) | ~GetCheck(Leia,z58)
+
+Pred	: NOT Leave(Teddy,z58) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~GetCheck(Leia,z58) | ~GetCheck(Teddy,z58) | ~Paid(Teddy,z58)
+Pred	: NOT GetCheck(Leia,z58) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Leave(Teddy,z58) | ~Ate(Leia,y5)
+Visited	: 9
+Resolve	: 9
+
+
+
+Query	: ~Leave(Teddy,z59) | ~Ate(Leia,y59)
+
+Pred	: NOT Leave(Teddy,z59) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Ate(Leia,y59) | ~GetCheck(Teddy,z59) | ~Paid(Teddy,z59)
+Pred	: NOT Ate(Leia,y59) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Leave(Teddy,z59) | ~Order(Leia,y59) | ~Good(y59)
+Visited	: 10
+Resolve	: 10
+
+
+
+Query	: ~Leave(Leia,z60) | ~Paid(Teddy,z60) | ~Ate(Teddy,y60)
+
+Pred	: NOT Leave(Leia,z60) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Paid(Teddy,z60) | ~Ate(Teddy,y60) | ~GetCheck(Leia,z60) | ~Paid(Leia,z60)
+Pred	: NOT Paid(Teddy,z60) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Leave(Leia,z60) | ~Ate(Teddy,y60) | ~GetCheck(Teddy,z60) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y60) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Leave(Leia,z60) | ~Paid(Teddy,z60) | ~Order(Teddy,y60) | ~Good(y60)
+Visited	: 11
+Resolve	: 12
+
+
+
+Query	: ~Leave(Leia,z61) | ~GetCheck(Teddy,z61) | ~HaveMoney(Teddy)
+
+Pred	: NOT Leave(Leia,z61) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~GetCheck(Teddy,z61) | ~HaveMoney(Teddy) | ~GetCheck(Leia,z61) | ~Paid(Leia,z61)
+Pred	: NOT GetCheck(Teddy,z61) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Leave(Leia,z61) | ~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Leave(Leia,z61) | ~GetCheck(Teddy,z61)
+Visited	: 12
+Resolve	: 14
+
+
+
+Query	: ~Leave(Leia,z62) | ~GetCheck(Teddy,z62)
+
+Pred	: NOT Leave(Leia,z62) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~GetCheck(Teddy,z62) | ~GetCheck(Leia,z62) | ~Paid(Leia,z62)
+Pred	: NOT GetCheck(Teddy,z62) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Leave(Leia,z62) | ~Ate(Teddy,y5)
+Visited	: 13
+Resolve	: 15
+
+
+
+Query	: ~Leave(Leia,z63) | ~Ate(Teddy,y63)
+
+Pred	: NOT Leave(Leia,z63) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Ate(Teddy,y63) | ~GetCheck(Leia,z63) | ~Paid(Leia,z63)
+Pred	: NOT Ate(Teddy,y63) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Leave(Leia,z63) | ~Order(Teddy,y63) | ~Good(y63)
+Visited	: 14
+Resolve	: 16
+
+
+
+Query	: ~Leave(Teddy,z64) | ~Order(Leia,y64) | ~Good(y64)
+
+Pred	: NOT Leave(Teddy,z64) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Order(Leia,y64) | ~Good(y64) | ~GetCheck(Teddy,z64) | ~Paid(Teddy,z64)
+Pred	: NOT Order(Leia,y64) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Leave(Teddy,z64) | ~Good(y64) | ~Seated(Leia,z7) | ~Stocked(y64,z7)
+Pred	: NOT Good(y64) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Leave(Teddy,z64) | ~Order(Leia,y64) | Bad(y64)
+Visited	: 15
+Resolve	: 18
+
+
+
+Query	: ~Leave(Teddy,z65) | ~HaveMoney(Leia) | ~Ate(Leia,y65)
+
+Pred	: NOT Leave(Teddy,z65) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Leia,y65) | ~GetCheck(Teddy,z65) | ~Paid(Teddy,z65)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~Leave(Teddy,z65) | ~Ate(Leia,y65)
+Pred	: NOT Ate(Leia,y65) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Leave(Teddy,z65) | ~HaveMoney(Leia) | ~Order(Leia,y65) | ~Good(y65)
+Visited	: 16
+Resolve	: 20
+
+
+
+Query	: ~Leave(Leia,z66) | ~Order(Teddy,y66) | ~Good(y66)
+
+Pred	: NOT Leave(Leia,z66) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Order(Teddy,y66) | ~Good(y66) | ~GetCheck(Leia,z66) | ~Paid(Leia,z66)
+Pred	: NOT Order(Teddy,y66) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Leave(Leia,z66) | ~Good(y66) | ~Seated(Teddy,z7) | ~Stocked(y66,z7)
+Pred	: NOT Good(y66) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Leave(Leia,z66) | ~Order(Teddy,y66) | Bad(y66)
+Visited	: 17
+Resolve	: 21
+
+
+
+Query	: ~Leave(Teddy,z67) | ~Order(Leia,y67) | Bad(y67)
+
+Pred	: NOT Leave(Teddy,z67) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Order(Leia,y67) | Bad(y67) | ~GetCheck(Teddy,z67) | ~Paid(Teddy,z67)
+Pred	: NOT Order(Leia,y67) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Leave(Teddy,z67) | Bad(y67) | ~Seated(Leia,z7) | ~Stocked(y67,z7)
+Pred	: Bad(y67) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Leave(Teddy,z67) | ~Order(Leia,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Leave(Teddy,z67) | ~Order(Leia,Tiramisu)
+Visited	: 18
+Resolve	: 24
+
+
+
+Query	: ~Leave(Teddy,z68) | ~Order(Leia,Tiramisu)
+
+Pred	: NOT Leave(Teddy,z68) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z68) | ~Paid(Teddy,z68)
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Leave(Teddy,z68) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Visited	: 19
+Resolve	: 25
+
+
+
+Query	: ~Leave(Leia,z69) | ~Order(Teddy,y69) | Bad(y69)
+
+Pred	: NOT Leave(Leia,z69) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Order(Teddy,y69) | Bad(y69) | ~GetCheck(Leia,z69) | ~Paid(Leia,z69)
+Pred	: NOT Order(Teddy,y69) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Leave(Leia,z69) | Bad(y69) | ~Seated(Teddy,z7) | ~Stocked(y69,z7)
+Pred	: Bad(y69) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Leave(Leia,z69) | ~Order(Teddy,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Leave(Leia,z69) | ~Order(Teddy,Tiramisu)
+Visited	: 20
+Resolve	: 28
+
+
+
+Query	: ~Leave(Leia,z70) | ~Order(Teddy,Tiramisu)
+
+Pred	: NOT Leave(Leia,z70) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~GetCheck(Leia,z70) | ~Paid(Leia,z70)
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Leave(Leia,z70) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Visited	: 21
+Resolve	: 29
+
+
+
+Query	: ~Leave(Teddy,z71) | ~Seated(Leia,z71) | ~Stocked(Tiramisu,z71)
+
+Pred	: NOT Leave(Teddy,z71) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,z71) | ~Stocked(Tiramisu,z71) | ~GetCheck(Teddy,z71) | ~Paid(Teddy,z71)
+Pred	: NOT Seated(Leia,z71) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,z71) | ~Stocked(Tiramisu,z71) | ~OpenRestaurant(z71) | ~Open(Kitchen,z71) | ~HasTable(z71)
+Pred	: NOT Stocked(Tiramisu,z71) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Leave(Teddy,z71) | ~Seated(Leia,z71) | ~HasIngredients(Tiramisu,z71) | ~Open(Kitchen,z71)
+Visited	: 22
+Resolve	: 31
+
+
+
+Query	: ~GetCheck(Teddy,z72) | ~GetCheck(Leia,z72) | ~Paid(Leia,z72)
+
+Pred	: NOT GetCheck(Teddy,z72) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Leia,z72) | ~Paid(Leia,z72) | ~Ate(Teddy,y5)
+Pred	: NOT GetCheck(Leia,z72) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z72) | ~Paid(Leia,z72) | ~Ate(Leia,y5)
+Pred	: NOT Paid(Leia,z72) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~GetCheck(Teddy,z72) | ~GetCheck(Leia,z72) | ~HaveMoney(Leia)
+Visited	: 23
+Resolve	: 33
+
+
+
+Query	: ~Leave(Leia,z73) | ~Seated(Teddy,z73) | ~Stocked(Tiramisu,z73)
+
+Pred	: NOT Leave(Leia,z73) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Teddy,z73) | ~Stocked(Tiramisu,z73) | ~GetCheck(Leia,z73) | ~Paid(Leia,z73)
+Pred	: NOT Seated(Teddy,z73) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Leia,z73) | ~Stocked(Tiramisu,z73) | ~OpenRestaurant(z73) | ~Open(Kitchen,z73) | ~HasTable(z73)
+Pred	: NOT Stocked(Tiramisu,z73) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Leave(Leia,z73) | ~Seated(Teddy,z73) | ~HasIngredients(Tiramisu,z73) | ~Open(Kitchen,z73)
+Visited	: 24
+Resolve	: 35
+
+
+
+Query	: ~GetCheck(Teddy,z74) | ~Paid(Leia,z74) | ~Ate(Leia,y74)
+
+Pred	: NOT GetCheck(Teddy,z74) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Paid(Leia,z74) | ~Ate(Leia,y74) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Leia,z74) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~GetCheck(Teddy,z74) | ~Ate(Leia,y74) | ~GetCheck(Leia,z74) | ~HaveMoney(Leia)
+Pred	: NOT Ate(Leia,y74) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Teddy,z74) | ~Paid(Leia,z74) | ~Order(Leia,y74) | ~Good(y74)
+Visited	: 25
+Resolve	: 37
+
+
+
+Query	: ~GetCheck(Teddy,z75) | ~GetCheck(Leia,z75) | ~HaveMoney(Leia)
+
+Pred	: NOT GetCheck(Teddy,z75) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Leia,z75) | ~HaveMoney(Leia) | ~Ate(Teddy,y5)
+Pred	: NOT GetCheck(Leia,z75) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z75) | ~HaveMoney(Leia) | ~Ate(Leia,y5)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~GetCheck(Teddy,z75) | ~GetCheck(Leia,z75)
+Visited	: 26
+Resolve	: 39
+
+
+
+Query	: ~GetCheck(Teddy,z76) | ~GetCheck(Leia,z76)
+
+Pred	: NOT GetCheck(Teddy,z76) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Leia,z76) | ~Ate(Teddy,y5)
+Pred	: NOT GetCheck(Leia,z76) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z76) | ~Ate(Leia,y5)
+Visited	: 27
+Resolve	: 40
+
+
+
+Query	: ~GetCheck(Leia,z77) | ~Ate(Teddy,y77)
+
+Pred	: NOT GetCheck(Leia,z77) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Teddy,y77) | ~Ate(Leia,y5)
+Pred	: NOT Ate(Teddy,y77) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Leia,z77) | ~Order(Teddy,y77) | ~Good(y77)
+Visited	: 28
+Resolve	: 41
+
+
+
+Query	: ~GetCheck(Teddy,z78) | ~Ate(Leia,y78)
+
+Pred	: NOT GetCheck(Teddy,z78) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Leia,y78) | ~Ate(Teddy,y5)
+Pred	: NOT Ate(Leia,y78) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Teddy,z78) | ~Order(Leia,y78) | ~Good(y78)
+Visited	: 29
+Resolve	: 42
+
+
+
+Query	: ~Ate(Teddy,y79) | ~Ate(Leia,y79)
+
+Pred	: NOT Ate(Teddy,y79) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Ate(Leia,y79) | ~Order(Teddy,y79) | ~Good(y79)
+Pred	: NOT Ate(Leia,y79) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Ate(Teddy,y79) | ~Order(Leia,y79) | ~Good(y79)
+Visited	: 30
+Resolve	: 43
+
+
+
+Query	: ~GetCheck(Teddy,z80) | ~HaveMoney(Leia) | ~Ate(Leia,y80)
+
+Pred	: NOT GetCheck(Teddy,z80) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Leia,y80) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~GetCheck(Teddy,z80) | ~Ate(Leia,y80)
+Pred	: NOT Ate(Leia,y80) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Teddy,z80) | ~HaveMoney(Leia) | ~Order(Leia,y80) | ~Good(y80)
+Visited	: 31
+Resolve	: 44
+
+
+
+Query	: ~GetCheck(Leia,z81) | ~HaveMoney(Leia) | ~Ate(Teddy,y81)
+
+Pred	: NOT GetCheck(Leia,z81) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Teddy,y81) | ~Ate(Leia,y5)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~GetCheck(Leia,z81) | ~Ate(Teddy,y81)
+Pred	: NOT Ate(Teddy,y81) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Leia,z81) | ~HaveMoney(Leia) | ~Order(Teddy,y81) | ~Good(y81)
+Visited	: 32
+Resolve	: 45
+
+
+
+Query	: ~Paid(Leia,z82) | ~Ate(Leia,y82) | ~Ate(Teddy,y82)
+
+Pred	: NOT Paid(Leia,z82) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Ate(Leia,y82) | ~Ate(Teddy,y82) | ~GetCheck(Leia,z82) | ~HaveMoney(Leia)
+Pred	: NOT Ate(Leia,y82) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Paid(Leia,z82) | ~Ate(Teddy,y82) | ~Order(Leia,y82) | ~Good(y82)
+Pred	: NOT Ate(Teddy,y82) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Paid(Leia,z82) | ~Ate(Leia,y82) | ~Order(Teddy,y82) | ~Good(y82)
+Visited	: 33
+Resolve	: 46
+
+
+
+Query	: ~GetCheck(Leia,z83) | ~Order(Teddy,y83) | ~Good(y83)
+
+Pred	: NOT GetCheck(Leia,z83) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Teddy,y83) | ~Good(y83) | ~Ate(Leia,y5)
+Pred	: NOT Order(Teddy,y83) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Leia,z83) | ~Good(y83) | ~Seated(Teddy,z7) | ~Stocked(y83,z7)
+Pred	: NOT Good(y83) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~GetCheck(Leia,z83) | ~Order(Teddy,y83) | Bad(y83)
+Visited	: 34
+Resolve	: 48
+
+
+
+Query	: ~Ate(Teddy,y84) | ~Order(Leia,y84) | ~Good(y84)
+
+Pred	: NOT Ate(Teddy,y84) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Leia,y84) | ~Good(y84) | ~Order(Teddy,y84)
+Pred	: NOT Order(Leia,y84) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Ate(Teddy,y84) | ~Good(y84) | ~Seated(Leia,z7) | ~Stocked(y84,z7)
+Pred	: NOT Good(y84) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Ate(Teddy,y84) | ~Order(Leia,y84) | Bad(y84)
+Visited	: 35
+Resolve	: 50
+
+
+
+Query	: ~HaveMoney(Leia) | ~Ate(Leia,y85) | ~Ate(Teddy,y85)
+
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~Ate(Leia,y85) | ~Ate(Teddy,y85)
+Pred	: NOT Ate(Leia,y85) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Teddy,y85) | ~Order(Leia,y85) | ~Good(y85)
+Pred	: NOT Ate(Teddy,y85) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Leia,y85) | ~Order(Teddy,y85) | ~Good(y85)
+Visited	: 36
+Resolve	: 52
+
+
+
+Query	: ~GetCheck(Leia,z86) | ~Order(Teddy,y86) | Bad(y86)
+
+Pred	: NOT GetCheck(Leia,z86) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Teddy,y86) | Bad(y86) | ~Ate(Leia,y5)
+Pred	: NOT Order(Teddy,y86) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Leia,z86) | Bad(y86) | ~Seated(Teddy,z7) | ~Stocked(y86,z7)
+Pred	: Bad(y86) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~GetCheck(Leia,z86) | ~Order(Teddy,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~GetCheck(Leia,z86) | ~Order(Teddy,Tiramisu)
+Visited	: 37
+Resolve	: 53
+
+
+
+Query	: ~GetCheck(Leia,z87) | ~Order(Teddy,Tiramisu)
+
+Pred	: NOT GetCheck(Leia,z87) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Ate(Leia,y5)
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Leia,z87) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Visited	: 38
+Resolve	: 54
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~Ate(Leia,y88)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Ate(Leia,y88) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Ate(Leia,y88) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Order(Leia,y88) | ~Good(y88)
+Visited	: 39
+Resolve	: 55
+
+
+
+Query	: ~Ate(Teddy,y89) | ~Order(Leia,y89) | Bad(y89)
+
+Pred	: NOT Ate(Teddy,y89) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Leia,y89) | Bad(y89) | ~Order(Teddy,y89) | ~Good(y89)
+Pred	: NOT Order(Leia,y89) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Ate(Teddy,y89) | Bad(y89) | ~Seated(Leia,z7) | ~Stocked(y89,z7)
+Pred	: Bad(y89) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Ate(Teddy,Lamb) | ~Order(Leia,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Ate(Teddy,Tiramisu) | ~Order(Leia,Tiramisu)
+Visited	: 40
+Resolve	: 58
+
+
+
+Query	: ~Ate(Teddy,Tiramisu) | ~Order(Leia,Tiramisu)
+
+Pred	: NOT Ate(Teddy,Tiramisu) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Order(Teddy,Tiramisu) | ~Good(Tiramisu)
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Ate(Teddy,Tiramisu) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Visited	: 41
+Resolve	: 59
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~Order(Leia,y91) | ~Good(y91)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Order(Leia,y91) | ~Good(y91) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Order(Leia,y91) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Good(y91) | ~Seated(Leia,z7) | ~Stocked(y91,z7)
+Pred	: NOT Good(y91) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Order(Leia,y91) | Bad(y91)
+Visited	: 42
+Resolve	: 61
+
+
+
+Query	: ~Ate(Leia,y92) | ~Order(Teddy,y92) | ~Good(y92)
+
+Pred	: NOT Ate(Leia,y92) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Teddy,y92) | ~Good(y92) | ~Order(Leia,y92)
+Pred	: NOT Order(Teddy,y92) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Ate(Leia,y92) | ~Good(y92) | ~Seated(Teddy,z7) | ~Stocked(y92,z7)
+Pred	: NOT Good(y92) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Ate(Leia,y92) | ~Order(Teddy,y92) | Bad(y92)
+Visited	: 43
+Resolve	: 62
+
+
+
+Query	: ~Ate(Leia,y93) | ~GetCheck(Teddy,z93) | ~Paid(Teddy,z93)
+
+Pred	: NOT Ate(Leia,y93) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Teddy,z93) | ~Paid(Teddy,z93) | ~Order(Leia,y93) | ~Good(y93)
+Pred	: NOT GetCheck(Teddy,z93) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Leia,y93) | ~Paid(Teddy,z93) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,z93) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Ate(Leia,y93) | ~GetCheck(Teddy,z93) | ~HaveMoney(Teddy)
+Visited	: 44
+Resolve	: 64
+
+
+
+Query	: ~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z94) | ~Paid(Teddy,z94)
+
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Teddy,z94) | ~Paid(Teddy,z94) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT GetCheck(Teddy,z94) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Paid(Teddy,z94) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,z94) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z94) | ~HaveMoney(Teddy)
+Visited	: 45
+Resolve	: 66
+
+
+
+Query	: ~Ate(Leia,y95) | ~GetCheck(Teddy,z95) | ~HaveMoney(Teddy)
+
+Pred	: NOT Ate(Leia,y95) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Teddy,z95) | ~HaveMoney(Teddy) | ~Order(Leia,y95) | ~Good(y95)
+Pred	: NOT GetCheck(Teddy,z95) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Leia,y95) | ~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Ate(Leia,y95) | ~GetCheck(Teddy,z95)
+Visited	: 46
+Resolve	: 68
+
+
+
+Query	: ~Order(Leia,Tiramisu) | ~Paid(Teddy,z96) | ~Ate(Teddy,y96)
+
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Paid(Teddy,z96) | ~Ate(Teddy,y96) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Paid(Teddy,z96) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Ate(Teddy,y96) | ~GetCheck(Teddy,z96) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y96) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Paid(Teddy,z96) | ~Order(Teddy,y96) | ~Good(y96)
+Visited	: 47
+Resolve	: 69
+
+
+
+Query	: ~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z97) | ~HaveMoney(Teddy)
+
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Teddy,z97) | ~HaveMoney(Teddy) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT GetCheck(Teddy,z97) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Leia,Tiramisu) | ~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z97)
+Visited	: 48
+Resolve	: 71
+
+
+
+Query	: ~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z98)
+
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Teddy,z98) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT GetCheck(Teddy,z98) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Ate(Teddy,y5)
+Visited	: 49
+Resolve	: 72
+
+
+
+Query	: ~Ate(Leia,y99) | ~HaveMoney(Teddy) | ~Ate(Teddy,y99)
+
+Pred	: NOT Ate(Leia,y99) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y99) | ~Order(Leia,y99) | ~Good(y99)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Ate(Leia,y99) | ~Ate(Teddy,y99)
+Pred	: NOT Ate(Teddy,y99) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Ate(Leia,y99) | ~HaveMoney(Teddy) | ~Order(Teddy,y99) | ~Good(y99)
+Visited	: 50
+Resolve	: 73
+
+
+
+Query	: ~Order(Leia,Tiramisu) | ~HaveMoney(Teddy) | ~Ate(Teddy,y100)
+
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y100) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Ate(Teddy,y100)
+Pred	: NOT Ate(Teddy,y100) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Leia,Tiramisu) | ~HaveMoney(Teddy) | ~Order(Teddy,y100) | ~Good(y100)
+Visited	: 51
+Resolve	: 74
+
+
+
+Query	: ~GetCheck(Teddy,z101) | ~Seated(Leia,z101) | ~Stocked(Tiramisu,z101)
+
+Pred	: NOT GetCheck(Teddy,z101) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Seated(Leia,z101) | ~Stocked(Tiramisu,z101) | ~Ate(Teddy,y5)
+Pred	: NOT Seated(Leia,z101) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~GetCheck(Teddy,z101) | ~Stocked(Tiramisu,z101) | ~OpenRestaurant(z101) | ~Open(Kitchen,z101) | ~HasTable(z101)
+Pred	: NOT Stocked(Tiramisu,z101) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~GetCheck(Teddy,z101) | ~Seated(Leia,z101) | ~HasIngredients(Tiramisu,z101) | ~Open(Kitchen,z101)
+Visited	: 52
+Resolve	: 75
+
+
+
+Query	: ~Seated(Leia,z102) | ~Stocked(Tiramisu,z102) | ~Ate(Teddy,y102)
+
+Pred	: NOT Seated(Leia,z102) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Stocked(Tiramisu,z102) | ~Ate(Teddy,y102) | ~OpenRestaurant(z102) | ~Open(Kitchen,z102) | ~HasTable(z102)
+Pred	: NOT Stocked(Tiramisu,z102) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Seated(Leia,z102) | ~Ate(Teddy,y102) | ~HasIngredients(Tiramisu,z102) | ~Open(Kitchen,z102)
+Pred	: NOT Ate(Teddy,y102) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Seated(Leia,z102) | ~Stocked(Tiramisu,z102) | ~Order(Teddy,y102) | ~Good(y102)
+Visited	: 53
+Resolve	: 76
+
+
+
+Query	: ~Leave(Leia,z103) | ~HaveMoney(Teddy) | ~Ate(Teddy,y103)
+
+Pred	: NOT Leave(Leia,z103) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y103) | ~GetCheck(Leia,z103) | ~Paid(Leia,z103)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Leave(Leia,z103) | ~Ate(Teddy,y103)
+Pred	: NOT Ate(Teddy,y103) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Leave(Leia,z103) | ~HaveMoney(Teddy) | ~Order(Teddy,y103) | ~Good(y103)
+Visited	: 54
+Resolve	: 77
+
+
+
+Query	: ~Order(Teddy,y104) | Bad(y104) | ~Ate(Leia,y104)
+
+Pred	: NOT Order(Teddy,y104) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	Bad(y104) | ~Ate(Leia,y104) | ~Seated(Teddy,z7) | ~Stocked(y104,z7)
+Pred	: Bad(y104) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Order(Teddy,Lamb) | ~Ate(Leia,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Ate(Leia,Tiramisu)
+Pred	: NOT Ate(Leia,y104) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Teddy,y104) | Bad(y104) | ~Order(Leia,y104) | ~Good(y104)
+Visited	: 55
+Resolve	: 79
+
+
+
+Query	: ~GetCheck(Teddy,z105) | ~Order(Leia,y105) | ~Good(y105)
+
+Pred	: NOT GetCheck(Teddy,z105) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Leia,y105) | ~Good(y105) | ~Ate(Teddy,y5)
+Pred	: NOT Order(Leia,y105) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Teddy,z105) | ~Good(y105) | ~Seated(Leia,z7) | ~Stocked(y105,z7)
+Pred	: NOT Good(y105) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~GetCheck(Teddy,z105) | ~Order(Leia,y105) | Bad(y105)
+Visited	: 56
+Resolve	: 78
+
+
+
+Query	: ~GetCheck(Teddy,z106) | ~Order(Leia,y106) | Bad(y106)
+
+Pred	: NOT GetCheck(Teddy,z106) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Leia,y106) | Bad(y106) | ~Ate(Teddy,y5)
+Pred	: NOT Order(Leia,y106) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Teddy,z106) | Bad(y106) | ~Seated(Leia,z7) | ~Stocked(y106,z7)
+Pred	: Bad(y106) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~GetCheck(Teddy,z106) | ~Order(Leia,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~GetCheck(Teddy,z106) | ~Order(Leia,Tiramisu)
+Visited	: 57
+Resolve	: 79
+
+
+
+Query	: ~GetCheck(Leia,z107) | ~Seated(Teddy,z107) | ~Stocked(Tiramisu,z107)
+
+Pred	: NOT GetCheck(Leia,z107) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Seated(Teddy,z107) | ~Stocked(Tiramisu,z107) | ~Ate(Leia,y5)
+Pred	: NOT Seated(Teddy,z107) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~GetCheck(Leia,z107) | ~Stocked(Tiramisu,z107) | ~OpenRestaurant(z107) | ~Open(Kitchen,z107) | ~HasTable(z107)
+Pred	: NOT Stocked(Tiramisu,z107) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~GetCheck(Leia,z107) | ~Seated(Teddy,z107) | ~HasIngredients(Tiramisu,z107) | ~Open(Kitchen,z107)
+Visited	: 58
+Resolve	: 77
+
+
+
+Query	: ~Ate(Leia,y108) | ~Seated(Teddy,z108) | ~Stocked(Tiramisu,z108)
+
+Pred	: NOT Ate(Leia,y108) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Seated(Teddy,z108) | ~Stocked(Tiramisu,z108) | ~Order(Leia,y108) | ~Good(y108)
+Pred	: NOT Seated(Teddy,z108) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Ate(Leia,y108) | ~Stocked(Tiramisu,z108) | ~OpenRestaurant(z108) | ~Open(Kitchen,z108) | ~HasTable(z108)
+Pred	: NOT Stocked(Tiramisu,z108) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Ate(Leia,y108) | ~Seated(Teddy,z108) | ~HasIngredients(Tiramisu,z108) | ~Open(Kitchen,z108)
+Visited	: 59
+Resolve	: 79
+
+
+
+Query	: ~Leave(Teddy,z109) | ~Paid(Leia,z109) | ~Ate(Leia,y109)
+
+Pred	: NOT Leave(Teddy,z109) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Paid(Leia,z109) | ~Ate(Leia,y109) | ~GetCheck(Teddy,z109) | ~Paid(Teddy,z109)
+Pred	: NOT Paid(Leia,z109) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Leave(Teddy,z109) | ~Ate(Leia,y109) | ~GetCheck(Leia,z109) | ~HaveMoney(Leia)
+Pred	: NOT Ate(Leia,y109) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Leave(Teddy,z109) | ~Paid(Leia,z109) | ~Order(Leia,y109) | ~Good(y109)
+Visited	: 60
+Resolve	: 79
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~GetCheck(Leia,z110) | ~Paid(Leia,z110)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Leia,z110) | ~Paid(Leia,z110) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT GetCheck(Leia,z110) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Paid(Leia,z110) | ~Ate(Leia,y5)
+Pred	: NOT Paid(Leia,z110) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~GetCheck(Leia,z110) | ~HaveMoney(Leia)
+Visited	: 61
+Resolve	: 81
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~Paid(Leia,z111) | ~Ate(Leia,y111)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Paid(Leia,z111) | ~Ate(Leia,y111) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Paid(Leia,z111) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Ate(Leia,y111) | ~GetCheck(Leia,z111) | ~HaveMoney(Leia)
+Pred	: NOT Ate(Leia,y111) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Paid(Leia,z111) | ~Order(Leia,y111) | ~Good(y111)
+Visited	: 62
+Resolve	: 82
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~GetCheck(Leia,z112) | ~HaveMoney(Leia)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Leia,z112) | ~HaveMoney(Leia) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT GetCheck(Leia,z112) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~HaveMoney(Leia) | ~Ate(Leia,y5)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~GetCheck(Leia,z112)
+Visited	: 63
+Resolve	: 84
+
+
+
+Query	: ~GetCheck(Leia,z113) | ~GetCheck(Teddy,z113) | ~Paid(Teddy,z113)
+
+Pred	: NOT GetCheck(Leia,z113) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z113) | ~Paid(Teddy,z113) | ~Ate(Leia,y5)
+Pred	: NOT GetCheck(Teddy,z113) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Leia,z113) | ~Paid(Teddy,z113) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,z113) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~GetCheck(Leia,z113) | ~GetCheck(Teddy,z113) | ~HaveMoney(Teddy)
+Visited	: 64
+Resolve	: 85
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~HaveMoney(Leia) | ~Ate(Leia,y114)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Leia,y114) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Ate(Leia,y114)
+Pred	: NOT Ate(Leia,y114) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~HaveMoney(Leia) | ~Order(Leia,y114) | ~Good(y114)
+Visited	: 65
+Resolve	: 87
+
+
+
+Query	: ~GetCheck(Leia,z115) | ~Paid(Teddy,z115) | ~Ate(Teddy,y115)
+
+Pred	: NOT GetCheck(Leia,z115) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Paid(Teddy,z115) | ~Ate(Teddy,y115) | ~Ate(Leia,y5)
+Pred	: NOT Paid(Teddy,z115) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~GetCheck(Leia,z115) | ~Ate(Teddy,y115) | ~GetCheck(Teddy,z115) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y115) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Leia,z115) | ~Paid(Teddy,z115) | ~Order(Teddy,y115) | ~Good(y115)
+Visited	: 66
+Resolve	: 87
+
+
+
+Query	: ~GetCheck(Leia,z116) | ~GetCheck(Teddy,z116) | ~HaveMoney(Teddy)
+
+Pred	: NOT GetCheck(Leia,z116) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z116) | ~HaveMoney(Teddy) | ~Ate(Leia,y5)
+Pred	: NOT GetCheck(Teddy,z116) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Leia,z116) | ~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~GetCheck(Leia,z116) | ~GetCheck(Teddy,z116)
+Visited	: 67
+Resolve	: 89
+
+
+
+Query	: ~Paid(Teddy,z117) | ~Ate(Teddy,y117) | ~Ate(Leia,y117)
+
+Pred	: NOT Paid(Teddy,z117) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Ate(Teddy,y117) | ~Ate(Leia,y117) | ~GetCheck(Teddy,z117) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y117) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Paid(Teddy,z117) | ~Ate(Leia,y117) | ~Order(Teddy,y117) | ~Good(y117)
+Pred	: NOT Ate(Leia,y117) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Paid(Teddy,z117) | ~Ate(Teddy,y117) | ~Order(Leia,y117) | ~Good(y117)
+Visited	: 68
+Resolve	: 90
+
+
+
+Query	: ~GetCheck(Leia,z118) | ~HaveMoney(Teddy) | ~Ate(Teddy,y118)
+
+Pred	: NOT GetCheck(Leia,z118) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y118) | ~Ate(Leia,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~GetCheck(Leia,z118) | ~Ate(Teddy,y118)
+Pred	: NOT Ate(Teddy,y118) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Leia,z118) | ~HaveMoney(Teddy) | ~Order(Teddy,y118) | ~Good(y118)
+Visited	: 69
+Resolve	: 91
+
+
+
+Query	: ~Ate(Teddy,y119) | ~GetCheck(Leia,z119) | ~Paid(Leia,z119)
+
+Pred	: NOT Ate(Teddy,y119) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Leia,z119) | ~Paid(Leia,z119) | ~Order(Teddy,y119) | ~Good(y119)
+Pred	: NOT GetCheck(Leia,z119) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Teddy,y119) | ~Paid(Leia,z119) | ~Ate(Leia,y5)
+Pred	: NOT Paid(Leia,z119) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Ate(Teddy,y119) | ~GetCheck(Leia,z119) | ~HaveMoney(Leia)
+Visited	: 70
+Resolve	: 90
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~Order(Leia,y120) | Bad(y120)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Order(Leia,y120) | Bad(y120) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Order(Leia,y120) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Order(Teddy,Tiramisu) | Bad(y120) | ~Seated(Leia,z7) | ~Stocked(y120,z7)
+Pred	: Bad(y120) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Order(Leia,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Order(Leia,Tiramisu)
+Visited	: 71
+Resolve	: 93
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~Order(Leia,Tiramisu)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Visited	: 72
+Resolve	: 94
+
+
+
+Query	: ~Order(Leia,Tiramisu) | ~Seated(Teddy,z122) | ~Stocked(Tiramisu,z122)
+
+Pred	: NOT Order(Leia,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Seated(Teddy,z122) | ~Stocked(Tiramisu,z122) | ~Seated(Leia,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Seated(Teddy,z122) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Stocked(Tiramisu,z122) | ~OpenRestaurant(z122) | ~Open(Kitchen,z122) | ~HasTable(z122)
+Pred	: NOT Stocked(Tiramisu,z122) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Order(Leia,Tiramisu) | ~Seated(Teddy,z122) | ~HasIngredients(Tiramisu,z122) | ~Open(Kitchen,z122)
+Visited	: 73
+Resolve	: 93
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | ~Seated(Leia,z123) | ~Stocked(Tiramisu,z123)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Seated(Leia,z123) | ~Stocked(Tiramisu,z123) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: NOT Seated(Leia,z123) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Stocked(Tiramisu,z123) | ~OpenRestaurant(z123) | ~Open(Kitchen,z123) | ~HasTable(z123)
+Pred	: NOT Stocked(Tiramisu,z123) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Seated(Leia,z123) | ~HasIngredients(Tiramisu,z123) | ~Open(Kitchen,z123)
+Visited	: 74
+Resolve	: 95
+
+
+
+Query	: ~Order(Leia,y124) | Bad(y124) | ~GetCheck(Teddy,z124) | ~Paid(Teddy,z124)
+
+Pred	: NOT Order(Leia,y124) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	Bad(y124) | ~GetCheck(Teddy,z124) | ~Paid(Teddy,z124) | ~Seated(Leia,z7) | ~Stocked(y124,z7)
+Pred	: Bad(y124) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Order(Leia,Lamb) | ~GetCheck(Teddy,z124) | ~Paid(Teddy,z124) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z124) | ~Paid(Teddy,z124)
+Pred	: NOT GetCheck(Teddy,z124) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Order(Leia,y124) | Bad(y124) | ~Paid(Teddy,z124) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,z124) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Order(Leia,y124) | Bad(y124) | ~GetCheck(Teddy,z124) | ~HaveMoney(Teddy)
+Visited	: 75
+Resolve	: 96
+
+
+
+Query	: ~HaveMoney(Leia) | ~Ate(Leia,y125) | ~Seated(Teddy,z125) | ~Stocked(Tiramisu,z125)
+
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~Ate(Leia,y125) | ~Seated(Teddy,z125) | ~Stocked(Tiramisu,z125)
+Pred	: NOT Ate(Leia,y125) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HaveMoney(Leia) | ~Seated(Teddy,z125) | ~Stocked(Tiramisu,z125) | ~Order(Leia,y125) | ~Good(y125)
+Pred	: NOT Seated(Teddy,z125) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Leia,y125) | ~Stocked(Tiramisu,z125) | ~OpenRestaurant(z125) | ~Open(Kitchen,z125) | ~HasTable(z125)
+Pred	: NOT Stocked(Tiramisu,z125) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~HaveMoney(Leia) | ~Ate(Leia,y125) | ~Seated(Teddy,z125) | ~HasIngredients(Tiramisu,z125) | ~Open(Kitchen,z125)
+Visited	: 76
+Resolve	: 98
+
+
+
+Query	: ~Paid(Teddy,z126) | ~Ate(Teddy,y126) | ~Order(Leia,y126) | ~Good(y126)
+
+Pred	: NOT Paid(Teddy,z126) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Ate(Teddy,y126) | ~Order(Leia,y126) | ~Good(y126) | ~GetCheck(Teddy,z126) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y126) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Paid(Teddy,z126) | ~Order(Leia,y126) | ~Good(y126) | ~Order(Teddy,y126)
+Pred	: NOT Order(Leia,y126) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Paid(Teddy,z126) | ~Ate(Teddy,y126) | ~Good(y126) | ~Seated(Leia,z7) | ~Stocked(y126,z7)
+Pred	: NOT Good(y126) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Paid(Teddy,z126) | ~Ate(Teddy,y126) | ~Order(Leia,y126) | Bad(y126)
+Visited	: 77
+Resolve	: 100
+
+
+
+Query	: ~Order(Teddy,Tiramisu) | Bad(y127) | ~Seated(Leia,z127) | ~Stocked(y127,z127)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	Bad(y127) | ~Seated(Leia,z127) | ~Stocked(y127,z127) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Pred	: Bad(y127) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Seated(Leia,z127) | ~Stocked(Lamb,z127) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~Seated(Leia,z127) | ~Stocked(Tiramisu,z127)
+Pred	: NOT Seated(Leia,z127) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Order(Teddy,Tiramisu) | Bad(y127) | ~Stocked(y127,z127) | ~OpenRestaurant(z127) | ~Open(Kitchen,z127) | ~HasTable(z127)
+Pred	: NOT Stocked(y127,z127) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Order(Teddy,Tiramisu) | Bad(y127) | ~Seated(Leia,z127) | ~HasIngredients(y127,z127) | ~Open(Kitchen,z127)
+Visited	: 78
+Resolve	: 104
+
+
+
+Query	: ~Leave(Leia,z128) | ~Good(y128) | ~Seated(Teddy,z128) | ~Stocked(y128,z128)
+
+Pred	: NOT Leave(Leia,z128) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Good(y128) | ~Seated(Teddy,z128) | ~Stocked(y128,z128) | ~GetCheck(Leia,z128) | ~Paid(Leia,z128)
+Pred	: NOT Good(y128) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Leave(Leia,z128) | ~Seated(Teddy,z128) | ~Stocked(y128,z128) | Bad(y128)
+Pred	: NOT Seated(Teddy,z128) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Leia,z128) | ~Good(y128) | ~Stocked(y128,z128) | ~OpenRestaurant(z128) | ~Open(Kitchen,z128) | ~HasTable(z128)
+Pred	: NOT Stocked(y128,z128) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Leave(Leia,z128) | ~Good(y128) | ~Seated(Teddy,z128) | ~HasIngredients(y128,z128) | ~Open(Kitchen,z128)
+Visited	: 79
+Resolve	: 106
+
+
+
+Query	: ~GetCheck(Teddy,z129) | ~HaveMoney(Teddy) | ~Order(Leia,y129) | ~Good(y129)
+
+Pred	: NOT GetCheck(Teddy,z129) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Teddy) | ~Order(Leia,y129) | ~Good(y129) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~GetCheck(Teddy,z129) | ~Order(Leia,y129) | ~Good(y129)
+Pred	: NOT Order(Leia,y129) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~GetCheck(Teddy,z129) | ~HaveMoney(Teddy) | ~Good(y129) | ~Seated(Leia,z7) | ~Stocked(y129,z7)
+Pred	: NOT Good(y129) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~GetCheck(Teddy,z129) | ~HaveMoney(Teddy) | ~Order(Leia,y129) | Bad(y129)
+Visited	: 80
+Resolve	: 109
+
+
+
+Query	: ~Paid(Teddy,z130) | ~Ate(Teddy,y130) | ~Seated(Leia,z130) | ~Stocked(Tiramisu,z130)
+
+Pred	: NOT Paid(Teddy,z130) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Ate(Teddy,y130) | ~Seated(Leia,z130) | ~Stocked(Tiramisu,z130) | ~GetCheck(Teddy,z130) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y130) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Paid(Teddy,z130) | ~Seated(Leia,z130) | ~Stocked(Tiramisu,z130) | ~Order(Teddy,y130) | ~Good(y130)
+Pred	: NOT Seated(Leia,z130) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Paid(Teddy,z130) | ~Ate(Teddy,y130) | ~Stocked(Tiramisu,z130) | ~OpenRestaurant(z130) | ~Open(Kitchen,z130) | ~HasTable(z130)
+Pred	: NOT Stocked(Tiramisu,z130) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Paid(Teddy,z130) | ~Ate(Teddy,y130) | ~Seated(Leia,z130) | ~HasIngredients(Tiramisu,z130) | ~Open(Kitchen,z130)
+Visited	: 81
+Resolve	: 111
+
+
+
+Query	: ~Seated(Leia,z131) | ~Stocked(Tiramisu,z131) | ~GetCheck(Teddy,z131) | ~Paid(Teddy,z131)
+
+Pred	: NOT Seated(Leia,z131) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Stocked(Tiramisu,z131) | ~GetCheck(Teddy,z131) | ~Paid(Teddy,z131) | ~OpenRestaurant(z131) | ~Open(Kitchen,z131) | ~HasTable(z131)
+Pred	: NOT Stocked(Tiramisu,z131) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Seated(Leia,z131) | ~GetCheck(Teddy,z131) | ~Paid(Teddy,z131) | ~HasIngredients(Tiramisu,z131) | ~Open(Kitchen,z131)
+Pred	: NOT GetCheck(Teddy,z131) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Seated(Leia,z131) | ~Stocked(Tiramisu,z131) | ~Paid(Teddy,z131) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,z131) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Seated(Leia,z131) | ~Stocked(Tiramisu,z131) | ~GetCheck(Teddy,z131) | ~HaveMoney(Teddy)
+Visited	: 82
+Resolve	: 114
+
+
+
+Query	: ~Leave(Teddy,z132) | ~Seated(Leia,z132) | ~HasIngredients(Tiramisu,z132) | ~Open(Kitchen,z132)
+
+Pred	: NOT Leave(Teddy,z132) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,z132) | ~HasIngredients(Tiramisu,z132) | ~Open(Kitchen,z132) | ~GetCheck(Teddy,z132) | ~Paid(Teddy,z132)
+Pred	: NOT Seated(Leia,z132) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,z132) | ~HasIngredients(Tiramisu,z132) | ~Open(Kitchen,z132) | ~OpenRestaurant(z132) | ~HasTable(z132)
+Pred	: NOT HasIngredients(Tiramisu,z132) 
+Clauses	: 5 : 17 
+Clause	: ~Has(LadyFingers,z17) | ~Has(Mascarpone,z17) | HasIngredients(Tiramisu,z17)
+Unified
+ 	~Leave(Teddy,z132) | ~Seated(Leia,z132) | ~Open(Kitchen,z132) | ~Has(LadyFingers,z132) | ~Has(Mascarpone,z132)
+Pred	: NOT Open(Kitchen,z132) 
+Clauses	: 2 : 39 41 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~HasIngredients(Tiramisu,Bestia)
+Clause	: Open(Kitchen,Dune)
+Unified
+ 	~Leave(Teddy,Dune) | ~Seated(Leia,Dune) | ~HasIngredients(Tiramisu,Dune)
+Visited	: 83
+Resolve	: 118
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~HasIngredients(Tiramisu,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,Bestia) | ~HasIngredients(Tiramisu,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,Bestia) | ~HasIngredients(Tiramisu,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT HasIngredients(Tiramisu,Bestia) 
+Clauses	: 5 : 17 
+Clause	: ~Has(LadyFingers,z17) | ~Has(Mascarpone,z17) | HasIngredients(Tiramisu,z17)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia)
+Visited	: 84
+Resolve	: 120
+
+
+
+Query	: ~Leave(Teddy,Dune) | ~Seated(Leia,Dune) | ~HasIngredients(Tiramisu,Dune)
+
+Pred	: NOT Leave(Teddy,Dune) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,Dune) | ~HasIngredients(Tiramisu,Dune) | ~GetCheck(Teddy,Dune) | ~Paid(Teddy,Dune)
+Pred	: NOT Seated(Leia,Dune) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,Dune) | ~HasIngredients(Tiramisu,Dune) | ~OpenRestaurant(Dune) | ~Open(Kitchen,Dune) | ~HasTable(Dune)
+Pred	: NOT HasIngredients(Tiramisu,Dune) 
+Clauses	: 5 : 17 
+Clause	: ~Has(LadyFingers,z17) | ~Has(Mascarpone,z17) | HasIngredients(Tiramisu,z17)
+Unified
+ 	~Leave(Teddy,Dune) | ~Seated(Leia,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune)
+Visited	: 85
+Resolve	: 122
+
+
+
+Query	: ~GetCheck(Teddy,z135) | ~HaveMoney(Teddy) | ~Seated(Leia,z135) | ~Stocked(Tiramisu,z135)
+
+Pred	: NOT GetCheck(Teddy,z135) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Teddy) | ~Seated(Leia,z135) | ~Stocked(Tiramisu,z135) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~GetCheck(Teddy,z135) | ~Seated(Leia,z135) | ~Stocked(Tiramisu,z135)
+Pred	: NOT Seated(Leia,z135) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~GetCheck(Teddy,z135) | ~HaveMoney(Teddy) | ~Stocked(Tiramisu,z135) | ~OpenRestaurant(z135) | ~Open(Kitchen,z135) | ~HasTable(z135)
+Pred	: NOT Stocked(Tiramisu,z135) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~GetCheck(Teddy,z135) | ~HaveMoney(Teddy) | ~Seated(Leia,z135) | ~HasIngredients(Tiramisu,z135) | ~Open(Kitchen,z135)
+Visited	: 86
+Resolve	: 125
+
+
+
+Query	: ~Leave(Teddy,z136) | ~Good(y136) | ~Seated(Leia,z136) | ~Stocked(y136,z136)
+
+Pred	: NOT Leave(Teddy,z136) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Good(y136) | ~Seated(Leia,z136) | ~Stocked(y136,z136) | ~GetCheck(Teddy,z136) | ~Paid(Teddy,z136)
+Pred	: NOT Good(y136) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Leave(Teddy,z136) | ~Seated(Leia,z136) | ~Stocked(y136,z136) | Bad(y136)
+Pred	: NOT Seated(Leia,z136) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,z136) | ~Good(y136) | ~Stocked(y136,z136) | ~OpenRestaurant(z136) | ~Open(Kitchen,z136) | ~HasTable(z136)
+Pred	: NOT Stocked(y136,z136) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Leave(Teddy,z136) | ~Good(y136) | ~Seated(Leia,z136) | ~HasIngredients(y136,z136) | ~Open(Kitchen,z136)
+Visited	: 87
+Resolve	: 126
+
+
+
+Query	: ~HaveMoney(Teddy) | ~Ate(Teddy,y137) | ~Order(Leia,y137) | ~Good(y137)
+
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Ate(Teddy,y137) | ~Order(Leia,y137) | ~Good(y137)
+Pred	: NOT Ate(Teddy,y137) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HaveMoney(Teddy) | ~Order(Leia,y137) | ~Good(y137) | ~Order(Teddy,y137)
+Pred	: NOT Order(Leia,y137) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y137) | ~Good(y137) | ~Seated(Leia,z7) | ~Stocked(y137,z7)
+Pred	: NOT Good(y137) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y137) | ~Order(Leia,y137) | Bad(y137)
+Visited	: 88
+Resolve	: 129
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Has(LadyFingers,Bestia) 
+Clauses	: 11 : 32 
+Clause	: Has(LadyFingers,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(Mascarpone,Bestia)
+Pred	: NOT Has(Mascarpone,Bestia) 
+Clauses	: 11 : 33 
+Clause	: Has(Mascarpone,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia)
+Visited	: 89
+Resolve	: 131
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(Mascarpone,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,Bestia) | ~Has(Mascarpone,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Has(Mascarpone,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Has(Mascarpone,Bestia) 
+Clauses	: 11 : 33 
+Clause	: Has(Mascarpone,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia)
+Visited	: 90
+Resolve	: 133
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Visited	: 91
+Resolve	: 134
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Has(LadyFingers,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Has(LadyFingers,Bestia) 
+Clauses	: 11 : 32 
+Clause	: Has(LadyFingers,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia)
+Visited	: 92
+Resolve	: 136
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Seated(Leia,Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Visited	: 93
+Resolve	: 137
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y143)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Paid(Teddy,Bestia) | ~Ate(Teddy,y143) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Seated(Leia,Bestia) | ~Ate(Teddy,y143) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y143) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Seated(Leia,Bestia) | ~Paid(Teddy,Bestia) | ~Order(Teddy,y143) | ~Good(y143)
+Visited	: 94
+Resolve	: 139
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Seated(Leia,Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia)
+Visited	: 95
+Resolve	: 141
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Seated(Leia,Bestia) | ~Ate(Teddy,y5)
+Visited	: 96
+Resolve	: 142
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~Ate(Teddy,y146)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Ate(Teddy,y146) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Ate(Teddy,y146) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Seated(Leia,Bestia) | ~Order(Teddy,y146) | ~Good(y146)
+Visited	: 97
+Resolve	: 143
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y147)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y147) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Seated(Leia,Bestia) | ~Ate(Teddy,y147)
+Pred	: NOT Ate(Teddy,y147) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Seated(Leia,Bestia) | ~HaveMoney(Teddy) | ~Order(Teddy,y147) | ~Good(y147)
+Visited	: 98
+Resolve	: 145
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~Order(Teddy,y148) | ~Good(y148)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Order(Teddy,y148) | ~Good(y148) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Order(Teddy,y148) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Seated(Leia,Bestia) | ~Good(y148) | ~Seated(Teddy,z7) | ~Stocked(y148,z7)
+Pred	: NOT Good(y148) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Seated(Leia,Bestia) | ~Order(Teddy,y148) | Bad(y148)
+Visited	: 99
+Resolve	: 146
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~Order(Teddy,y149) | Bad(y149)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Order(Teddy,y149) | Bad(y149) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Order(Teddy,y149) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Seated(Leia,Bestia) | Bad(y149) | ~Seated(Teddy,z7) | ~Stocked(y149,z7)
+Pred	: Bad(y149) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Seated(Leia,Bestia) | ~Order(Teddy,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Seated(Leia,Bestia) | ~Order(Teddy,Tiramisu)
+Visited	: 100
+Resolve	: 149
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~Order(Teddy,Tiramisu)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Order(Teddy,Tiramisu) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Seated(Leia,Bestia) | ~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Visited	: 101
+Resolve	: 150
+
+
+
+Query	: ~Seated(Leia,Bestia) | ~Seated(Teddy,z151) | ~Stocked(Tiramisu,z151)
+
+Pred	: NOT Seated(Leia,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Seated(Teddy,z151) | ~Stocked(Tiramisu,z151) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Seated(Teddy,z151) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Seated(Leia,Bestia) | ~Stocked(Tiramisu,z151) | ~OpenRestaurant(z151) | ~Open(Kitchen,z151) | ~HasTable(z151)
+Pred	: NOT Stocked(Tiramisu,z151) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Seated(Leia,Bestia) | ~Seated(Teddy,z151) | ~HasIngredients(Tiramisu,z151) | ~Open(Kitchen,z151)
+Visited	: 102
+Resolve	: 151
+
+
+
+Query	: ~Leave(Teddy,Dune) | ~Seated(Leia,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune)
+
+Pred	: NOT Leave(Teddy,Dune) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Seated(Leia,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune) | ~GetCheck(Teddy,Dune) | ~Paid(Teddy,Dune)
+Pred	: NOT Seated(Leia,Dune) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Leave(Teddy,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune) | ~OpenRestaurant(Dune) | ~Open(Kitchen,Dune) | ~HasTable(Dune)
+Pred	: NOT Has(LadyFingers,Dune) 
+Clauses	: 11 : 
+Pred	: NOT Has(Mascarpone,Dune) 
+Clauses	: 11 : 
+Visited	: 103
+Resolve	: 152
+
+
+
+Query	: ~GetCheck(Teddy,z153) | ~HaveMoney(Teddy) | ~GetCheck(Leia,z153) | ~Paid(Leia,z153)
+
+Pred	: NOT GetCheck(Teddy,z153) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Teddy) | ~GetCheck(Leia,z153) | ~Paid(Leia,z153) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~GetCheck(Teddy,z153) | ~GetCheck(Leia,z153) | ~Paid(Leia,z153)
+Pred	: NOT GetCheck(Leia,z153) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z153) | ~HaveMoney(Teddy) | ~Paid(Leia,z153) | ~Ate(Leia,y5)
+Pred	: NOT Paid(Leia,z153) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~GetCheck(Teddy,z153) | ~HaveMoney(Teddy) | ~GetCheck(Leia,z153) | ~HaveMoney(Leia)
+Visited	: 104
+Resolve	: 155
+
+
+
+Query	: ~GetCheck(Teddy,z154) | ~Ate(Leia,y154) | ~GetCheck(Leia,z154) | ~HaveMoney(Leia)
+
+Pred	: NOT GetCheck(Teddy,z154) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Leia,y154) | ~GetCheck(Leia,z154) | ~HaveMoney(Leia) | ~Ate(Teddy,y5)
+Pred	: NOT Ate(Leia,y154) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Teddy,z154) | ~GetCheck(Leia,z154) | ~HaveMoney(Leia) | ~Order(Leia,y154) | ~Good(y154)
+Pred	: NOT GetCheck(Leia,z154) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z154) | ~Ate(Leia,y154) | ~HaveMoney(Leia) | ~Ate(Leia,y5)
+Pred	: NOT HaveMoney(Leia) 
+Clauses	: 2 : 42 
+Clause	: HaveMoney(Leia)
+Unified
+ 	~GetCheck(Teddy,z154) | ~Ate(Leia,y154) | ~GetCheck(Leia,z154)
+Visited	: 105
+Resolve	: 157
+
+
+
+Query	: ~GetCheck(Teddy,z155) | ~Ate(Leia,y155) | ~GetCheck(Leia,z155)
+
+Pred	: NOT GetCheck(Teddy,z155) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Leia,y155) | ~GetCheck(Leia,z155) | ~Ate(Teddy,y5)
+Pred	: NOT Ate(Leia,y155) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Teddy,z155) | ~GetCheck(Leia,z155) | ~Order(Leia,y155) | ~Good(y155)
+Pred	: NOT GetCheck(Leia,z155) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~GetCheck(Teddy,z155) | ~Ate(Leia,y155) | ~Ate(Leia,y5)
+Visited	: 106
+Resolve	: 159
+
+
+
+Query	: ~Ate(Leia,y156) | ~GetCheck(Leia,z156) | ~Ate(Teddy,y156)
+
+Pred	: NOT Ate(Leia,y156) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~GetCheck(Leia,z156) | ~Ate(Teddy,y156) | ~Order(Leia,y156) | ~Good(y156)
+Pred	: NOT GetCheck(Leia,z156) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Leia,y156) | ~Ate(Teddy,y156) | ~Ate(Leia,y5)
+Pred	: NOT Ate(Teddy,y156) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Ate(Leia,y156) | ~GetCheck(Leia,z156) | ~Order(Teddy,y156) | ~Good(y156)
+Visited	: 107
+Resolve	: 161
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT OpenRestaurant(Bestia) 
+Clauses	: 2 : 38 
+Clause	: OpenRestaurant(Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~HasTable(Bestia)
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(y10,Bestia)
+Visited	: 108
+Resolve	: 163
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Open(Kitchen,Bestia) | ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~HasTable(Bestia)
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(y10,Bestia)
+Visited	: 109
+Resolve	: 166
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~HasTable(Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~Leave(Teddy,Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~Leave(Teddy,Bestia) | ~TableOpen(y10,Bestia)
+Visited	: 110
+Resolve	: 168
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~TableOpen(x160,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~TableOpen(x160,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT TableOpen(x160,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia)
+Visited	: 111
+Resolve	: 169
+
+
+
+Query	: ~Leave(Teddy,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Visited	: 112
+Resolve	: 169
+
+
+
+Query	: ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Paid(Teddy,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Visited	: 113
+Resolve	: 169
+
+
+
+Query	: ~Paid(Teddy,Bestia) | ~Ate(Teddy,y163)
+
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Ate(Teddy,y163) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y163) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Paid(Teddy,Bestia) | ~Order(Teddy,y163) | ~Good(y163)
+Visited	: 114
+Resolve	: 170
+
+
+
+Query	: ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~GetCheck(Teddy,Bestia)
+Visited	: 115
+Resolve	: 171
+
+
+
+Query	: ~GetCheck(Teddy,Bestia)
+
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Ate(Teddy,y5)
+Visited	: 116
+Resolve	: 171
+
+
+
+Query	: ~Ate(Teddy,y166)
+
+Pred	: NOT Ate(Teddy,y166) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Order(Teddy,y166) | ~Good(y166)
+Visited	: 117
+Resolve	: 171
+
+
+
+Query	: ~HaveMoney(Teddy) | ~Ate(Teddy,y167)
+
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Ate(Teddy,y167)
+Pred	: NOT Ate(Teddy,y167) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HaveMoney(Teddy) | ~Order(Teddy,y167) | ~Good(y167)
+Visited	: 118
+Resolve	: 172
+
+
+
+Query	: ~Order(Teddy,y168) | ~Good(y168)
+
+Pred	: NOT Order(Teddy,y168) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Good(y168) | ~Seated(Teddy,z7) | ~Stocked(y168,z7)
+Pred	: NOT Good(y168) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Order(Teddy,y168) | Bad(y168)
+Visited	: 119
+Resolve	: 172
+
+
+
+Query	: ~Order(Teddy,y169) | Bad(y169)
+
+Pred	: NOT Order(Teddy,y169) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	Bad(y169) | ~Seated(Teddy,z7) | ~Stocked(y169,z7)
+Pred	: Bad(y169) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Order(Teddy,Lamb) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Order(Teddy,Tiramisu)
+Visited	: 120
+Resolve	: 174
+
+
+
+Query	: ~Order(Teddy,Tiramisu)
+
+Pred	: NOT Order(Teddy,Tiramisu) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Seated(Teddy,z7) | ~Stocked(Tiramisu,z7)
+Visited	: 121
+Resolve	: 174
+
+
+
+Query	: ~Seated(Teddy,z171) | ~Stocked(Tiramisu,z171)
+
+Pred	: NOT Seated(Teddy,z171) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Stocked(Tiramisu,z171) | ~OpenRestaurant(z171) | ~Open(Kitchen,z171) | ~HasTable(z171)
+Pred	: NOT Stocked(Tiramisu,z171) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Seated(Teddy,z171) | ~HasIngredients(Tiramisu,z171) | ~Open(Kitchen,z171)
+Visited	: 122
+Resolve	: 174
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~HasTable(Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~OpenRestaurant(Bestia) | ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT OpenRestaurant(Bestia) 
+Clauses	: 2 : 38 
+Clause	: OpenRestaurant(Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~HasTable(Bestia)
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~TableOpen(y10,Bestia)
+Visited	: 123
+Resolve	: 177
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(x173,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Open(Kitchen,Bestia) | ~TableOpen(x173,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~TableOpen(x173,Bestia)
+Pred	: NOT TableOpen(x173,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia)
+Visited	: 124
+Resolve	: 178
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia)
+Visited	: 125
+Resolve	: 178
+
+
+
+Query	: ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia) | ~TableOpen(y10,Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HasTable(Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Visited	: 126
+Resolve	: 180
+
+
+
+Query	: ~Seated(Teddy,z176) | ~HasIngredients(Tiramisu,z176) | ~Open(Kitchen,z176)
+
+Pred	: NOT Seated(Teddy,z176) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~HasIngredients(Tiramisu,z176) | ~Open(Kitchen,z176) | ~OpenRestaurant(z176) | ~HasTable(z176)
+Pred	: NOT HasIngredients(Tiramisu,z176) 
+Clauses	: 5 : 17 
+Clause	: ~Has(LadyFingers,z17) | ~Has(Mascarpone,z17) | HasIngredients(Tiramisu,z17)
+Unified
+ 	~Seated(Teddy,z176) | ~Open(Kitchen,z176) | ~Has(LadyFingers,z176) | ~Has(Mascarpone,z176)
+Pred	: NOT Open(Kitchen,z176) 
+Clauses	: 2 : 39 41 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Seated(Teddy,Bestia) | ~HasIngredients(Tiramisu,Bestia)
+Clause	: Open(Kitchen,Dune)
+Unified
+ 	~Seated(Teddy,Dune) | ~HasIngredients(Tiramisu,Dune)
+Visited	: 127
+Resolve	: 183
+
+
+
+Query	: ~Seated(Teddy,Bestia) | ~HasIngredients(Tiramisu,Bestia)
+
+Pred	: NOT Seated(Teddy,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~HasIngredients(Tiramisu,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT HasIngredients(Tiramisu,Bestia) 
+Clauses	: 5 : 17 
+Clause	: ~Has(LadyFingers,z17) | ~Has(Mascarpone,z17) | HasIngredients(Tiramisu,z17)
+Unified
+ 	~Seated(Teddy,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia)
+Visited	: 128
+Resolve	: 184
+
+
+
+Query	: ~Seated(Teddy,Dune) | ~HasIngredients(Tiramisu,Dune)
+
+Pred	: NOT Seated(Teddy,Dune) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~HasIngredients(Tiramisu,Dune) | ~OpenRestaurant(Dune) | ~Open(Kitchen,Dune) | ~HasTable(Dune)
+Pred	: NOT HasIngredients(Tiramisu,Dune) 
+Clauses	: 5 : 17 
+Clause	: ~Has(LadyFingers,z17) | ~Has(Mascarpone,z17) | HasIngredients(Tiramisu,z17)
+Unified
+ 	~Seated(Teddy,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune)
+Visited	: 129
+Resolve	: 185
+
+
+
+Query	: ~TableOpen(x179,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+
+Pred	: NOT TableOpen(x179,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~TableOpen(x179,Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~TableOpen(x179,Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Visited	: 130
+Resolve	: 187
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~TableOpen(y180,Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~OpenRestaurant(Bestia) | ~TableOpen(y180,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT OpenRestaurant(Bestia) 
+Clauses	: 2 : 38 
+Clause	: OpenRestaurant(Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~TableOpen(y180,Bestia)
+Pred	: NOT TableOpen(y180,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia)
+Visited	: 131
+Resolve	: 187
+
+
+
+Query	: ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia)
+
+Pred	: NOT Leave(Teddy,Bestia) 
+Clauses	: 1 : 3 
+Clause	: ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+Unified
+ 	~OpenRestaurant(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT OpenRestaurant(Bestia) 
+Clauses	: 2 : 38 
+Clause	: OpenRestaurant(Bestia)
+Unified
+ 	~Leave(Teddy,Bestia)
+Visited	: 132
+Resolve	: 187
+
+
+
+Query	: ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy) | ~TableOpen(y10,Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HasTable(Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~HasTable(Bestia) | ~GetCheck(Teddy,Bestia)
+Visited	: 133
+Resolve	: 189
+
+
+
+Query	: ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia)
+
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~TableOpen(y10,Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HasTable(Bestia) | ~Ate(Teddy,y5)
+Visited	: 134
+Resolve	: 191
+
+
+
+Query	: ~GetCheck(Teddy,Bestia) | ~TableOpen(x184,Bestia)
+
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~TableOpen(x184,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT TableOpen(x184,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~GetCheck(Teddy,Bestia)
+Visited	: 135
+Resolve	: 192
+
+
+
+Query	: ~HasTable(Bestia) | ~Ate(Teddy,y185)
+
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~Ate(Teddy,y185) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~Ate(Teddy,y185) | ~TableOpen(y10,Bestia)
+Pred	: NOT Ate(Teddy,y185) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HasTable(Bestia) | ~Order(Teddy,y185) | ~Good(y185)
+Visited	: 136
+Resolve	: 193
+
+
+
+Query	: ~TableOpen(x186,Bestia) | ~Ate(Teddy,y186)
+
+Pred	: NOT TableOpen(x186,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~Ate(Teddy,y186)
+Pred	: NOT Ate(Teddy,y186) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~TableOpen(x186,Bestia) | ~Order(Teddy,y186) | ~Good(y186)
+Visited	: 137
+Resolve	: 194
+
+
+
+Query	: ~Paid(Teddy,Bestia) | ~Order(Teddy,y187) | ~Good(y187)
+
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Order(Teddy,y187) | ~Good(y187) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Pred	: NOT Order(Teddy,y187) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Paid(Teddy,Bestia) | ~Good(y187) | ~Seated(Teddy,z7) | ~Stocked(y187,z7)
+Pred	: NOT Good(y187) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Paid(Teddy,Bestia) | ~Order(Teddy,y187) | Bad(y187)
+Visited	: 138
+Resolve	: 192
+
+
+
+Query	: Bad(y188) | ~Seated(Teddy,z188) | ~Stocked(y188,z188)
+
+Pred	: Bad(y188) 
+Clauses	: 2 : 21 36 
+Clause	: ~Bad(Lamb) | Bad(LambPlate)
+Unified
+ 	~Seated(Teddy,z188) | ~Stocked(Lamb,z188) | Bad(LambPlate)
+Clause	: ~Bad(Tiramisu)
+Unified
+ 	~Seated(Teddy,z188) | ~Stocked(Tiramisu,z188)
+Pred	: NOT Seated(Teddy,z188) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	Bad(y188) | ~Stocked(y188,z188) | ~OpenRestaurant(z188) | ~Open(Kitchen,z188) | ~HasTable(z188)
+Pred	: NOT Stocked(y188,z188) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	Bad(y188) | ~Seated(Teddy,z188) | ~HasIngredients(y188,z188) | ~Open(Kitchen,z188)
+Visited	: 139
+Resolve	: 195
+
+
+
+Query	: ~Seated(Teddy,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia)
+
+Pred	: NOT Seated(Teddy,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Has(LadyFingers,Bestia) 
+Clauses	: 11 : 32 
+Clause	: Has(LadyFingers,Bestia)
+Unified
+ 	~Seated(Teddy,Bestia) | ~Has(Mascarpone,Bestia)
+Pred	: NOT Has(Mascarpone,Bestia) 
+Clauses	: 11 : 33 
+Clause	: Has(Mascarpone,Bestia)
+Unified
+ 	~Seated(Teddy,Bestia) | ~Has(LadyFingers,Bestia)
+Visited	: 140
+Resolve	: 195
+
+
+
+Query	: ~Seated(Teddy,Bestia) | ~Has(Mascarpone,Bestia)
+
+Pred	: NOT Seated(Teddy,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Has(Mascarpone,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Has(Mascarpone,Bestia) 
+Clauses	: 11 : 33 
+Clause	: Has(Mascarpone,Bestia)
+Unified
+ 	~Seated(Teddy,Bestia)
+Visited	: 141
+Resolve	: 196
+
+
+
+Query	: ~Seated(Teddy,Bestia)
+
+Pred	: NOT Seated(Teddy,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Visited	: 142
+Resolve	: 196
+
+
+
+Query	: ~Seated(Teddy,Bestia) | ~Has(LadyFingers,Bestia)
+
+Pred	: NOT Seated(Teddy,Bestia) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Has(LadyFingers,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Has(LadyFingers,Bestia) 
+Clauses	: 11 : 32 
+Clause	: Has(LadyFingers,Bestia)
+Unified
+ 	~Seated(Teddy,Bestia)
+Visited	: 143
+Resolve	: 197
+
+
+
+Query	: ~Good(y193) | ~Seated(Teddy,z193) | ~Stocked(y193,z193)
+
+Pred	: NOT Good(y193) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Seated(Teddy,z193) | ~Stocked(y193,z193) | Bad(y193)
+Pred	: NOT Seated(Teddy,z193) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Good(y193) | ~Stocked(y193,z193) | ~OpenRestaurant(z193) | ~Open(Kitchen,z193) | ~HasTable(z193)
+Pred	: NOT Stocked(y193,z193) 
+Clauses	: 1 : 11 
+Clause	: ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+Unified
+ 	~Good(y193) | ~Seated(Teddy,z193) | ~HasIngredients(y193,z193) | ~Open(Kitchen,z193)
+Visited	: 144
+Resolve	: 198
+
+
+
+Query	: ~OpenRestaurant(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+
+Pred	: NOT OpenRestaurant(Bestia) 
+Clauses	: 2 : 38 
+Clause	: OpenRestaurant(Bestia)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~OpenRestaurant(Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~OpenRestaurant(Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Visited	: 145
+Resolve	: 200
+
+
+
+Query	: ~Seated(Teddy,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune)
+
+Pred	: NOT Seated(Teddy,Dune) 
+Clauses	: 1 : 8 
+Clause	: ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+Unified
+ 	~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune) | ~OpenRestaurant(Dune) | ~Open(Kitchen,Dune) | ~HasTable(Dune)
+Pred	: NOT Has(LadyFingers,Dune) 
+Clauses	: 11 : 
+Pred	: NOT Has(Mascarpone,Dune) 
+Clauses	: 11 : 
+Visited	: 146
+Resolve	: 199
+
+
+
+Query	: ~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Open(Kitchen,Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Visited	: 147
+Resolve	: 201
+
+
+
+Query	: ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy) | ~TableOpen(y197,Bestia)
+
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~HaveMoney(Teddy) | ~TableOpen(y197,Bestia) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~TableOpen(y197,Bestia)
+Pred	: NOT TableOpen(y197,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Visited	: 148
+Resolve	: 202
+
+
+
+Query	: ~TableOpen(x198,Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y198)
+
+Pred	: NOT TableOpen(x198,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	~Paid(Teddy,Bestia) | ~Ate(Teddy,y198)
+Pred	: NOT Paid(Teddy,Bestia) 
+Clauses	: 1 : 4 
+Clause	: ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+Unified
+ 	~TableOpen(x198,Bestia) | ~Ate(Teddy,y198) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Pred	: NOT Ate(Teddy,y198) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~TableOpen(x198,Bestia) | ~Paid(Teddy,Bestia) | ~Order(Teddy,y198) | ~Good(y198)
+Visited	: 149
+Resolve	: 202
+
+
+
+Query	: ~HasTable(Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y199)
+
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y199) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y199) | ~TableOpen(y10,Bestia)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~HasTable(Bestia) | ~Ate(Teddy,y199)
+Pred	: NOT Ate(Teddy,y199) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~HasTable(Bestia) | ~HaveMoney(Teddy) | ~Order(Teddy,y199) | ~Good(y199)
+Visited	: 150
+Resolve	: 204
+
+
+
+Query	: ~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Open(Kitchen,Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y5)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia)
+Visited	: 151
+Resolve	: 204
+
+
+
+Query	: ~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia)
+
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~GetCheck(Teddy,Bestia)
+Pred	: NOT GetCheck(Teddy,Bestia) 
+Clauses	: 1 : 5 
+Clause	: ~Ate(x5,y5) | GetCheck(x5,z5)
+Unified
+ 	~Open(Kitchen,Bestia) | ~Ate(Teddy,y5)
+Visited	: 152
+Resolve	: 204
+
+
+
+Query	: ~Open(Kitchen,Bestia) | ~Ate(Teddy,y202)
+
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Ate(Teddy,y202)
+Pred	: NOT Ate(Teddy,y202) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Open(Kitchen,Bestia) | ~Order(Teddy,y202) | ~Good(y202)
+Visited	: 153
+Resolve	: 204
+
+
+
+Query	: ~Open(Kitchen,Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y203)
+
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~HaveMoney(Teddy) | ~Ate(Teddy,y203)
+Pred	: NOT HaveMoney(Teddy) 
+Clauses	: 2 : 43 
+Clause	: HaveMoney(Teddy)
+Unified
+ 	~Open(Kitchen,Bestia) | ~Ate(Teddy,y203)
+Pred	: NOT Ate(Teddy,y203) 
+Clauses	: 1 : 6 
+Clause	: ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+Unified
+ 	~Open(Kitchen,Bestia) | ~HaveMoney(Teddy) | ~Order(Teddy,y203) | ~Good(y203)
+Visited	: 154
+Resolve	: 205
+
+
+
+Query	: ~Open(Kitchen,Bestia) | ~Order(Teddy,y204) | ~Good(y204)
+
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~Order(Teddy,y204) | ~Good(y204)
+Pred	: NOT Order(Teddy,y204) 
+Clauses	: 1 : 7 
+Clause	: ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+Unified
+ 	~Open(Kitchen,Bestia) | ~Good(y204) | ~Seated(Teddy,z7) | ~Stocked(y204,z7)
+Pred	: NOT Good(y204) 
+Clauses	: 1 : 12 
+Clause	: Bad(x12) | Good(x12)
+Unified
+ 	~Open(Kitchen,Bestia) | ~Order(Teddy,y204) | Bad(y204)
+Visited	: 155
+Resolve	: 205
+
+
+
+Query	: ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+
+Pred	: NOT OpenRestaurant(Bestia) 
+Clauses	: 2 : 38 
+Clause	: OpenRestaurant(Bestia)
+Unified
+ 	~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~OpenRestaurant(Bestia) | ~HasTable(Bestia)
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(y10,Bestia)
+Visited	: 156
+Resolve	: 207
+
+
+
+Query	: ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+
+Pred	: NOT Open(Kitchen,Bestia) 
+Clauses	: 2 : 39 
+Clause	: Open(Kitchen,Bestia)
+Unified
+ 	~HasTable(Bestia)
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~Open(Kitchen,Bestia) | ~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~Open(Kitchen,Bestia) | ~TableOpen(y10,Bestia)
+Visited	: 157
+Resolve	: 209
+
+
+
+Query	: ~HasTable(Bestia)
+
+Pred	: NOT HasTable(Bestia) 
+Clauses	: 2 : 9 10 
+Clause	: ~TableOpen(x9,z9) | HasTable(z9)
+Unified
+ 	~TableOpen(x9,Bestia)
+Clause	: ~TableOpen(y10,z10) | HasTable(z10)
+Unified
+ 	~TableOpen(y10,Bestia)
+Visited	: 158
+Resolve	: 210
+
+
+
+Query	: ~TableOpen(x208,Bestia)
+
+Pred	: NOT TableOpen(x208,Bestia) 
+Clauses	: 1 : 48 
+Clause	: TableOpen(Patio,Bestia)
+Unified
+ 	
+FINAL ANSWER 	: 1
+
+
+Time taken: 0 minutes 0 seconds 50 milliseconds
+KB
+clause 0 : ~Likes(x0,y0) | ~Likes(y0,x0) | Hangout(x0,y0)
+clause 1 : ~Meet(x1,y1,z1) | Hangout(x1,y1)
+clause 2 : ~Leave(x2,z2) | ~Leave(y2,z2) | Meet(x2,y2,z2)
+clause 3 : ~GetCheck(x3,z3) | ~Paid(x3,z3) | Leave(x3,z3)
+clause 4 : ~GetCheck(x4,z4) | ~HaveMoney(x4) | Paid(x4,z4)
+clause 5 : ~Ate(x5,y5) | GetCheck(x5,z5)
+clause 6 : ~Order(x6,y6) | ~Good(y6) | Ate(x6,y6)
+clause 7 : ~Seated(x7,z7) | ~Stocked(y7,z7) | Order(x7,y7)
+clause 8 : ~OpenRestaurant(z8) | ~Open(Kitchen,z8) | ~HasTable(z8) | Seated(x8,z8)
+clause 9 : ~TableOpen(x9,z9) | HasTable(z9)
+clause 10 : ~TableOpen(y10,z10) | HasTable(z10)
+clause 11 : ~HasIngredients(y11,z11) | ~Open(Kitchen,z11) | Stocked(y11,z11)
+clause 12 : Bad(x12) | Good(x12)
+clause 13 : ~Has(Dough,z13) | ~Has(Cheese,z13) | HasIngredients(CheesePizza,z13)
+clause 14 : ~Has(Pasta,z14) | ~Has(Pesto,z14) | HasIngredients(PestoPasta,z14)
+clause 15 : ~Has(Falafel,z15) | ~Has(Hummus,z15) | HasIngredients(FalafelPlate,z15)
+clause 16 : ~Has(Rice,z16) | ~Has(Lamb,z16) | HasIngredients(LambPlate,z16)
+clause 17 : ~Has(LadyFingers,z17) | ~Has(Mascarpone,z17) | HasIngredients(Tiramisu,z17)
+clause 18 : 
+clause 19 : ~Burnt(CheesePizza) | Bad(CheesePizza)
+clause 20 : 
+clause 21 : ~Bad(Lamb) | Bad(LambPlate)
+clause 22 : ~Soggy(Rice) | Bad(LambPlate)
+clause 23 : Has(Dough,Bestia)
+clause 24 : Has(Cheese,Bestia)
+clause 25 : Has(Cheese,Dune)
+clause 26 : Has(Pasta,Bestia)
+clause 27 : Has(Pesto,Bestia)
+clause 28 : Has(Falafel,Dune)
+clause 29 : Has(Hummus,Dune)
+clause 30 : Has(Rice,Dune)
+clause 31 : Has(Lamb,Dune)
+clause 32 : Has(LadyFingers,Bestia)
+clause 33 : Has(Mascarpone,Bestia)
+clause 34 : Burnt(CheesePizza)
+clause 35 : Soggy(Rice)
+clause 36 : ~Bad(Tiramisu)
+clause 37 : Bad(Lamb)
+clause 38 : OpenRestaurant(Bestia)
+clause 39 : Open(Kitchen,Bestia)
+clause 40 : OpenRestaurant(Dune)
+clause 41 : Open(Kitchen,Dune)
+clause 42 : HaveMoney(Leia)
+clause 43 : HaveMoney(Teddy)
+clause 44 : Likes(Leia,Teddy)
+clause 45 : Likes(Leia,Mary)
+clause 46 : Likes(Teddy,Harry)
+clause 47 : Likes(Harry,Teddy)
+clause 48 : TableOpen(Patio,Bestia)
+clause 49 : ~Hangout(Leia,Teddy)
+clause 50 : ~Hangout(Leia,Teddy)
+clause 51 : ~Meet(Leia,Teddy,z51)
+clause 52 : ~Likes(Leia,Teddy) | ~Likes(Teddy,Leia)
+clause 53 : ~Likes(Teddy,Leia)
+clause 54 : ~Leave(Leia,z54) | ~Leave(Teddy,z54)
+clause 55 : ~Leave(Teddy,z55) | ~GetCheck(Leia,z55) | ~Paid(Leia,z55)
+clause 56 : ~Leave(Leia,z56) | ~GetCheck(Teddy,z56) | ~Paid(Teddy,z56)
+clause 57 : ~Leave(Teddy,z57) | ~GetCheck(Leia,z57) | ~HaveMoney(Leia)
+clause 58 : ~Leave(Teddy,z58) | ~GetCheck(Leia,z58)
+clause 59 : ~Leave(Teddy,z59) | ~Ate(Leia,y59)
+clause 60 : ~Leave(Leia,z60) | ~Paid(Teddy,z60) | ~Ate(Teddy,y60)
+clause 61 : ~Leave(Leia,z61) | ~GetCheck(Teddy,z61) | ~HaveMoney(Teddy)
+clause 62 : ~Leave(Leia,z62) | ~GetCheck(Teddy,z62)
+clause 63 : ~Leave(Leia,z63) | ~Ate(Teddy,y63)
+clause 64 : ~Leave(Teddy,z64) | ~Order(Leia,y64) | ~Good(y64)
+clause 65 : ~Leave(Teddy,z65) | ~HaveMoney(Leia) | ~Ate(Leia,y65)
+clause 66 : ~Leave(Leia,z66) | ~Order(Teddy,y66) | ~Good(y66)
+clause 67 : ~Leave(Teddy,z67) | ~Order(Leia,y67) | Bad(y67)
+clause 68 : ~Leave(Teddy,z68) | ~Order(Leia,Tiramisu)
+clause 69 : ~Leave(Leia,z69) | ~Order(Teddy,y69) | Bad(y69)
+clause 70 : ~Leave(Leia,z70) | ~Order(Teddy,Tiramisu)
+clause 71 : ~Leave(Teddy,z71) | ~Seated(Leia,z71) | ~Stocked(Tiramisu,z71)
+clause 72 : ~GetCheck(Teddy,z72) | ~GetCheck(Leia,z72) | ~Paid(Leia,z72)
+clause 73 : ~Leave(Leia,z73) | ~Seated(Teddy,z73) | ~Stocked(Tiramisu,z73)
+clause 74 : ~GetCheck(Teddy,z74) | ~Paid(Leia,z74) | ~Ate(Leia,y74)
+clause 75 : ~GetCheck(Teddy,z75) | ~GetCheck(Leia,z75) | ~HaveMoney(Leia)
+clause 76 : ~GetCheck(Teddy,z76) | ~GetCheck(Leia,z76)
+clause 77 : ~GetCheck(Leia,z77) | ~Ate(Teddy,y77)
+clause 78 : ~GetCheck(Teddy,z78) | ~Ate(Leia,y78)
+clause 79 : ~Ate(Teddy,y79) | ~Ate(Leia,y79)
+clause 80 : ~GetCheck(Teddy,z80) | ~HaveMoney(Leia) | ~Ate(Leia,y80)
+clause 81 : ~GetCheck(Leia,z81) | ~HaveMoney(Leia) | ~Ate(Teddy,y81)
+clause 82 : ~Paid(Leia,z82) | ~Ate(Leia,y82) | ~Ate(Teddy,y82)
+clause 83 : ~GetCheck(Leia,z83) | ~Order(Teddy,y83) | ~Good(y83)
+clause 84 : ~Ate(Teddy,y84) | ~Order(Leia,y84) | ~Good(y84)
+clause 85 : ~HaveMoney(Leia) | ~Ate(Leia,y85) | ~Ate(Teddy,y85)
+clause 86 : ~GetCheck(Leia,z86) | ~Order(Teddy,y86) | Bad(y86)
+clause 87 : ~GetCheck(Leia,z87) | ~Order(Teddy,Tiramisu)
+clause 88 : ~Order(Teddy,Tiramisu) | ~Ate(Leia,y88)
+clause 89 : ~Ate(Teddy,y89) | ~Order(Leia,y89) | Bad(y89)
+clause 90 : ~Ate(Teddy,Tiramisu) | ~Order(Leia,Tiramisu)
+clause 91 : ~Order(Teddy,Tiramisu) | ~Order(Leia,y91) | ~Good(y91)
+clause 92 : ~Ate(Leia,y92) | ~Order(Teddy,y92) | ~Good(y92)
+clause 93 : ~Ate(Leia,y93) | ~GetCheck(Teddy,z93) | ~Paid(Teddy,z93)
+clause 94 : ~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z94) | ~Paid(Teddy,z94)
+clause 95 : ~Ate(Leia,y95) | ~GetCheck(Teddy,z95) | ~HaveMoney(Teddy)
+clause 96 : ~Order(Leia,Tiramisu) | ~Paid(Teddy,z96) | ~Ate(Teddy,y96)
+clause 97 : ~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z97) | ~HaveMoney(Teddy)
+clause 98 : ~Order(Leia,Tiramisu) | ~GetCheck(Teddy,z98)
+clause 99 : ~Ate(Leia,y99) | ~HaveMoney(Teddy) | ~Ate(Teddy,y99)
+clause 100 : ~Order(Leia,Tiramisu) | ~HaveMoney(Teddy) | ~Ate(Teddy,y100)
+clause 101 : ~GetCheck(Teddy,z101) | ~Seated(Leia,z101) | ~Stocked(Tiramisu,z101)
+clause 102 : ~Seated(Leia,z102) | ~Stocked(Tiramisu,z102) | ~Ate(Teddy,y102)
+clause 103 : ~Leave(Leia,z103) | ~HaveMoney(Teddy) | ~Ate(Teddy,y103)
+clause 104 : ~Order(Teddy,y104) | Bad(y104) | ~Ate(Leia,y104)
+clause 105 : ~GetCheck(Teddy,z105) | ~Order(Leia,y105) | ~Good(y105)
+clause 106 : ~GetCheck(Teddy,z106) | ~Order(Leia,y106) | Bad(y106)
+clause 107 : ~GetCheck(Leia,z107) | ~Seated(Teddy,z107) | ~Stocked(Tiramisu,z107)
+clause 108 : ~Ate(Leia,y108) | ~Seated(Teddy,z108) | ~Stocked(Tiramisu,z108)
+clause 109 : ~Leave(Teddy,z109) | ~Paid(Leia,z109) | ~Ate(Leia,y109)
+clause 110 : ~Order(Teddy,Tiramisu) | ~GetCheck(Leia,z110) | ~Paid(Leia,z110)
+clause 111 : ~Order(Teddy,Tiramisu) | ~Paid(Leia,z111) | ~Ate(Leia,y111)
+clause 112 : ~Order(Teddy,Tiramisu) | ~GetCheck(Leia,z112) | ~HaveMoney(Leia)
+clause 113 : ~GetCheck(Leia,z113) | ~GetCheck(Teddy,z113) | ~Paid(Teddy,z113)
+clause 114 : ~Order(Teddy,Tiramisu) | ~HaveMoney(Leia) | ~Ate(Leia,y114)
+clause 115 : ~GetCheck(Leia,z115) | ~Paid(Teddy,z115) | ~Ate(Teddy,y115)
+clause 116 : ~GetCheck(Leia,z116) | ~GetCheck(Teddy,z116) | ~HaveMoney(Teddy)
+clause 117 : ~Paid(Teddy,z117) | ~Ate(Teddy,y117) | ~Ate(Leia,y117)
+clause 118 : ~GetCheck(Leia,z118) | ~HaveMoney(Teddy) | ~Ate(Teddy,y118)
+clause 119 : ~Ate(Teddy,y119) | ~GetCheck(Leia,z119) | ~Paid(Leia,z119)
+clause 120 : ~Order(Teddy,Tiramisu) | ~Order(Leia,y120) | Bad(y120)
+clause 121 : ~Order(Teddy,Tiramisu) | ~Order(Leia,Tiramisu)
+clause 122 : ~Order(Leia,Tiramisu) | ~Seated(Teddy,z122) | ~Stocked(Tiramisu,z122)
+clause 123 : ~Order(Teddy,Tiramisu) | ~Seated(Leia,z123) | ~Stocked(Tiramisu,z123)
+clause 124 : ~Order(Leia,y124) | Bad(y124) | ~GetCheck(Teddy,z124) | ~Paid(Teddy,z124)
+clause 125 : ~HaveMoney(Leia) | ~Ate(Leia,y125) | ~Seated(Teddy,z125) | ~Stocked(Tiramisu,z125)
+clause 126 : ~Paid(Teddy,z126) | ~Ate(Teddy,y126) | ~Order(Leia,y126) | ~Good(y126)
+clause 127 : ~Order(Teddy,Tiramisu) | Bad(y127) | ~Seated(Leia,z127) | ~Stocked(y127,z127)
+clause 128 : ~Leave(Leia,z128) | ~Good(y128) | ~Seated(Teddy,z128) | ~Stocked(y128,z128)
+clause 129 : ~GetCheck(Teddy,z129) | ~HaveMoney(Teddy) | ~Order(Leia,y129) | ~Good(y129)
+clause 130 : ~Paid(Teddy,z130) | ~Ate(Teddy,y130) | ~Seated(Leia,z130) | ~Stocked(Tiramisu,z130)
+clause 131 : ~Seated(Leia,z131) | ~Stocked(Tiramisu,z131) | ~GetCheck(Teddy,z131) | ~Paid(Teddy,z131)
+clause 132 : ~Leave(Teddy,z132) | ~Seated(Leia,z132) | ~HasIngredients(Tiramisu,z132) | ~Open(Kitchen,z132)
+clause 133 : ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~HasIngredients(Tiramisu,Bestia)
+clause 134 : ~Leave(Teddy,Dune) | ~Seated(Leia,Dune) | ~HasIngredients(Tiramisu,Dune)
+clause 135 : ~GetCheck(Teddy,z135) | ~HaveMoney(Teddy) | ~Seated(Leia,z135) | ~Stocked(Tiramisu,z135)
+clause 136 : ~Leave(Teddy,z136) | ~Good(y136) | ~Seated(Leia,z136) | ~Stocked(y136,z136)
+clause 137 : ~HaveMoney(Teddy) | ~Ate(Teddy,y137) | ~Order(Leia,y137) | ~Good(y137)
+clause 138 : ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia)
+clause 139 : ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(Mascarpone,Bestia)
+clause 140 : ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia)
+clause 141 : ~Leave(Teddy,Bestia) | ~Seated(Leia,Bestia) | ~Has(LadyFingers,Bestia)
+clause 142 : ~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+clause 143 : ~Seated(Leia,Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y143)
+clause 144 : ~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+clause 145 : ~Seated(Leia,Bestia) | ~GetCheck(Teddy,Bestia)
+clause 146 : ~Seated(Leia,Bestia) | ~Ate(Teddy,y146)
+clause 147 : ~Seated(Leia,Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y147)
+clause 148 : ~Seated(Leia,Bestia) | ~Order(Teddy,y148) | ~Good(y148)
+clause 149 : ~Seated(Leia,Bestia) | ~Order(Teddy,y149) | Bad(y149)
+clause 150 : ~Seated(Leia,Bestia) | ~Order(Teddy,Tiramisu)
+clause 151 : ~Seated(Leia,Bestia) | ~Seated(Teddy,z151) | ~Stocked(Tiramisu,z151)
+clause 152 : ~Leave(Teddy,Dune) | ~Seated(Leia,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune)
+clause 153 : ~GetCheck(Teddy,z153) | ~HaveMoney(Teddy) | ~GetCheck(Leia,z153) | ~Paid(Leia,z153)
+clause 154 : ~GetCheck(Teddy,z154) | ~Ate(Leia,y154) | ~GetCheck(Leia,z154) | ~HaveMoney(Leia)
+clause 155 : ~GetCheck(Teddy,z155) | ~Ate(Leia,y155) | ~GetCheck(Leia,z155)
+clause 156 : ~Ate(Leia,y156) | ~GetCheck(Leia,z156) | ~Ate(Teddy,y156)
+clause 157 : ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+clause 158 : ~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+clause 159 : ~Leave(Teddy,Bestia) | ~HasTable(Bestia)
+clause 160 : ~Leave(Teddy,Bestia) | ~TableOpen(x160,Bestia)
+clause 161 : ~Leave(Teddy,Bestia)
+clause 162 : ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+clause 163 : ~Paid(Teddy,Bestia) | ~Ate(Teddy,y163)
+clause 164 : ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+clause 165 : ~GetCheck(Teddy,Bestia)
+clause 166 : ~Ate(Teddy,y166)
+clause 167 : ~HaveMoney(Teddy) | ~Ate(Teddy,y167)
+clause 168 : ~Order(Teddy,y168) | ~Good(y168)
+clause 169 : ~Order(Teddy,y169) | Bad(y169)
+clause 170 : ~Order(Teddy,Tiramisu)
+clause 171 : ~Seated(Teddy,z171) | ~Stocked(Tiramisu,z171)
+clause 172 : ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~HasTable(Bestia)
+clause 173 : ~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia) | ~TableOpen(x173,Bestia)
+clause 174 : ~Leave(Teddy,Bestia) | ~Open(Kitchen,Bestia)
+clause 175 : ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+clause 176 : ~Seated(Teddy,z176) | ~HasIngredients(Tiramisu,z176) | ~Open(Kitchen,z176)
+clause 177 : ~Seated(Teddy,Bestia) | ~HasIngredients(Tiramisu,Bestia)
+clause 178 : ~Seated(Teddy,Dune) | ~HasIngredients(Tiramisu,Dune)
+clause 179 : ~TableOpen(x179,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+clause 180 : ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia) | ~TableOpen(y180,Bestia)
+clause 181 : ~Leave(Teddy,Bestia) | ~OpenRestaurant(Bestia)
+clause 182 : ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+clause 183 : ~HasTable(Bestia) | ~GetCheck(Teddy,Bestia)
+clause 184 : ~GetCheck(Teddy,Bestia) | ~TableOpen(x184,Bestia)
+clause 185 : ~HasTable(Bestia) | ~Ate(Teddy,y185)
+clause 186 : ~TableOpen(x186,Bestia) | ~Ate(Teddy,y186)
+clause 187 : ~Paid(Teddy,Bestia) | ~Order(Teddy,y187) | ~Good(y187)
+clause 188 : Bad(y188) | ~Seated(Teddy,z188) | ~Stocked(y188,z188)
+clause 189 : ~Seated(Teddy,Bestia) | ~Has(LadyFingers,Bestia) | ~Has(Mascarpone,Bestia)
+clause 190 : ~Seated(Teddy,Bestia) | ~Has(Mascarpone,Bestia)
+clause 191 : ~Seated(Teddy,Bestia)
+clause 192 : ~Seated(Teddy,Bestia) | ~Has(LadyFingers,Bestia)
+clause 193 : ~Good(y193) | ~Seated(Teddy,z193) | ~Stocked(y193,z193)
+clause 194 : ~OpenRestaurant(Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+clause 195 : ~Seated(Teddy,Dune) | ~Has(LadyFingers,Dune) | ~Has(Mascarpone,Dune)
+clause 196 : ~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia) | ~Paid(Teddy,Bestia)
+clause 197 : ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy) | ~TableOpen(y197,Bestia)
+clause 198 : ~TableOpen(x198,Bestia) | ~Paid(Teddy,Bestia) | ~Ate(Teddy,y198)
+clause 199 : ~HasTable(Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y199)
+clause 200 : ~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia) | ~HaveMoney(Teddy)
+clause 201 : ~Open(Kitchen,Bestia) | ~GetCheck(Teddy,Bestia)
+clause 202 : ~Open(Kitchen,Bestia) | ~Ate(Teddy,y202)
+clause 203 : ~Open(Kitchen,Bestia) | ~HaveMoney(Teddy) | ~Ate(Teddy,y203)
+clause 204 : ~Open(Kitchen,Bestia) | ~Order(Teddy,y204) | ~Good(y204)
+clause 205 : ~OpenRestaurant(Bestia) | ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+clause 206 : ~Open(Kitchen,Bestia) | ~HasTable(Bestia)
+clause 207 : ~HasTable(Bestia)
+KBMap
+Open(v,v) : 41 39 
+Soggy(v) : 35 
+Has(v,v) : 33 32 31 30 29 28 27 26 25 24 23 
+Moldy(Pesto) : 
+~Soggy(v) : 22 
+~Moldy(v) : 
+Burnt(v) : 34 
+~Old(v) : 
+HasIngredients(v,v) : 17 16 15 14 13 
+~Has(v,v) : 195 192 14 152 141 139 138 17 16 15 190 189 13 
+Good(v) : 12 
+Stocked(v,v) : 11 
+Old(Cheese) : 
+~Burnt(v) : 19 
+~HasIngredients(v,v) : 178 134 177 133 132 176 11 
+HasTable(v) : 10 9 
+~HasTable(v) : 207 199 185 205 159 182 175 206 183 172 157 158 8 
+~Open(v,v) : 206 205 202 200 173 196 174 132 201 203 157 176 11 204 158 8 
+~Stocked(v,v) : 136 135 151 128 127 171 102 125 7 122 131 108 130 107 188 73 123 193 101 71 
+Paid(v,v) : 4 
+Ate(v,v) : 6 
+OpenRestaurant(v) : 40 38 
+GetCheck(v,v) : 5 
+Bad(v) : 188 169 149 124 120 37 106 127 12 104 86 69 22 67 21 19 89 
+~Seated(v,v) : 176 171 152 151 150 147 193 146 192 145 191 144 190 143 189 142 188 141 139 138 136 135 134 133 132 128 127 149 102 125 195 148 101 7 122 178 131 108 177 130 107 73 123 140 71 
+~Likes(v,v) : 53 52 0 
+Hangout(v,v) : 1 0 
+~TableOpen(v,v) : 198 180 184 173 160 197 186 10 179 9 
+~Order(v,v) : 187 150 149 148 129 127 126 124 170 123 169 122 168 121 120 112 204 110 106 105 104 6 100 97 96 94 88 111 64 87 84 70 92 69 91 68 137 90 114 67 86 89 66 83 98 
+Leave(v,v) : 3 
+~Paid(v,v) : 198 194 179 175 163 153 131 130 126 162 115 113 111 110 109 142 72 119 96 143 74 117 94 3 56 187 93 82 60 124 196 55 
+~Good(v) : 193 187 168 148 136 83 129 126 92 137 91 128 105 6 84 64 204 66 
+Meet(v,v,v) : 2 
+Likes(v,v) : 47 46 45 44 
+~Bad(v) : 36 21 
+Seated(v,v) : 8 
+~Ate(v,v) : 203 202 198 167 163 130 166 119 118 117 115 114 111 59 156 109 155 108 104 103 199 5 102 146 99 143 96 95 93 92 137 90 186 89 85 84 80 126 79 125 78 147 100 77 74 63 81 82 185 88 65 154 60 
+~HaveMoney(v) : 203 199 167 164 154 200 153 100 147 129 125 116 137 114 182 135 65 112 99 118 95 85 197 103 57 80 97 144 75 61 81 4 
+~OpenRestaurant(v) : 181 180 205 194 172 157 8 
+~GetCheck(v,v) : 201 200 196 182 179 165 164 135 131 129 118 116 162 115 113 112 110 57 154 107 56 153 106 4 101 94 93 184 87 183 86 83 124 77 76 75 144 197 3 194 97 74 156 62 142 95 119 72 58 155 61 80 175 78 55 145 98 81 105 
+TableOpen(v,v) : 48 
+HaveMoney(v) : 43 42 
+Order(v,v) : 7 
+~Leave(v,v) : 174 173 172 141 140 139 138 136 181 134 180 133 132 73 70 69 68 161 67 160 66 159 65 158 64 62 109 157 63 61 60 128 59 152 58 103 56 55 54 57 71 2 
+~Hangout(v,v) : 50 49 
+~Meet(v,v,v) : 51 1 
+=============================================================

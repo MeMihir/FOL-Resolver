@@ -1,0 +1,65 @@
+NOT A(Ficus,Iris) 
+
+Orignal	: (NOT B(z,z,y) OR (NOT C(w,w,x) OR A(y,x) ))
+Orignal	: C(One,Two,Iris) 
+Orignal	: B(One,Two,Ficus) 
+
+KB
+clause 0 : ~B(z,z,y) | ~C(w,w,x) | A(y,x)
+clause 1 : C(One,Two,Iris)
+clause 2 : B(One,Two,Ficus)
+clause 3 : ~A(Ficus,Iris)
+KBMap
+~A(v,v) : 3 
+A(v,v) : 0 
+B(v,v,v) : 2 
+~C(v,v,v) : 0 
+C(v,v,v) : 1 
+~B(v,v,v) : 0 
+
+
+
+Query	: ~A(Ficus,Iris)
+
+Pred	: NOT A(Ficus,Iris) 
+Clauses	: 1 : 0 
+Clause	: ~B(z0,z0,y0) | ~C(w0,w0,x0) | A(y0,x0)
+Unified
+ 	~B(z0,z0,Ficus) | ~C(w0,w0,Iris)
+Visited	: 1
+Resolve	: 1
+
+
+
+Query	: ~B(z5,z5,Ficus) | ~C(w5,w5,Iris)
+
+Pred	: NOT B(z5,z5,Ficus) 
+Clauses	: 1 : 2 
+Clause	: B(One,Two,Ficus)
+Unified
+ Pred	: NOT C(w5,w5,Iris) 
+Clauses	: 1 : 1 
+Clause	: C(One,Two,Iris)
+Unified
+ Visited	: 2
+Resolve	: 0
+
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+KB
+clause 0 : ~B(z0,z0,y0) | ~C(w0,w0,x0) | A(y0,x0)
+clause 1 : C(One,Two,Iris)
+clause 2 : B(One,Two,Ficus)
+clause 3 : ~A(Ficus,Iris)
+clause 4 : ~A(Ficus,Iris)
+clause 5 : ~B(z5,z5,Ficus) | ~C(w5,w5,Iris)
+KBMap
+~A(v,v) : 4 3 
+A(v,v) : 0 
+B(v,v,v) : 2 
+~C(v,v,v) : 5 0 
+C(v,v,v) : 1 
+~B(v,v,v) : 5 0 
+=============================================================

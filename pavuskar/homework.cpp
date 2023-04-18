@@ -635,6 +635,48 @@ void standardizeKB() {
         }
     }
 }
+
+void removeFromKB(int indx)
+{
+    for (auto it = KB[indx].clause.begin(); it != KB[indx].clause.end(); it++)
+    {
+        Predicate p = *it;
+        unordered_set <int> clauseIndices = KBMap[p];
+        clauseIndices.erase(indx);
+        KBMap[p] = clauseIndices;
+    }
+    KB[indx].clear();
+}
+
+void reduceKB() {
+    bool isReduced = false;
+    do
+    {
+        isReduced = false;
+        for (int i = 0; i < KB.size(); i++)
+        {
+            bool remove = false;
+            for (auto it = KB[i].clause.begin(); it != KB[i].clause.end(); it++)
+            {
+                Predicate p = *it;
+                p.sign = !p.sign;
+                unordered_set <int> clauseIndices = KBMap[p];
+                if(clauseIndices.size() == 0)
+                {
+                    isReduced = true;
+                    remove = true;
+                    break;
+                }
+            }
+
+            if(remove)
+            {
+                removeFromKB(i);
+            }
+        }
+    } while (isReduced);
+}
+
 // ============================================================================================================
 // ======================================= KB ASK FUNCTIONS =======================================================
 
@@ -881,6 +923,9 @@ int main()
     query.sign = !query.sign;
     // query.print(); cout<<endl<<endl; // debugM
 
+    Clause queryClause; // clause
+    queryClause.insert(query);
+
     auto start = chrono::high_resolution_clock::now();
     for(int i = 0; i < input.size(); i++)
     {
@@ -888,8 +933,12 @@ int main()
         fol = FOLtoCNF(fol);
         tellKB(fol);
     }
+    addClause2KB(queryClause);
+
+    // cout<<endl; printKB(); cout<<endl; // debugM    
+    reduceKB();
     standardizeKB();
-    // cout<<endl; printKB(); cout<<endl; // debugM
+    // printKB(); // debugM
 
     bool ans = askKB(query);
     // cout<<"FINAL ANSWER \t: "<<ans<<endl<<endl<<endl; // debugM
