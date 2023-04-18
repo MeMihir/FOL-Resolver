@@ -1,0 +1,90 @@
+NOT A(Daphne) 
+
+Orignal	: ((B(x) AND C(y,y,x) )IMPLY A(Daphne) )
+Orignal	: C(One,Two,Three) 
+Orignal	: B(Three) 
+
+KB
+clause 0 : ~B(x) | ~C(y,y,x) | A(Daphne)
+clause 1 : C(One,Two,Three)
+clause 2 : B(Three)
+clause 3 : ~A(Daphne)
+KBMap
+~A(v) : 3 
+B(v) : 2 
+C(v,v,v) : 1 
+A(v) : 0 
+~C(v,v,v) : 0 
+~B(v) : 0 
+
+KB
+clause 0 : ~B(x0) | ~C(y0,y0,x0) | A(Daphne)
+clause 1 : C(One,Two,Three)
+clause 2 : B(Three)
+clause 3 : ~A(Daphne)
+KBMap
+~A(v) : 3 
+B(v) : 2 
+C(v,v,v) : 1 
+A(v) : 0 
+~C(v,v,v) : 0 
+~B(v) : 0 
+
+
+Query	: ~A(Daphne)
+
+Pred	: NOT A(Daphne) 
+Clauses	: 1 : 0 
+Clause	: ~B(x0) | ~C(y0,y0,x0) | A(Daphne)
+Unified
+ 	~B(x0) | ~C(y0,y0,x0)
+Visited	: 1
+Resolve	: 1
+
+
+
+Query	: ~B(a5) | ~C(b5,b5,a5)
+
+Pred	: NOT B(a5) 
+Clauses	: 1 : 2 
+Clause	: B(Three)
+Unified
+ 	~C(b5,b5,Three)
+Pred	: NOT C(b5,b5,a5) 
+Clauses	: 1 : 1 
+Clause	: C(One,Two,Three)
+Unified
+ Visited	: 2
+Resolve	: 1
+
+
+
+Query	: ~C(a6,a6,Three)
+
+Pred	: NOT C(a6,a6,Three) 
+Clauses	: 1 : 1 
+Clause	: C(One,Two,Three)
+Unified
+ Visited	: 3
+Resolve	: 0
+
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+KB
+clause 0 : ~B(x0) | ~C(y0,y0,x0) | A(Daphne)
+clause 1 : C(One,Two,Three)
+clause 2 : B(Three)
+clause 3 : ~A(Daphne)
+clause 4 : ~A(Daphne)
+clause 5 : ~B(a5) | ~C(b5,b5,a5)
+clause 6 : ~C(a6,a6,Three)
+KBMap
+~A(v) : 4 3 
+B(v) : 2 
+C(v,v,v) : 1 
+A(v) : 0 
+~C(v,v,v) : 6 5 0 
+~B(v) : 5 0 
+=============================================================

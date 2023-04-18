@@ -96,6 +96,7 @@ struct Clause {
     void clear();
     ClauseVect::iterator find(Predicate p);
     ClauseVect::iterator findStrict(Predicate p);
+    ClauseVect::iterator findUnify(Predicate p);
     void erase(ClauseVect::iterator it);
     size_t size();
     bool empty();
@@ -423,14 +424,33 @@ void Clause::insert(Predicate predicate)
     // }
     
     // predicate.sign = !predicate.sign;
-    it = findStrict(predicate);
+    // it = findStrict(predicate);
     if (it == clause.end()){
         // printPredicate(predicate);
         clause.push_back(predicate);
     }
 }
 
-ClauseVect::iterator Clause::find(Predicate predicate) 
+ClauseVect::iterator Clause::find(Predicate predicate)
+{
+    for (auto it = clause.begin(); it != clause.end(); it++) {
+        if (it->sign == predicate.sign && it->name == predicate.name && it->arity == predicate.arity) {
+            bool flag = true;
+            for (int i = 0; i < it->arity; i++) {
+                if (isVariable(it->arguments[i]) && isVariable(predicate.arguments[i]))
+                    continue;
+                if (it->arguments[i] == predicate.arguments[i])
+                    continue;
+                flag = false;
+            }
+            if (flag)
+                return it;
+        }
+    }
+    return clause.end();
+}
+
+ClauseVect::iterator Clause::findUnify(Predicate predicate) 
 {
     for (auto it = clause.begin(); it != clause.end(); it++) {
         bool flag = true;
@@ -524,28 +544,56 @@ bool Clause::checkTautology()
     for (auto it = clause.begin(); it != clause.end(); it++) {
         Predicate predicate = *it;
         predicate.sign = !predicate.sign;
-        if (find(predicate) != clause.end())
+        if (findStrict(predicate) != clause.end())
             return true;
     }
     return false;
 }
 
+// returns unique letters 0 -> a, 25 -> z, 26 -> aa
+string getUniqueLetter(int i)
+{
+    string result = "";
+    while(i >= 0)
+    {
+        result = (char)('a' + (i%26)) + result;
+        i = i/26 - 1;
+    }
+    return result;
+}
+
 Clause Clause::standardize()
 {
     Clause result;
+    unordered_map <string, string> map;
+
+    for (auto it = clause.begin(); it != clause.end(); it++) 
+    {
+        Predicate p = *it;
+        for (int i = 0; i < p.arity; i++) 
+        {
+            if (isVariable(p.arguments[i])) 
+            {
+                if (map.find(p.arguments[i]) == map.end()) 
+                {
+                    map[p.arguments[i]] = getUniqueLetter(map.size());
+                }
+            }
+        }
+    }
+
     for(auto it = clause.begin(); it != clause.end(); it++)
     {
         Predicate p = *it;
-        for(int i=0; i<p.arity; i++)
+        for(int i = 0; i < p.arity; i++)
         {
-            if(isVariable(p.arguments[i]))
+            if(isVariable(p.arguments[i])) 
             {
-                p.arguments[i] = p.arguments[i][0] + to_string(KB.size());
+                p.arguments[i] = map[p.arguments[i]] + to_string(KB.size());
             }
         }
         result.insert(p);
     }
-
     return result;
 }
 
@@ -691,7 +739,7 @@ vector <Clause> getKBClauses(Predicate target)
 
     for(auto it = clauseIndices.begin(); it != clauseIndices.end(); it++)
     {
-        ClauseVect::iterator it2 = KB[*it].find(target);
+        ClauseVect::iterator it2 = KB[*it].findUnify(target);
         if(it2 == KB[*it].clause.end()) {
             // cout<<*it<<":CU "; // debug
             continue;
@@ -935,7 +983,7 @@ int main()
     }
     addClause2KB(queryClause);
 
-    // cout<<endl; printKB(); cout<<endl; // debugM    
+    // cout<<endl; printKB(); cout<<endl; // debugM
     reduceKB();
     standardizeKB();
     // printKB(); // debugM

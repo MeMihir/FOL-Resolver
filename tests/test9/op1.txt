@@ -1,0 +1,102 @@
+NOT Order(Jenny,Pizza) 
+
+Orignal	: (Order(x,y) IMPLY Seated(x) )
+Orignal	: (Order(x,y) IMPLY Stocked(y) )
+Orignal	: (Ate(x) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(x) )IMPLY Leave(x) )
+Orignal	: (Seated(x) IMPLY Open(Restaurant) )
+Orignal	: (Seated(x) IMPLY Open(Kitchen) )
+Orignal	: Stocked(Hamburger) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+
+KB
+clause 0 : ~Order(x,y) | Seated(x)
+clause 1 : ~Order(x,y) | Stocked(y)
+clause 2 : ~Ate(x) | GetCheck(x)
+clause 3 : ~GetCheck(x) | ~Paid(x) | Leave(x)
+clause 4 : ~Seated(x) | Open(Restaurant)
+clause 5 : ~Seated(x) | Open(Kitchen)
+clause 6 : Stocked(Hamburger)
+clause 7 : Open(Restaurant)
+clause 8 : Open(Kitchen)
+clause 9 : ~Order(Jenny,Pizza)
+KBMap
+~Seated(v) : 5 4 
+~GetCheck(v) : 3 
+Leave(v) : 3 
+GetCheck(v) : 2 
+~Order(v,v) : 9 1 0 
+Stocked(v) : 6 1 
+~Paid(v) : 3 
+~Ate(v) : 2 
+Open(v) : 8 7 5 4 
+Seated(v) : 0 
+
+KB
+clause 0 : 
+clause 1 : 
+clause 2 : 
+clause 3 : 
+clause 4 : 
+clause 5 : 
+clause 6 : 
+clause 7 : 
+clause 8 : 
+clause 9 : 
+KBMap
+~Stocked(Hamburger) : 
+Ate(x) : 
+~Seated(v) : 
+Order(x,y) : 
+~GetCheck(v) : 
+Seated(v) : 
+Leave(v) : 
+GetCheck(v) : 
+~Order(v,v) : 
+Open(v) : 
+Stocked(v) : 
+~Paid(v) : 
+~Open(Restaurant) : 
+~Ate(v) : 
+
+
+Query	: ~Order(Jenny,Pizza)
+
+Pred	: NOT Order(Jenny,Pizza) 
+Clauses	: 0 : 
+Visited	: 1
+Resolve	: 0
+
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 0 milliseconds
+KB
+clause 0 : 
+clause 1 : 
+clause 2 : 
+clause 3 : 
+clause 4 : 
+clause 5 : 
+clause 6 : 
+clause 7 : 
+clause 8 : 
+clause 9 : 
+clause 10 : ~Order(Jenny,Pizza)
+KBMap
+~Stocked(Hamburger) : 
+Ate(x) : 
+~Seated(v) : 
+Order(x,y) : 
+~GetCheck(v) : 
+Seated(v) : 
+Leave(v) : 
+GetCheck(v) : 
+~Order(v,v) : 10 
+Open(v) : 
+Stocked(v) : 
+~Paid(v) : 
+~Open(Restaurant) : 
+~Ate(v) : 
+=============================================================
