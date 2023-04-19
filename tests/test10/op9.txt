@@ -1,0 +1,149 @@
+NOT Leave(Charley) 
+
+Orignal	: ((Seated(x) AND Stocked(y) )IMPLY Order(x,y) )
+Orignal	: ((Order(x,y) AND Good(y) )IMPLY Ate(x,y) )
+Orignal	: ((Order(x,y) AND Bad(y) )IMPLY NOT Ate(x,y) )
+Orignal	: ((GetCheck(x) AND HaveMoney(x) )IMPLY Paid(x) )
+Orignal	: (Ate(x,y) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(y) )IMPLY Leave(x) )
+Orignal	: ((Open(Restaurant) AND Open(Kitchen) )IMPLY Seated(x) )
+Orignal	: ((Stocked(Soup) AND Stocked(Chicken) )IMPLY Stocked(ChickenSoup) )
+Orignal	: Stocked(Chicken) 
+Orignal	: Bad(Chicken) 
+Orignal	: Open(Restaurant) 
+Orignal	: Open(Kitchen) 
+Orignal	: NOT HaveMoney(Charley) 
+Orignal	: HaveMoney(Bob) 
+
+KB
+clause 0 : ~Seated(x) | ~Stocked(y) | Order(x,y)
+clause 1 : ~Order(x,y) | ~Good(y) | Ate(x,y)
+clause 2 : ~Order(x,y) | ~Bad(y) | ~Ate(x,y)
+clause 3 : ~GetCheck(x) | ~HaveMoney(x) | Paid(x)
+clause 4 : ~Ate(x,y) | GetCheck(x)
+clause 5 : ~GetCheck(x) | ~Paid(y) | Leave(x)
+clause 6 : ~Open(Restaurant) | ~Open(Kitchen) | Seated(x)
+clause 7 : ~Stocked(Soup) | ~Stocked(Chicken) | Stocked(ChickenSoup)
+clause 8 : Stocked(Chicken)
+clause 9 : Bad(Chicken)
+clause 10 : Open(Restaurant)
+clause 11 : Open(Kitchen)
+clause 12 : ~HaveMoney(Charley)
+clause 13 : HaveMoney(Bob)
+clause 14 : ~Leave(Charley)
+KBMap
+HaveMoney(v) : 13 
+Bad(v) : 9 
+~Open(v) : 6 
+~Paid(v) : 5 
+GetCheck(v) : 4 
+~Good(v) : 1 
+Paid(v) : 3 
+~GetCheck(v) : 5 3 
+Seated(v) : 6 
+Leave(v) : 5 
+Ate(v,v) : 1 
+~Stocked(v) : 7 0 
+Order(v,v) : 0 
+~HaveMoney(v) : 12 3 
+~Leave(v) : 14 
+~Ate(v,v) : 4 2 
+Open(v) : 11 10 
+Stocked(v) : 8 7 
+~Bad(v) : 2 
+~Order(v,v) : 2 1 
+~Seated(v) : 0 
+
+KB
+clause 0 : 
+clause 1 : 
+clause 2 : 
+clause 3 : 
+clause 4 : 
+clause 5 : 
+clause 6 : 
+clause 7 : ~Stocked(Soup) | ~Stocked(Chicken) | Stocked(ChickenSoup)
+clause 8 : Stocked(Chicken)
+clause 9 : 
+clause 10 : 
+clause 11 : 
+clause 12 : ~HaveMoney(Charley)
+clause 13 : HaveMoney(Bob)
+clause 14 : 
+KBMap
+HaveMoney(v) : 13 
+Bad(v) : 
+~Open(v) : 
+Good(y) : 
+~Paid(v) : 
+GetCheck(v) : 
+~Good(v) : 
+Paid(v) : 
+~GetCheck(v) : 
+Seated(v) : 
+Leave(v) : 
+Ate(v,v) : 
+~Stocked(v) : 7 
+Order(v,v) : 
+~HaveMoney(v) : 12 
+~Leave(v) : 
+~Ate(v,v) : 
+Open(v) : 
+Stocked(v) : 8 7 
+~Bad(v) : 
+~Order(v,v) : 
+~Seated(v) : 
+
+
+Query	: ~Leave(Charley)
+
+Pred	: NOT Leave(Charley) 
+Clauses	: 0 : 
+Visited	: 1
+Resolve	: 0
+
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 3 milliseconds
+KB
+clause 0 : 
+clause 1 : 
+clause 2 : 
+clause 3 : 
+clause 4 : 
+clause 5 : 
+clause 6 : 
+clause 7 : ~Stocked(Soup) | ~Stocked(Chicken) | Stocked(ChickenSoup)
+clause 8 : Stocked(Chicken)
+clause 9 : 
+clause 10 : 
+clause 11 : 
+clause 12 : ~HaveMoney(Charley)
+clause 13 : HaveMoney(Bob)
+clause 14 : 
+clause 15 : ~Leave(Charley)
+KBMap
+HaveMoney(v) : 13 
+Bad(v) : 
+~Open(v) : 
+Good(y) : 
+~Paid(v) : 
+GetCheck(v) : 
+~Good(v) : 
+Paid(v) : 
+~GetCheck(v) : 
+Seated(v) : 
+Leave(v) : 
+Ate(v,v) : 
+~Stocked(v) : 7 
+Order(v,v) : 
+~HaveMoney(v) : 12 
+~Leave(v) : 15 
+~Ate(v,v) : 
+Open(v) : 
+Stocked(v) : 8 7 
+~Bad(v) : 
+~Order(v,v) : 
+~Seated(v) : 
+=============================================================

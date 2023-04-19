@@ -1,0 +1,508 @@
+NOT Order(Tim,Italian) 
+
+Orignal	: ((Seated(x) AND Stocked(y) )IMPLY Order(x,y) )
+Orignal	: (Order(x,y) IMPLY Ate(x) )
+Orignal	: ((GetCheck(x) AND HaveMoney(x) )IMPLY Paid(x) )
+Orignal	: (Ate(x) IMPLY GetCheck(x) )
+Orignal	: ((GetCheck(x) AND Paid(x) )IMPLY Leave(x) )
+Orignal	: ((Open(Restaurant) AND Open(Kitchen) )IMPLY Seated(x) )
+Orignal	: ((Stocked(Pasta) OR Stocked(Pizza) )IMPLY Stocked(Italian) )
+Orignal	: ((Stocked(Flour) AND Stocked(Cheese) )IMPLY Stocked(Pizza) )
+Orignal	: ((Stocked(Penne) AND Stocked(Pesto) )IMPLY Stocked(Pasta) )
+Orignal	: Open(Restaurant) 
+Orignal	: HaveMoney(Tim) 
+Orignal	: HaveMoney(Lauren) 
+Orignal	: Stocked(Penne) 
+Orignal	: Stocked(Flour) 
+Orignal	: Stocked(Cheese) 
+
+KB
+clause 0 : ~Seated(x) | ~Stocked(y) | Order(x,y)
+clause 1 : ~Order(x,y) | Ate(x)
+clause 2 : ~GetCheck(x) | ~HaveMoney(x) | Paid(x)
+clause 3 : ~Ate(x) | GetCheck(x)
+clause 4 : ~GetCheck(x) | ~Paid(x) | Leave(x)
+clause 5 : ~Open(Restaurant) | ~Open(Kitchen) | Seated(x)
+clause 6 : ~Stocked(Pasta) | Stocked(Italian)
+clause 7 : ~Stocked(Pizza) | Stocked(Italian)
+clause 8 : ~Stocked(Flour) | ~Stocked(Cheese) | Stocked(Pizza)
+clause 9 : ~Stocked(Penne) | ~Stocked(Pesto) | Stocked(Pasta)
+clause 10 : Open(Restaurant)
+clause 11 : HaveMoney(Tim)
+clause 12 : HaveMoney(Lauren)
+clause 13 : Stocked(Penne)
+clause 14 : Stocked(Flour)
+clause 15 : Stocked(Cheese)
+clause 16 : ~Order(Tim,Italian)
+KBMap
+HaveMoney(v) : 12 11 
+Open(v) : 10 
+Stocked(v) : 15 14 9 13 8 7 6 
+Seated(v) : 5 
+Leave(v) : 4 
+~Paid(v) : 4 
+~Open(v) : 5 
+~Ate(v) : 3 
+Paid(v) : 2 
+~GetCheck(v) : 4 2 
+~Stocked(v) : 9 8 7 6 0 
+Order(v,v) : 0 
+GetCheck(v) : 3 
+~Seated(v) : 0 
+Ate(v) : 1 
+~HaveMoney(v) : 2 
+~Order(v,v) : 16 1 
+
+KB
+clause 0 : ~Seated(x0) | ~Stocked(y0) | Order(x0,y0)
+clause 1 : 
+clause 2 : 
+clause 3 : 
+clause 4 : 
+clause 5 : ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+clause 6 : ~Stocked(Pasta) | Stocked(Italian)
+clause 7 : ~Stocked(Pizza) | Stocked(Italian)
+clause 8 : ~Stocked(Flour) | ~Stocked(Cheese) | Stocked(Pizza)
+clause 9 : ~Stocked(Penne) | ~Stocked(Pesto) | Stocked(Pasta)
+clause 10 : Open(Restaurant)
+clause 11 : 
+clause 12 : 
+clause 13 : Stocked(Penne)
+clause 14 : Stocked(Flour)
+clause 15 : Stocked(Cheese)
+clause 16 : ~Order(Tim,Italian)
+KBMap
+~Leave(x) : 
+HaveMoney(v) : 
+Open(v) : 10 
+Stocked(v) : 15 14 9 13 8 7 6 
+Seated(v) : 5 
+Leave(v) : 
+~Paid(v) : 
+~Open(v) : 5 
+~Ate(v) : 
+Paid(v) : 
+~GetCheck(v) : 
+~Stocked(v) : 9 8 7 6 0 
+Order(v,v) : 0 
+GetCheck(v) : 
+~Seated(v) : 0 
+Ate(v) : 
+~HaveMoney(v) : 
+~Order(v,v) : 16 
+
+
+Query	: ~Order(Tim,Italian)
+
+Pred	: NOT Order(Tim,Italian) 
+Clauses	: 1 : 0 
+Clause	: ~Seated(x0) | ~Stocked(y0) | Order(x0,y0)
+Unified
+ 	~Seated(Tim) | ~Stocked(Italian)
+Visited	: 1
+Resolve	: 1
+
+
+
+Query	: ~Seated(Tim) | ~Stocked(Italian)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Stocked(Italian) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Stocked(Italian) 
+Clauses	: 7 : 6 7 
+Clause	: ~Stocked(Pasta) | Stocked(Italian)
+Unified
+ 	~Seated(Tim) | ~Stocked(Pasta)
+Clause	: ~Stocked(Pizza) | Stocked(Italian)
+Unified
+ 	~Seated(Tim) | ~Stocked(Pizza)
+Visited	: 2
+Resolve	: 3
+
+
+
+Query	: ~Seated(Tim) | ~Stocked(Pasta)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Stocked(Pasta) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Stocked(Pasta) 
+Clauses	: 7 : 9 
+Clause	: ~Stocked(Penne) | ~Stocked(Pesto) | Stocked(Pasta)
+Unified
+ 	~Seated(Tim) | ~Stocked(Penne) | ~Stocked(Pesto)
+Visited	: 3
+Resolve	: 4
+
+
+
+Query	: ~Seated(Tim) | ~Stocked(Pizza)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Stocked(Pizza) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Stocked(Pizza) 
+Clauses	: 7 : 8 
+Clause	: ~Stocked(Flour) | ~Stocked(Cheese) | Stocked(Pizza)
+Unified
+ 	~Seated(Tim) | ~Stocked(Flour) | ~Stocked(Cheese)
+Visited	: 4
+Resolve	: 5
+
+
+
+Query	: ~Stocked(Italian) | ~Open(Restaurant) | ~Open(Kitchen)
+
+Pred	: NOT Stocked(Italian) 
+Clauses	: 7 : 6 7 
+Clause	: ~Stocked(Pasta) | Stocked(Italian)
+Unified
+ 	~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Pasta)
+Clause	: ~Stocked(Pizza) | Stocked(Italian)
+Unified
+ 	~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Pizza)
+Pred	: NOT Open(Restaurant) 
+Clauses	: 1 : 10 
+Clause	: Open(Restaurant)
+Unified
+ 	~Stocked(Italian) | ~Open(Kitchen)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Visited	: 5
+Resolve	: 7
+
+
+
+Query	: ~Stocked(Italian) | ~Open(Kitchen)
+
+Pred	: NOT Stocked(Italian) 
+Clauses	: 7 : 6 7 
+Clause	: ~Stocked(Pasta) | Stocked(Italian)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Pasta)
+Clause	: ~Stocked(Pizza) | Stocked(Italian)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Pizza)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Visited	: 6
+Resolve	: 8
+
+
+
+Query	: ~Open(Kitchen) | ~Stocked(Pasta)
+
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Pred	: NOT Stocked(Pasta) 
+Clauses	: 7 : 9 
+Clause	: ~Stocked(Penne) | ~Stocked(Pesto) | Stocked(Pasta)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Penne) | ~Stocked(Pesto)
+Visited	: 7
+Resolve	: 8
+
+
+
+Query	: ~Open(Kitchen) | ~Stocked(Pizza)
+
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Pred	: NOT Stocked(Pizza) 
+Clauses	: 7 : 8 
+Clause	: ~Stocked(Flour) | ~Stocked(Cheese) | Stocked(Pizza)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Flour) | ~Stocked(Cheese)
+Visited	: 8
+Resolve	: 8
+
+
+
+Query	: ~Seated(Tim) | ~Stocked(Flour) | ~Stocked(Cheese)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Stocked(Flour) | ~Stocked(Cheese) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Stocked(Flour) 
+Clauses	: 7 : 14 
+Clause	: Stocked(Flour)
+Unified
+ 	~Seated(Tim) | ~Stocked(Cheese)
+Pred	: NOT Stocked(Cheese) 
+Clauses	: 7 : 15 
+Clause	: Stocked(Cheese)
+Unified
+ 	~Seated(Tim) | ~Stocked(Flour)
+Visited	: 9
+Resolve	: 10
+
+
+
+Query	: ~Seated(Tim) | ~Stocked(Cheese)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Stocked(Cheese) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Stocked(Cheese) 
+Clauses	: 7 : 15 
+Clause	: Stocked(Cheese)
+Unified
+ 	~Seated(Tim)
+Visited	: 10
+Resolve	: 11
+
+
+
+Query	: ~Seated(Tim)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 1 : 5 
+Clause	: ~Open(Restaurant) | ~Open(Kitchen) | Seated(x5)
+Unified
+ 	~Open(Restaurant) | ~Open(Kitchen)
+Visited	: 11
+Resolve	: 11
+
+
+
+Query	: ~Seated(Tim) | ~Stocked(Flour)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 0 : 
+Pred	: NOT Stocked(Flour) 
+Clauses	: 7 : 14 
+Clause	: Stocked(Flour)
+Unified
+ 	~Seated(Tim)
+Visited	: 12
+Resolve	: 10
+
+
+
+Query	: ~Open(Restaurant) | ~Open(Kitchen)
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 1 : 10 
+Clause	: Open(Restaurant)
+Unified
+ 	~Open(Kitchen)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Visited	: 13
+Resolve	: 10
+
+
+
+Query	: ~Open(Kitchen)
+
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Visited	: 14
+Resolve	: 9
+
+
+
+Query	: ~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Pasta)
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 1 : 10 
+Clause	: Open(Restaurant)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Pasta)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Pred	: NOT Stocked(Pasta) 
+Clauses	: 7 : 9 
+Clause	: ~Stocked(Penne) | ~Stocked(Pesto) | Stocked(Pasta)
+Unified
+ 	~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Penne) | ~Stocked(Pesto)
+Visited	: 15
+Resolve	: 8
+
+
+
+Query	: ~Open(Kitchen) | ~Stocked(Penne) | ~Stocked(Pesto)
+
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Pred	: NOT Stocked(Penne) 
+Clauses	: 7 : 13 
+Clause	: Stocked(Penne)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Pesto)
+Pred	: NOT Stocked(Pesto) 
+Clauses	: 7 : 
+Visited	: 16
+Resolve	: 7
+
+
+
+Query	: ~Stocked(Cheese) | ~Open(Restaurant) | ~Open(Kitchen)
+
+Pred	: NOT Stocked(Cheese) 
+Clauses	: 7 : 15 
+Clause	: Stocked(Cheese)
+Unified
+ 	~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Open(Restaurant) 
+Clauses	: 1 : 10 
+Clause	: Open(Restaurant)
+Unified
+ 	~Stocked(Cheese) | ~Open(Kitchen)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Visited	: 17
+Resolve	: 6
+
+
+
+Query	: ~Open(Kitchen) | ~Stocked(Flour) | ~Stocked(Cheese)
+
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Pred	: NOT Stocked(Flour) 
+Clauses	: 7 : 14 
+Clause	: Stocked(Flour)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Cheese)
+Pred	: NOT Stocked(Cheese) 
+Clauses	: 7 : 15 
+Clause	: Stocked(Cheese)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Flour)
+Visited	: 18
+Resolve	: 5
+
+
+
+Query	: ~Seated(Tim) | ~Stocked(Penne) | ~Stocked(Pesto)
+
+Pred	: NOT Seated(Tim) 
+Clauses	: 0 : 
+Pred	: NOT Stocked(Penne) 
+Clauses	: 7 : 13 
+Clause	: Stocked(Penne)
+Unified
+ 	~Seated(Tim) | ~Stocked(Pesto)
+Pred	: NOT Stocked(Pesto) 
+Clauses	: 7 : 
+Visited	: 19
+Resolve	: 3
+
+
+
+Query	: ~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Pizza)
+
+Pred	: NOT Open(Restaurant) 
+Clauses	: 1 : 10 
+Clause	: Open(Restaurant)
+Unified
+ 	~Open(Kitchen) | ~Stocked(Pizza)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Pred	: NOT Stocked(Pizza) 
+Clauses	: 7 : 8 
+Clause	: ~Stocked(Flour) | ~Stocked(Cheese) | Stocked(Pizza)
+Unified
+ 	~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Flour) | ~Stocked(Cheese)
+Visited	: 20
+Resolve	: 2
+
+
+
+Query	: ~Stocked(Flour) | ~Stocked(Cheese) | ~Open(Restaurant) | ~Open(Kitchen)
+
+Pred	: NOT Stocked(Flour) 
+Clauses	: 7 : 14 
+Clause	: Stocked(Flour)
+Unified
+ 	~Stocked(Cheese) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Stocked(Cheese) 
+Clauses	: 7 : 15 
+Clause	: Stocked(Cheese)
+Unified
+ 	~Stocked(Flour) | ~Open(Restaurant) | ~Open(Kitchen)
+Pred	: NOT Open(Restaurant) 
+Clauses	: 1 : 10 
+Clause	: Open(Restaurant)
+Unified
+ 	~Stocked(Flour) | ~Stocked(Cheese) | ~Open(Kitchen)
+Pred	: NOT Open(Kitchen) 
+Clauses	: 1 : 
+Visited	: 21
+Resolve	: 0
+
+FINAL ANSWER 	: 0
+
+
+Time taken: 0 minutes 0 seconds 4 milliseconds
+KB
+clause 0 : ~Seated(x0) | ~Stocked(y0) | Order(x0,y0)
+clause 1 : 
+clause 2 : 
+clause 3 : 
+clause 4 : 
+clause 5 : 
+clause 6 : ~Stocked(Pasta) | Stocked(Italian)
+clause 7 : ~Stocked(Pizza) | Stocked(Italian)
+clause 8 : ~Stocked(Flour) | ~Stocked(Cheese) | Stocked(Pizza)
+clause 9 : ~Stocked(Penne) | ~Stocked(Pesto) | Stocked(Pasta)
+clause 10 : Open(Restaurant)
+clause 11 : 
+clause 12 : 
+clause 13 : Stocked(Penne)
+clause 14 : Stocked(Flour)
+clause 15 : Stocked(Cheese)
+clause 16 : ~Order(Tim,Italian)
+clause 17 : ~Order(Tim,Italian)
+clause 18 : 
+clause 19 : 
+clause 20 : 
+clause 21 : 
+clause 22 : 
+clause 23 : 
+clause 24 : 
+clause 25 : 
+clause 26 : ~Seated(Tim) | ~Stocked(Cheese)
+clause 27 : ~Seated(Tim)
+clause 28 : ~Seated(Tim) | ~Stocked(Flour)
+clause 29 : ~Open(Restaurant) | ~Open(Kitchen)
+clause 30 : ~Open(Kitchen)
+clause 31 : ~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Pasta)
+clause 32 : ~Open(Kitchen) | ~Stocked(Penne) | ~Stocked(Pesto)
+clause 33 : ~Stocked(Cheese) | ~Open(Restaurant) | ~Open(Kitchen)
+clause 34 : ~Open(Kitchen) | ~Stocked(Flour) | ~Stocked(Cheese)
+clause 35 : ~Seated(Tim) | ~Stocked(Penne) | ~Stocked(Pesto)
+clause 36 : ~Open(Restaurant) | ~Open(Kitchen) | ~Stocked(Pizza)
+clause 37 : ~Stocked(Flour) | ~Stocked(Cheese) | ~Open(Restaurant) | ~Open(Kitchen)
+KBMap
+~Leave(x) : 
+HaveMoney(v) : 
+Open(v) : 10 
+Stocked(v) : 15 14 9 13 8 7 6 
+Seated(v) : 
+Leave(v) : 
+~Paid(v) : 
+~Open(v) : 37 36 34 33 32 31 30 29 
+~Ate(v) : 
+Paid(v) : 
+~GetCheck(v) : 
+~Stocked(v) : 37 36 35 34 33 28 26 0 32 9 31 8 7 6 
+Order(v,v) : 0 
+GetCheck(v) : 
+~Seated(v) : 28 27 26 35 0 
+Ate(v) : 
+~HaveMoney(v) : 
+~Order(v,v) : 17 16 
+=============================================================

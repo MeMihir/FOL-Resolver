@@ -104,6 +104,7 @@ struct Clause {
     void print();
     bool checkTautology();
     Clause standardize();
+    bool subsumes(Clause c);
 };
 
 struct FOL
@@ -597,6 +598,16 @@ Clause Clause::standardize()
     return result;
 }
 
+bool Clause::subsumes(Clause c)
+{
+    for(auto it = clause.begin(); it != clause.end(); it++)
+    {
+        if(c.find(*it) == c.clause.end())
+            return false;
+    }
+    return true;
+}
+
 // ============================================================================================================
 // ======================================= KB TELL FUNCTIONS =======================================================
 
@@ -723,6 +734,55 @@ void reduceKB() {
             }
         }
     } while (isReduced);
+
+    for (int i = 0; i < KB.size(); i++)
+    {
+        if (KB[i].size() == 0)
+            continue;
+        for (auto it = KB[i].clause.begin(); it != KB[i].clause.end(); it++)
+        {
+            Predicate p = *it;
+            unordered_set <int> clauseIndices = KBMap[p];
+            for (auto it2 = clauseIndices.begin(); it2 != clauseIndices.end(); it2++)
+            {
+                if (*it2 == i)
+                    continue;
+                if (KB[*it2].size() == 0)
+                    continue;
+                if (KB[i].subsumes(KB[*it2])) {
+                    // KB[i].print(); cout<<" subsumes "; KB[*it2].print(); cout<<endl;
+                    removeFromKB(*it2);
+                }
+            }
+        }
+    }
+}
+
+bool checkIsSubsumed(Clause clause)
+{
+    for (int i = 0; i < KB.size(); i++)
+    {
+        if (KB[i].size() == 0)
+            continue;
+        if (KB[i].subsumes(clause))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void checkSubsumed(Clause clause)
+{
+    for (int i = 0; i < KB.size(); i++)
+    {
+        if (KB[i].size() == 0)
+            continue;
+        if (clause.subsumes(KB[i]))
+        {
+            removeFromKB(i);
+        }
+    }    
 }
 
 // ============================================================================================================
@@ -905,8 +965,11 @@ bool askKB(Predicate target)
                 // cout<<"Unified\n ";  // debugM
                 for(int j=0; j<unifiedResults.size(); j++) {
                     // cout<<"\t"; unifiedResults[j].print(); // debugM
-                    if(unifiedResults[j].size() != 0)
+                    if(unifiedResults[j].size() != 0) {
+                       if(checkIsSubsumed(unifiedResults[j])) continue;
+                       checkSubsumed(unifiedResults[j]);
                        resolver.push(unifiedResults[j]);
+                    }
                     else 
                         return true;
                 }
