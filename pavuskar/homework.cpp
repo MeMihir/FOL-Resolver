@@ -321,10 +321,19 @@ FOL *deMorgan(FOL *fol)
 // Distributive Law
 FOL *distributeCNF(FOL *fol)
 {
-    if (fol->operatorType == AND)
+    if(!(fol->left == nullptr && fol->right == nullptr))
     {
         fol->left = distributeCNF(fol->left);
         fol->right = distributeCNF(fol->right);
+    }
+    else 
+        return fol;
+
+    if (fol->operatorType == AND)
+    {
+        // fol->left = distributeCNF(fol->left);
+        // fol->right = distributeCNF(fol->right);
+        return fol;
     }
     else if (fol->operatorType == OR)
     {
@@ -335,10 +344,13 @@ FOL *distributeCNF(FOL *fol)
 
             FOL* left = new FOL();
             left->operatorType = AND;
-            left->right = distributeCNF(new FOL(distributeCNF(b), distributeCNF(c),  OR));
-            left->left = distributeCNF(new FOL(distributeCNF(a), distributeCNF(c),  OR));
+            // left->right = distributeCNF(new FOL(distributeCNF(b), distributeCNF(c),  OR));
+            // left->left = distributeCNF(new FOL(distributeCNF(a), distributeCNF(c),  OR));
+            left->right = distributeCNF(new FOL(b, c,  OR));
+            left->left = distributeCNF(new FOL(a, c,  OR));
 
-            return distributeCNF(left);
+            // return distributeCNF(left);
+            return left;
         }
         else if (fol->right->operatorType == AND)
         {
@@ -348,15 +360,19 @@ FOL *distributeCNF(FOL *fol)
 
             FOL* left = new FOL();
             left->operatorType = AND;
-            left->left = distributeCNF(new FOL(distributeCNF(a), distributeCNF(b), OR));
-            left->right = distributeCNF(new FOL(distributeCNF(a), distributeCNF(c), OR));
+            // left->left = distributeCNF(new FOL(distributeCNF(a), distributeCNF(b), OR));
+            // left->right = distributeCNF(new FOL(distributeCNF(a), distributeCNF(c), OR));
+            left->left = distributeCNF(new FOL(a, b, OR));
+            left->right = distributeCNF(new FOL(a, c, OR));
 
-            return distributeCNF(left);
+            // return distributeCNF(left);
+            return left;
         }
         else
         {
-            fol->left = distributeCNF(fol->left);
-            fol->right = distributeCNF(fol->right);
+            // fol->left = distributeCNF(fol->left);
+            // fol->right = distributeCNF(fol->right);
+            return fol;
         }
 
         return fol;
@@ -720,6 +736,7 @@ void reduceKB() {
                 Predicate p = *it;
                 p.sign = !p.sign;
                 unordered_set <int> clauseIndices = KBMap[p];
+                p.sign = !p.sign;
                 if(clauseIndices.size() == 0)
                 {
                     isReduced = true;
@@ -1037,7 +1054,7 @@ int main()
     Clause queryClause; // clause
     queryClause.insert(query);
 
-    auto start = chrono::high_resolution_clock::now();
+    // auto start = chrono::high_resolution_clock::now(); // debugM
     for(int i = 0; i < input.size(); i++)
     {
         FOL *fol = stringToFOL(input[i]);
@@ -1053,11 +1070,11 @@ int main()
 
     bool ans = askKB(query);
     // cout<<"FINAL ANSWER \t: "<<ans<<endl<<endl<<endl; // debugM
-    auto end = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
-    int minutes = chrono::duration_cast<chrono::minutes>(duration).count();
-    int seconds = chrono::duration_cast<chrono::seconds>(duration).count() - minutes * 60;
-    int milliseconds = chrono::duration_cast<chrono::milliseconds>(duration).count() - minutes * 60 * 1000 - seconds * 1000;
+    // auto end = chrono::high_resolution_clock::now(); // debugM
+    // auto duration = chrono::duration_cast<chrono::microseconds>(end - start); // debugM
+    // int minutes = chrono::duration_cast<chrono::minutes>(duration).count(); // debugM
+    // int seconds = chrono::duration_cast<chrono::seconds>(duration).count() - minutes * 60; // debugM
+    // int milliseconds = chrono::duration_cast<chrono::milliseconds>(duration).count() - minutes * 60 * 1000 - seconds * 1000; // debugM
     // cout << "Time taken: " << minutes << " minutes " << seconds << " seconds " << milliseconds << " milliseconds" << endl; // debugM
     
     // printKB(); // debugM
