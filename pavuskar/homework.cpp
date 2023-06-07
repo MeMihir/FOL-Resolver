@@ -952,6 +952,7 @@ bool askKB(Predicate target)
 {
     Clause query; // clause
     query.insert(target);
+    auto start = chrono::high_resolution_clock::now(); // start timer
 
     // priority queue of clauses
     priority_queue<Clause, vector<Clause>, ClauseCompare> resolver;
@@ -997,6 +998,9 @@ bool askKB(Predicate target)
         // cout<<"Resolve\t: "<< resolver.size() <<endl<<endl; // debugM
 
         addClause2KB(query);
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::minutes>(end - start);
+        if(duration.count() > 17) return false;
     }
 
     // vector <Clause> clauses = getKBClauses(target);
